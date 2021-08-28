@@ -35,6 +35,7 @@ app.get('/cities', (req, res) => {
   }, 3000)
   
 } )
+// comment
 
 // cities.forEach((city, i) => {
 //   setTimeout(() => {
