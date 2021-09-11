@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/thesayf/hvm-api#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "express": "^4.17.1",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "underscore": "^1.13.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
