@@ -39,7 +39,6 @@ app.get("/cities", (req, res) => {
   }, 3000);
 });
 
-<<<<<<< HEAD
 app.get('/', (req, res) =>  {
     res.send('HVM APP')
 })
@@ -64,8 +63,7 @@ app.get('/cities', (req, res) => {
   
 } )
 // comment
-=======
->>>>>>> 890107f52c7dfd86a2cb649e9de6f5a0ffbe8183
+
 
 // cities.forEach((city, i) => {
 //   setTimeout(() => {
