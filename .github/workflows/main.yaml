@@ -1,3 +1,4 @@
+---
 name: Upload app to s3
 
 on:
