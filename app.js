@@ -19,49 +19,49 @@ app.get("/", (req, res) => {
   res.send("HVM APP");
 });
 
-const cities = ["London", "New York", "Chicago", "Leicester", "Manchester"];
+// const cities = ["London", "New York", "Chicago", "Leicester", "Manchester"];
 
-app.get("/cities", (req, res) => {
-  let i = 0;
+// app.get("/cities", (req, res) => {
+//   let i = 0;
 
-  let timeHasrun = setInterval(() => {
-    fetch(
-      `https://www.numbeo.com/api/city_prices?api_key=1dap9z2dq3eguv&query=${cities[i]}`
-    )
-      .then((res) => res.json())
-      .then((body) => {
-        console.log(body);
-        i++;
-        if (i === 4) {
-          clearInterval(timeHasrun);
-        }
-      });
-  }, 3000);
-});
+//   let timeHasrun = setInterval(() => {
+//     fetch(
+//       `https://www.numbeo.com/api/city_prices?api_key=1dap9z2dq3eguv&query=${cities[i]}`
+//     )
+//       .then((res) => res.json())
+//       .then((body) => {
+//         console.log(body);
+//         i++;
+//         if (i === 4) {
+//           clearInterval(timeHasrun);
+//         }
+//       });
+//   }, 3000);
+// });
 
-app.get('/', (req, res) =>  {
-    res.send('HVM APP')
-})
+// app.get('/', (req, res) =>  {
+//     res.send('HVM APP')
+// })
 
-const cities = ['London', 'New York', 'Chicago', 'Leicester', 'Manchester']
+// const cities = ['London', 'New York', 'Chicago', 'Leicester', 'Manchester']
 
-app.get('/cities', (req, res) => {
+// app.get('/cities', (req, res) => {
 
-  let i = 0
+//   let i = 0
 
- let timeHasrun = setInterval(() => {
-    fetch(`https://www.numbeo.com/api/city_prices?api_key=1dap9z2dq3eguv&query=${cities[i]}`)
-          .then(res => res.json())
-          .then((body) => {
-            console.log(body)
-            i++
-            if(i === 4 ){
-                  clearInterval(timeHasrun)
-              }
-          })
-  }, 3000)
+//  let timeHasrun = setInterval(() => {
+//     fetch(`https://www.numbeo.com/api/city_prices?api_key=1dap9z2dq3eguv&query=${cities[i]}`)
+//           .then(res => res.json())
+//           .then((body) => {
+//             console.log(body)
+//             i++
+//             if(i === 4 ){
+//                   clearInterval(timeHasrun)
+//               }
+//           })
+//   }, 3000)
   
-} )
+// } )
 // comment
 
 
