@@ -1,4 +1,5 @@
 {
+  "engines" : { "node" : ">=12.21.0" },
   "name": "hvm-api",
   "version": "1.0.0",
   "description": "",
