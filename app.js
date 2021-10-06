@@ -4,6 +4,15 @@ const fetch = require("node-fetch");
 var axios = require("axios").default;
 const fs = require("fs");
 const _ = require("underscore");
+const mongoose = require("mongoose")
+const db = mongoose.connection;
+// const cities = require("./cities.json")
+const cityFactory = require("./factories/cityFactory")
+const bodyParser = require("body-parser")
+const jsonParser = bodyParser.json()
+const City = require("./models/City")
+
+const cities = ["London", "New York", "Chicago", "Leicester", "Manchester"];
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -19,14 +28,17 @@ app.get("/", (req, res) => {
   res.send("HVM APP");
 });
 
-const cities = ["London", "New York", "Chicago", "Leicester", "Manchester"];
+app.post("/createCity", jsonParser, (req, res) => {
+  const city = cityFactory(req.body)
+  city.save().then((state) => console.log(state))
+})
 
 app.get("/cities", (req, res) => {
   let i = 0;
 
   let timeHasrun = setInterval(() => {
     fetch(
-      `https://www.numbeo.com/api/city_prices?api_key=1dap9z2dq3eguv&query=${cities[i]}`
+      `https://www.numbeo.com/api/city_prices?api_key=1dap9z2dq3eguv&query=${cities[i].name}`
     )
       .then((res) => res.json())
       .then((body) => {
@@ -78,6 +90,16 @@ app.get("/cities", (req, res) => {
 //         clearInterval(timeHasrun)
 //     }
 // }, 3000)
+
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+  console.log("were connected to DB");
+});
+
+mongoose.connect(
+  `mongodb+srv://Rori:Ishaqsol1234@cluster0-mawms.mongodb.net/hvm?retryWrites=true&w=majority`,
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
 
 const port = process.env.PORT || "3000";
 app.listen(port, () => console.log("waiting on port 3000"));
