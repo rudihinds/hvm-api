@@ -1,9 +1,12 @@
+require('dotenv').config()
 const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
 var axios = require("axios").default;
 const fs = require("fs");
 const _ = require("underscore");
+
+
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
