@@ -85,7 +85,7 @@ app.get("/cities", (req, res) => {
 
   let timeHasrun = setInterval(() => {
     fetch(
-      `https://www.numbeo.com/api/city_prices?api_key=1dap9z2dq3eguv&query=${cities[i].name}`
+      `https://www.numbeo.com/api/city_prices?api_key=${process.env.NUMBEO_API_KEY}&query=${cities[i].name}`
     )
       .then((res) => res.json())
       .then((body) => {
@@ -144,7 +144,7 @@ db.once("open", function () {
 });
 
 mongoose.connect(
-  `mongodb+srv://Rori:Ishaqsol1234@cluster0-mawms.mongodb.net/hvm?retryWrites=true&w=majority`,
+  `mongodb+srv://${process.env.MONGO_DB_USER_NAME}:${process.env.MONGO_DB_USER_NAME}@cluster0-mawms.mongodb.net/${process.env.MONGO_DB_DB}?retryWrites=true&w=majority`,
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
