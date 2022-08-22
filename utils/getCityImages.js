@@ -1,8 +1,8 @@
-require('dotenv').config()
 var axios = require("axios").default;
 
 const unsplashClientId = process.env.UNSPLASH_CLIENT_ID
 
+// sample data
 const arr = [
   {
     id: 13538,
@@ -37,6 +37,7 @@ const arr = [
 /**
  * Function to extract city image data from Unsplash API. In the end it will do 2 things
  *  a. Store object on Model to store relevant data on our DB. this includes links to images on unsplash API
+ * returns single city image data given a (roughly) correct spelling
  */
 
 const getImageData = (city) => {
@@ -48,11 +49,14 @@ const getImageData = (city) => {
   return results;
 };
 
+// loops each city and runs getImageData for each city, 
+// returns a new array of city objs, now including image urls.
 const loopCities = async (cityArr) => {
   let allCitiesImageData = [];
   for (i = 0; i < cityArr.length; i++) {
     const oneCityTenImages = await getImageData(cityArr[i].name)
       .then((results) => {
+        console.log(results);
         return results.map((imageDataObj) => convertObject(imageDataObj, cityArr[i].name));
       })
       .catch((err) => console.log(err));
@@ -61,9 +65,12 @@ const loopCities = async (cityArr) => {
       ...oneCityTenImages
     ]
   }
-  console.log(allCitiesImageData);
+  // console.log(allCitiesImageData);
+  return allCitiesImageData
 };
 
+// used in loopcities func. captures image urls + rest obj properties
+// in one object per city
 const convertObject = (imgDataObj, cityName) => {
   const { id, description, alt_description, width, height, urls, user } =
     imgDataObj;
@@ -81,4 +88,5 @@ const convertObject = (imgDataObj, cityName) => {
   return cityImageObj;
 };
 
-loopCities(arr);
+// loopCities(arr)
+module.exports = loopCities;
