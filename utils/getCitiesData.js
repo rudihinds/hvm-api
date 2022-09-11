@@ -4,15 +4,16 @@ const fetch = require("node-fetch");
 
 // parse city data to js obj
 // each city obj, get city name
-// create query str
-// fetch city data
-// store in DB
+// create query string for numbeo including city name
+// fetch numbeo data for single city
+// need to write a new JSON and store to db
 
 let queryStr =
   "https://www.numbeo.com/api/city_prices?api_key=1dap9z2dq3eguv&query=";
 
 const parseCityData = async () => {
   fs.readFile("./cities+5m.json", "utf8", (err, data) => {
+    console.log('cities total', JSON.parse(data).length);
     if (err) console.log(err);
     const cityName = JSON.parse(data)[0].name;
     queryStr = queryStr + cityName;
@@ -24,7 +25,7 @@ const parseCityData = async () => {
   });
 };
 
-console.log(parseCityData());
+parseCityData();
 
 const getCitiesData = () => {};
 

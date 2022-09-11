@@ -1,3 +1,8 @@
+/**
+ * This will hit the api and return all cities with minimum population of 5 million or more.
+ * It writes a file called cities+5m.json
+ */
+
 var axios = require("axios").default;
 const fs = require("fs");
 const _ = require("underscore");

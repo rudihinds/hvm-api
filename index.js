@@ -49,6 +49,25 @@ async function main() {
   await alfie.save();
   const kittens = await Kitty.find();
   console.log("kittens: ", kittens);
+  /**
+   * kittens:  [
+  {
+    _id: new ObjectId("62eff94f2a7e9c33d24dc662"),
+    name: 'Alfie',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("62f000aa4f79861e0f0bff95"),
+    name: 'Alfie',
+    __v: 0
+  },
+  {
+    _id: new ObjectId("6303f7cf385c7dd74ffecca9"),
+    name: 'Alfie',
+    __v: 0
+  }
+]
+   */
 
   const db = mongoose.connection;
   db.on("error", console.error.bind(console, "MongoDB connection error:"));
