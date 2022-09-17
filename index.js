@@ -155,5 +155,15 @@ app.get("/", (req, res) => {
 //     }
 // }, 3000)
 
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", function () {
+  console.log("were connected to DB");
+});
+
+mongoose.connect(
+  `mongodb+srv://${process.env.MONGO_DB_USER_NAME}:${process.env.MONGO_DB_USER_NAME}@cluster0-mawms.mongodb.net/${process.env.MONGO_DB_DB}?retryWrites=true&w=majority`,
+  { useNewUrlParser: true, useUnifiedTopology: true }
+);
+
 const port = process.env.PORT || "3000";
 app.listen(port, () => console.log("waiting on port 3000!!"));

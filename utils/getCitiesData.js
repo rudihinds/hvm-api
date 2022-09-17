@@ -9,7 +9,7 @@ const fetch = require("node-fetch");
 // need to write a new JSON and store to db
 
 let queryStr =
-  "https://www.numbeo.com/api/city_prices?api_key=1dap9z2dq3eguv&query=";
+  `https://www.numbeo.com/api/city_prices?api_key=${process.env.NUMBEO_API_KEY}&query=`;
 
 const parseCityData = async () => {
   fs.readFile("./cities+5m.json", "utf8", (err, data) => {
