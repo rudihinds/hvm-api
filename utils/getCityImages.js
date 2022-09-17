@@ -504,7 +504,7 @@ const getImageDataForCities = async (citiesArr) => {
   let failedImageFetchData = [];
   let city = "";
   console.log("inside getimgdata");
-  for (let i = 0; i < citiesArr.length; i++) {
+  for (let i = 3290; i <= citiesArr.length; i++) {
     await staggerApiCalls(i);
     try {
       city = citiesArr[i].name;
@@ -512,7 +512,15 @@ const getImageDataForCities = async (citiesArr) => {
       if (tenImagesFullData?.imagesAvailable === false) {
         console.log("no images for", citiesArr[i].name);
         failedImageFetchData.push(tenImagesFullData);
-        writeFailedCitiesToJson(failedImageFetchData);
+        if (tenImagesFullData) {
+          writeFailedCitiesToJson(failedImageFetchData);
+          if (i === citiesArr.length - 1) console.log("yaglidaglidagliiga and that's all folks!!!!");
+        } else {
+          console.log(
+            `inside try block of getImagedataforcities, can't write dodgy outputs to clean JSON, 
+            tenimagesfulldata is currently ${tenImagesFullData}`
+          );
+        }
         console.log("i =", i);
         failedImageFetchData = [];
       } else {
@@ -543,7 +551,6 @@ const getImageDataForCities = async (citiesArr) => {
 function organiseImageDataAndWriteToJson(unorganisedCityImages) {
   console.log("inside organiseImageDataAndWriteToJson");
   console.log("passed in data", unorganisedCityImages);
-  const organisedCityObjectsWithImages = [];
   const newArr = unorganisedCityImages.map((cityFullImageObj) => {
     const arrImgObjsOneCity = cityFullImageObj.results.map((images) =>
       convertObject(images, cityFullImageObj.city)
@@ -554,39 +561,51 @@ function organiseImageDataAndWriteToJson(unorganisedCityImages) {
     };
   });
   console.log(
-    "inside something, length of cities with converted objects is",
-    newArr.length
+    "inside organiseImageDataAndWriteToJson, length of cities with converted objects is",
+    newArr.length,
+    newArr
   );
   writeCitiesToJson(newArr);
 }
 
 const writeCitiesToJson = (somearr) => {
+  console.log(
+    "inside writeCitiesToJson, data to be merged with main json",
+    somearr
+  );
   fs.readFile("./sampleCityWithImages.json", function (err, data) {
-    var json = JSON.parse(data);
-    let newObj = [...json, ...somearr];
-    fs.writeFile(
-      "./sampleCityWithImages.json",
-      JSON.stringify(newObj),
-      function (err) {
-        if (err) throw err;
-        console.log('The "data to append" was appended to file!');
-      }
-    );
+    try {
+      var json = JSON.parse(data);
+      let newObj = [...json, ...somearr];
+      fs.writeFile(
+        "./sampleCityWithImages.json",
+        JSON.stringify(newObj),
+        function (err) {
+          if (err) console.log(err);
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
   });
 };
 
 const writeFailedCitiesToJson = (cities) => {
   fs.readFile("./failedCityWithImages.json", function (err, data) {
-    var json = JSON.parse(data);
-    let newObj = [...json, ...cities];
-    fs.writeFile(
-      "./failedCityWithImages.json",
-      JSON.stringify(newObj),
-      function (err) {
-        if (err) throw err;
-        console.log('The "data to append" was appended to file!');
-      }
-    );
+    try {
+      var json = JSON.parse(data);
+      let newObj = [...json, ...cities];
+      fs.writeFile(
+        "./failedCityWithImages.json",
+        JSON.stringify(newObj),
+        function (err) {
+          if (err) throw err;
+          console.log('The "data to append" was appended to file!');
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
   });
 };
 
@@ -614,13 +633,15 @@ const staggerApiCalls = async (i) => {
  */
 
 const getTenUnsplashImagesForACity = (city) => {
-  console.log("inside api fetch function");
+  console.log("inside api fetch function", city);
+  if (city === undefined || !city) return;
   return axios
     .get(
-      `https://api.unsplash.com/search/photos?client_id=${unsplashClientId}&query=${city}`
+      `https://api.unsplash.com/search/photos?client_id=${unsplashClientId}&query=${city}`,
+      { headers: { "Content-Type": "application/json" } }
     )
     .then((res) => {
-      console.log("inside unsplash fetch then", res.status);
+      console.log("inside unsplash fetch .then", res.status);
       // console.log(res);
       if (res.data && res.data.total !== 0) {
         console.log("passed condition checks for ", city);
@@ -632,7 +653,7 @@ const getTenUnsplashImagesForACity = (city) => {
       }
     })
     .catch((err) => {
-      console.log("inside unsplash fetch catch", err.message);
+      console.log("inside unsplash fetch catch", err);
       errors.push({
         city,
         imagesAvailable: false,
