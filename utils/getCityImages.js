@@ -682,11 +682,16 @@ const convertObject = (imgDataObj, cityName) => {
 };
 
 const parseCitiesJsonAndPassToRunner = () => {
-  fs.readFile("./cities+5m.json", function (err, data) {
+  fs.readFile("./sampleCityWithImages.json", function (err, data) {
     jsonObj = JSON.parse(data);
+    console.log(jsonObj.length)
+    throw Error('stop')
     getImageDataForCities(jsonObj);
   });
 };
 
 parseCitiesJsonAndPassToRunner();
 module.exports = getImageDataForCities;
+
+// ./cities+5m.json length === 3290
+// ./sampleCityWithImages.json length === 2988
