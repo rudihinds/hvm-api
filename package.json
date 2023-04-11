@@ -30,7 +30,8 @@
     "mongoose": "^6.2.5",
     "node-fetch": "^2.6.1",
     "path": "^0.12.7",
-    "underscore": "^1.13.1"
+    "underscore": "^1.13.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

@@ -12,6 +12,8 @@ AWS.config.update({
 const dynamoDB = new AWS.DynamoDB();
 const docClient = new AWS.DynamoDB.DocumentClient();
 
+// create cities table, and add all cities' data from cities+5m.json
+
 const createTableParams = {
   TableName: "Cities",
   KeySchema: [{ AttributeName: "cityId", KeyType: "HASH" }],
