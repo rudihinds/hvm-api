@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/thesayf/hvm-api#readme",
   "dependencies": {
+    "async-sema": "^3.1.1",
     "aws-sdk": "^2.1352.0",
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
