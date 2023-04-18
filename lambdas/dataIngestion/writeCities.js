@@ -16,8 +16,8 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 
 const createTableParams = {
   TableName: "Cities",
-  KeySchema: [{ AttributeName: "cityId", KeyType: "HASH" }],
-  AttributeDefinitions: [{ AttributeName: "cityId", AttributeType: "N" }],
+  KeySchema: [{ AttributeName: "city", KeyType: "HASH" }],
+  AttributeDefinitions: [{ AttributeName: "city", AttributeType: "N" }],
   ProvisionedThroughput: {
     // will need to be considered for launch, or move to pay as you go to get an idea first three months.
     ReadCapacityUnits: 5,
@@ -30,7 +30,7 @@ const jsonFilePath = path.resolve(
   "..",
   "..",
   "data",
-  "cities+5m.json"
+  "newCities.json"
 );
 
 const insertCitiesData = () => {
@@ -39,12 +39,11 @@ const insertCitiesData = () => {
     const putParams = {
       TableName: "Cities",
       Item: {
-        cityId: index + 1,
+        city: `${cityObject.city}, ${cityObject.country}`,
         name: cityObject.name,
         country: cityObject.country,
         latitude: cityObject.latitude,
         longitude: cityObject.longitude,
-        population: cityObject.population,
       },
     };
     docClient.put(putParams, (err, data) => {

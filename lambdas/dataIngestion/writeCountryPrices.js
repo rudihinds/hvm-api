@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const { Sema } = require("async-sema");
 const AWS = require("aws-sdk");
+require("dotenv").config();
 
 AWS.config.update({
   region: "eu-west-1",
@@ -10,11 +11,10 @@ AWS.config.update({
   endpoint: "http://localhost:8000",
 });
 
+const NUMBEO_API_KEY = process.env.NUMBEO_API_KEY;
 const dynamoDB = new AWS.DynamoDB();
 const docClient = new AWS.DynamoDB.DocumentClient();
 const baseCurrency = "USD";
-
-// create cities table, and add all cities' data from cities+5m.json
 
 const createTableParams = {
   TableName: "CountriesPrices",
@@ -97,7 +97,6 @@ const createPricesObjectAndWriteToDb = () => {
   fs.readFile(jsonFilePath, null, async (err, data) => {
     if (err) console.log(err);
     const countries = JSON.parse(data).supported_countries;
-
     try {
       for (const country of countries) {
         await sema.acquire();
@@ -113,7 +112,7 @@ const createPricesObjectAndWriteToDb = () => {
             );
             const countryPriceObj = {
               ...priceObj,
-              usdPrices: priceObj.prices.map((itemPrice) => {
+              usdPrices: priceObj.prices.length ? priceObj.prices.map((itemPrice) => {
                 if (itemPrice.lowest_price) {
                   itemPrice.lowest_price =
                     itemPrice.lowest_price * baseExchangeRate;
@@ -127,7 +126,7 @@ const createPricesObjectAndWriteToDb = () => {
                     itemPrice.average_price * baseExchangeRate;
                 }
                 return itemPrice
-              }),
+              }) : [],
             };
             insertCountryData(countryPriceObj);
           }

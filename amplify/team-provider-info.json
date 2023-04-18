@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-hvmapi-dev-01301-authRole",
+      "UnauthRoleArn": "arn:aws:iam::503313416126:role/amplify-hvmapi-dev-01301-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::503313416126:role/amplify-hvmapi-dev-01301-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-hvmapi-dev-01301-deployment",
+      "UnauthRoleName": "amplify-hvmapi-dev-01301-unauthRole",
+      "StackName": "amplify-hvmapi-dev-01301",
+      "StackId": "arn:aws:cloudformation:eu-west-1:503313416126:stack/amplify-hvmapi-dev-01301/672036f0-dd75-11ed-b5a3-06977adc6ef1",
+      "AmplifyAppId": "d1izmn44kfgokf"
+    }
+  }
+}
