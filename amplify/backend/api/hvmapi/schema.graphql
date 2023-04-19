@@ -42,6 +42,7 @@ input CostOfLivingRankingInput {
 type Query {
   getCostOfLivingRanking(city: String!): CostOfLivingRanking
   listCostOfLivingRankings: [CostOfLivingRanking!]
+  getCitiesPrice(cityCountry: String!): CitiesPrice
 }
 
 type CitiesPrice {
