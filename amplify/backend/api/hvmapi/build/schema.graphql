@@ -7,6 +7,76 @@ type Todo {
   updatedAt: AWSDateTime!
 }
 
+type CostOfLivingRanking {
+  city: String!
+  city_name: String!
+  cityCountry: String!
+  country: String!
+  gross_rental_yield_outside_of_centre: Float!
+  price_to_rent_ratio_outside_of_centre: Float!
+  house_price_to_income_ratio: Float!
+  affordability_index: Float!
+  mortgage_as_percentage_of_income: Float!
+  price_to_rent_ratio_city_centre: Float!
+  gross_rental_yield_city_centre: Float!
+  city_id: Int!
+}
+
+input CostOfLivingRankingInput {
+  city: String!
+  city_name: String!
+  cityCountry: String!
+  country: String!
+  gross_rental_yield_outside_of_centre: Float!
+  price_to_rent_ratio_outside_of_centre: Float!
+  house_price_to_income_ratio: Float!
+  affordability_index: Float!
+  mortgage_as_percentage_of_income: Float!
+  price_to_rent_ratio_city_centre: Float!
+  gross_rental_yield_city_centre: Float!
+  city_id: Int!
+}
+
+type Query {
+  getCostOfLivingRanking(city: String!): CostOfLivingRanking
+  listCostOfLivingRankings(limit: Int, nextToken: String): [CostOfLivingRanking]
+  getCitiesPrice(cityCountry: String!): CitiesPrice
+  getTodo(id: ID!): Todo
+  listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
+}
+
+type CitiesPrice {
+  country: String!
+  numbeoCityId: Int!
+  city: String!
+  usdPrices: [UsdPrice]!
+  currency: String!
+  contributors12months: Int!
+  monthLastUpdate: Int!
+  cityCountry: String!
+  contributors: Int!
+  yearLastUpdate: Int!
+  prices: [Price]!
+}
+
+type Price {
+  lowest_price: Float!
+  average_price: Float!
+  highest_price: Float!
+  data_points: Int!
+  item_name: String!
+  item_id: Int!
+}
+
+type UsdPrice {
+  lowest_price: Float!
+  average_price: Float!
+  highest_price: Float!
+  data_points: Int!
+  item_name: String!
+  item_id: Int!
+}
+
 input ModelStringInput {
   ne: String
   eq: String
@@ -169,11 +239,6 @@ input ModelTodoFilterInput {
   and: [ModelTodoFilterInput]
   or: [ModelTodoFilterInput]
   not: ModelTodoFilterInput
-}
-
-type Query {
-  getTodo(id: ID!): Todo
-  listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
 }
 
 input ModelTodoConditionInput {

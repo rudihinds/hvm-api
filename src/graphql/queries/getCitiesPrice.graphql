@@ -1,0 +1,15 @@
+query GetCitiesPrice($cityCountry: String!) {
+  getCitiesPrice(cityCountry: $cityCountry) {
+    country
+    numbeoCityId
+    city
+    usdPrices
+    currency
+    contributors12months
+    monthLastUpdate
+    cityCountry
+    contributors
+    yearLastUpdate
+    prices
+  }
+}

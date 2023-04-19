@@ -1,0 +1,16 @@
+query GetCostOfLivingRanking($city: String!) {
+  getCostOfLivingRanking(city: $city) {
+    city
+    cityCountry
+    country
+    grossRentalYieldOutsideOfCentre
+    cityName
+    priceToRentRatioOutsideOfCentre
+    housePriceToIncomeRatio
+    affordabilityIndex
+    mortgageAsPercentageOfIncome
+    priceToRentRatioCityCentre
+    grossRentalYieldCityCentre
+    cityId
+  }
+}

@@ -41,7 +41,7 @@ input CostOfLivingRankingInput {
 
 type Query {
   getCostOfLivingRanking(city: String!): CostOfLivingRanking
-  listCostOfLivingRankings: [CostOfLivingRanking!]
+  listCostOfLivingRankings(limit: Int, nextToken: String): [CostOfLivingRanking]
   getCitiesPrice(cityCountry: String!): CitiesPrice
 }
 
@@ -79,5 +79,4 @@ type UsdPrice {
 
 schema {
   query: Query
-  mutation: Mutation
 }

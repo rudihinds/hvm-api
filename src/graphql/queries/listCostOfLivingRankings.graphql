@@ -1,0 +1,16 @@
+query ListCostOfLivingRankings {
+  listCostOfLivingRankings {
+    city
+    cityCountry
+    country
+    grossRentalYieldOutsideOfCentre
+    cityName
+    priceToRentRatioOutsideOfCentre
+    housePriceToIncomeRatio
+    affordabilityIndex
+    mortgageAsPercentageOfIncome
+    priceToRentRatioCityCentre
+    grossRentalYieldCityCentre
+    cityId
+  }
+}
