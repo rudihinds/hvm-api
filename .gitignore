@@ -124,5 +124,6 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+data/
 data/numbeoCityPrices(deprecated).json
-numbeoCityPricesActual.json
+data/numbeoCityPricesActual.json
