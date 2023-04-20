@@ -2,6 +2,73 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
+export type CitiesPriceInput = {
+  country?: string | null,
+  numbeoCityId?: number | null,
+  city?: string | null,
+  usdPrices?: Array< UsdPriceInput | null > | null,
+  currency?: string | null,
+  contributors12months?: number | null,
+  monthLastUpdate?: number | null,
+  cityCountry: string,
+  contributors?: number | null,
+  yearLastUpdate?: number | null,
+  prices?: Array< PriceInput | null > | null,
+};
+
+export type UsdPriceInput = {
+  lowest_price?: number | null,
+  average_price?: number | null,
+  highest_price?: number | null,
+  data_points?: number | null,
+  item_name?: string | null,
+  item_id?: number | null,
+};
+
+export type PriceInput = {
+  lowest_price?: number | null,
+  average_price?: number | null,
+  highest_price?: number | null,
+  data_points?: number | null,
+  item_name?: string | null,
+  item_id?: number | null,
+};
+
+export type CitiesPrice = {
+  __typename: "CitiesPrice",
+  country?: string | null,
+  numbeoCityId?: number | null,
+  city?: string | null,
+  usdPrices?:  Array<UsdPrice | null > | null,
+  currency?: string | null,
+  contributors12months?: number | null,
+  monthLastUpdate?: number | null,
+  cityCountry: string,
+  contributors?: number | null,
+  yearLastUpdate?: number | null,
+  prices?:  Array<Price | null > | null,
+};
+
+export type UsdPrice = {
+  __typename: "UsdPrice",
+  lowest_price?: number | null,
+  average_price?: number | null,
+  highest_price?: number | null,
+  data_points?: number | null,
+  item_name?: string | null,
+  item_id?: number | null,
+};
+
+export type Price = {
+  __typename: "Price",
+  lowest_price?: number | null,
+  average_price?: number | null,
+  highest_price?: number | null,
+  data_points?: number | null,
+  item_name?: string | null,
+  item_id?: number | null,
+};
+
 export type CreateTodoInput = {
   id?: string | null,
   name: string,
@@ -91,41 +158,6 @@ export type CostOfLivingRanking = {
   city_id: number,
 };
 
-export type CitiesPrice = {
-  __typename: "CitiesPrice",
-  country: string,
-  numbeoCityId: number,
-  city: string,
-  usdPrices:  Array<UsdPrice | null >,
-  currency: string,
-  contributors12months: number,
-  monthLastUpdate: number,
-  cityCountry: string,
-  contributors: number,
-  yearLastUpdate: number,
-  prices:  Array<Price | null >,
-};
-
-export type UsdPrice = {
-  __typename: "UsdPrice",
-  lowest_price: number,
-  average_price: number,
-  highest_price: number,
-  data_points: number,
-  item_name: string,
-  item_id: number,
-};
-
-export type Price = {
-  __typename: "Price",
-  lowest_price: number,
-  average_price: number,
-  highest_price: number,
-  data_points: number,
-  item_name: string,
-  item_id: number,
-};
-
 export type ModelTodoFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -193,6 +225,43 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null,
   in?: Array< string | null > | null,
   notIn?: Array< string | null > | null,
+};
+
+export type CreateCitiesPriceMutationVariables = {
+  input: CitiesPriceInput,
+};
+
+export type CreateCitiesPriceMutation = {
+  createCitiesPrice?:  {
+    __typename: "CitiesPrice",
+    country?: string | null,
+    numbeoCityId?: number | null,
+    city?: string | null,
+    usdPrices?:  Array< {
+      __typename: "UsdPrice",
+      lowest_price?: number | null,
+      average_price?: number | null,
+      highest_price?: number | null,
+      data_points?: number | null,
+      item_name?: string | null,
+      item_id?: number | null,
+    } | null > | null,
+    currency?: string | null,
+    contributors12months?: number | null,
+    monthLastUpdate?: number | null,
+    cityCountry: string,
+    contributors?: number | null,
+    yearLastUpdate?: number | null,
+    prices?:  Array< {
+      __typename: "Price",
+      lowest_price?: number | null,
+      average_price?: number | null,
+      highest_price?: number | null,
+      data_points?: number | null,
+      item_name?: string | null,
+      item_id?: number | null,
+    } | null > | null,
+  } | null,
 };
 
 export type CreateTodoMutationVariables = {
@@ -295,33 +364,33 @@ export type GetCitiesPriceQueryVariables = {
 export type GetCitiesPriceQuery = {
   getCitiesPrice?:  {
     __typename: "CitiesPrice",
-    country: string,
-    numbeoCityId: number,
-    city: string,
-    usdPrices:  Array< {
+    country?: string | null,
+    numbeoCityId?: number | null,
+    city?: string | null,
+    usdPrices?:  Array< {
       __typename: "UsdPrice",
-      lowest_price: number,
-      average_price: number,
-      highest_price: number,
-      data_points: number,
-      item_name: string,
-      item_id: number,
-    } | null >,
-    currency: string,
-    contributors12months: number,
-    monthLastUpdate: number,
+      lowest_price?: number | null,
+      average_price?: number | null,
+      highest_price?: number | null,
+      data_points?: number | null,
+      item_name?: string | null,
+      item_id?: number | null,
+    } | null > | null,
+    currency?: string | null,
+    contributors12months?: number | null,
+    monthLastUpdate?: number | null,
     cityCountry: string,
-    contributors: number,
-    yearLastUpdate: number,
-    prices:  Array< {
+    contributors?: number | null,
+    yearLastUpdate?: number | null,
+    prices?:  Array< {
       __typename: "Price",
-      lowest_price: number,
-      average_price: number,
-      highest_price: number,
-      data_points: number,
-      item_name: string,
-      item_id: number,
-    } | null >,
+      lowest_price?: number | null,
+      average_price?: number | null,
+      highest_price?: number | null,
+      data_points?: number | null,
+      item_name?: string | null,
+      item_id?: number | null,
+    } | null > | null,
   } | null,
 };
 

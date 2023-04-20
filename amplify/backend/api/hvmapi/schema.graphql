@@ -39,44 +39,80 @@ input CostOfLivingRankingInput {
   city_id: Int!
 }
 
+type CitiesPrice {
+  country: String
+  numbeoCityId: Int
+  city: String
+  usdPrices: [UsdPrice]
+  currency: String
+  contributors12months: Int
+  monthLastUpdate: Int
+  cityCountry: String!
+  contributors: Int
+  yearLastUpdate: Int
+  prices: [Price]
+}
+
+input CitiesPriceInput {
+  country: String
+  numbeoCityId: Int
+  city: String
+  usdPrices: [UsdPriceInput]
+  currency: String
+  contributors12months: Int
+  monthLastUpdate: Int
+  cityCountry: String!
+  contributors: Int
+  yearLastUpdate: Int
+  prices: [PriceInput]
+}
+
+type Price {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+input PriceInput {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+type UsdPrice {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+input UsdPriceInput {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+schema {
+  query: Query
+}
+
 type Query {
   getCostOfLivingRanking(city: String!): CostOfLivingRanking
   listCostOfLivingRankings(limit: Int, nextToken: String): [CostOfLivingRanking]
   getCitiesPrice(cityCountry: String!): CitiesPrice
 }
 
-type CitiesPrice {
-  country: String!
-  numbeoCityId: Int!
-  city: String!
-  usdPrices: [UsdPrice]!
-  currency: String!
-  contributors12months: Int!
-  monthLastUpdate: Int!
-  cityCountry: String!
-  contributors: Int!
-  yearLastUpdate: Int!
-  prices: [Price]!
-}
-
-type Price {
-  lowest_price: Float!
-  average_price: Float!
-  highest_price: Float!
-  data_points: Int!
-  item_name: String!
-  item_id: Int!
-}
-
-type UsdPrice {
-  lowest_price: Float!
-  average_price: Float!
-  highest_price: Float!
-  data_points: Int!
-  item_name: String!
-  item_id: Int!
-}
-
-schema {
-  query: Query
+type Mutation {
+  createCitiesPrice(input: CitiesPriceInput!): CitiesPrice
 }

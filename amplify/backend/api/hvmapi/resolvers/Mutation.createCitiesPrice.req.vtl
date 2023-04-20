@@ -1,0 +1,15 @@
+
+#set ($inputJson = $util.toJson($ctx.args.input))
+#info("Received input: $inputJson")
+
+{
+  "version": "2018-05-29",
+  "operation": "PutItem",
+  "key": {
+    "cityCountry": $util.dynamodb.toDynamoDBJson($ctx.args.input.cityCountry),
+  },
+  "attributeValues": $util.dynamodb.toMapValuesJson($ctx.args.input),
+  "condition": {
+    "expression": "attribute_not_exists(cityCountry)"
+  }
+}

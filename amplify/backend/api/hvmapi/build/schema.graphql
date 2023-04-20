@@ -37,6 +37,70 @@ input CostOfLivingRankingInput {
   city_id: Int!
 }
 
+type CitiesPrice {
+  country: String
+  numbeoCityId: Int
+  city: String
+  usdPrices: [UsdPrice]
+  currency: String
+  contributors12months: Int
+  monthLastUpdate: Int
+  cityCountry: String!
+  contributors: Int
+  yearLastUpdate: Int
+  prices: [Price]
+}
+
+input CitiesPriceInput {
+  country: String
+  numbeoCityId: Int
+  city: String
+  usdPrices: [UsdPriceInput]
+  currency: String
+  contributors12months: Int
+  monthLastUpdate: Int
+  cityCountry: String!
+  contributors: Int
+  yearLastUpdate: Int
+  prices: [PriceInput]
+}
+
+type Price {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+input PriceInput {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+type UsdPrice {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+input UsdPriceInput {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
 type Query {
   getCostOfLivingRanking(city: String!): CostOfLivingRanking
   listCostOfLivingRankings(limit: Int, nextToken: String): [CostOfLivingRanking]
@@ -45,36 +109,11 @@ type Query {
   listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
 }
 
-type CitiesPrice {
-  country: String!
-  numbeoCityId: Int!
-  city: String!
-  usdPrices: [UsdPrice]!
-  currency: String!
-  contributors12months: Int!
-  monthLastUpdate: Int!
-  cityCountry: String!
-  contributors: Int!
-  yearLastUpdate: Int!
-  prices: [Price]!
-}
-
-type Price {
-  lowest_price: Float!
-  average_price: Float!
-  highest_price: Float!
-  data_points: Int!
-  item_name: String!
-  item_id: Int!
-}
-
-type UsdPrice {
-  lowest_price: Float!
-  average_price: Float!
-  highest_price: Float!
-  data_points: Int!
-  item_name: String!
-  item_id: Int!
+type Mutation {
+  createCitiesPrice(input: CitiesPriceInput!): CitiesPrice
+  createTodo(input: CreateTodoInput!, condition: ModelTodoConditionInput): Todo
+  updateTodo(input: UpdateTodoInput!, condition: ModelTodoConditionInput): Todo
+  deleteTodo(input: DeleteTodoInput!, condition: ModelTodoConditionInput): Todo
 }
 
 input ModelStringInput {
@@ -263,12 +302,6 @@ input UpdateTodoInput {
 
 input DeleteTodoInput {
   id: ID!
-}
-
-type Mutation {
-  createTodo(input: CreateTodoInput!, condition: ModelTodoConditionInput): Todo
-  updateTodo(input: UpdateTodoInput!, condition: ModelTodoConditionInput): Todo
-  deleteTodo(input: DeleteTodoInput!, condition: ModelTodoConditionInput): Todo
 }
 
 input ModelSubscriptionTodoFilterInput {

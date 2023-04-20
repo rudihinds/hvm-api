@@ -2,6 +2,37 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createCitiesPrice = /* GraphQL */ `
+  mutation CreateCitiesPrice($input: CitiesPriceInput!) {
+    createCitiesPrice(input: $input) {
+      country
+      numbeoCityId
+      city
+      usdPrices {
+        lowest_price
+        average_price
+        highest_price
+        data_points
+        item_name
+        item_id
+      }
+      currency
+      contributors12months
+      monthLastUpdate
+      cityCountry
+      contributors
+      yearLastUpdate
+      prices {
+        lowest_price
+        average_price
+        highest_price
+        data_points
+        item_name
+        item_id
+      }
+    }
+  }
+`;
 export const createTodo = /* GraphQL */ `
   mutation CreateTodo(
     $input: CreateTodoInput!

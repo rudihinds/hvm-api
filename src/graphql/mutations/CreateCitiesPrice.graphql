@@ -1,0 +1,15 @@
+mutation CreateCitiesPrice($input: CitiesPriceInput!) {
+  createCitiesPrice(input: $input) {
+    country
+    numbeoCityId
+    city
+    usdPrices
+    currency
+    contributors12months
+    monthLastUpdate
+    cityCountry
+    contributors
+    yearLastUpdate
+    prices
+  }
+}
