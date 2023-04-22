@@ -20,6 +20,8 @@ type CostOfLivingRanking {
   price_to_rent_ratio_city_centre: Float!
   gross_rental_yield_city_centre: Float!
   city_id: Int!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
 }
 
 input CostOfLivingRankingInput {
@@ -37,7 +39,7 @@ input CostOfLivingRankingInput {
   city_id: Int!
 }
 
-type CitiesPrice {
+type CityPrice {
   country: String
   numbeoCityId: Int
   city: String
@@ -49,9 +51,11 @@ type CitiesPrice {
   contributors: Int
   yearLastUpdate: Int
   prices: [Price]
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
 }
 
-input CitiesPriceInput {
+input CityPriceInput {
   country: String
   numbeoCityId: Int
   city: String
@@ -101,19 +105,9 @@ input UsdPriceInput {
   item_id: Int
 }
 
-type Query {
-  getCostOfLivingRanking(city: String!): CostOfLivingRanking
-  listCostOfLivingRankings(limit: Int, nextToken: String): [CostOfLivingRanking]
-  getCitiesPrice(cityCountry: String!): CitiesPrice
-  getTodo(id: ID!): Todo
-  listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
-}
-
-type Mutation {
-  createCitiesPrice(input: CitiesPriceInput!): CitiesPrice
-  createTodo(input: CreateTodoInput!, condition: ModelTodoConditionInput): Todo
-  updateTodo(input: UpdateTodoInput!, condition: ModelTodoConditionInput): Todo
-  deleteTodo(input: DeleteTodoInput!, condition: ModelTodoConditionInput): Todo
+type CityPriceConnection {
+  Items: [CityPrice]
+  nextToken: String
 }
 
 input ModelStringInput {
@@ -280,6 +274,15 @@ input ModelTodoFilterInput {
   not: ModelTodoFilterInput
 }
 
+type Query {
+  getTodo(id: ID!): Todo
+  listTodos(filter: ModelTodoFilterInput, limit: Int, nextToken: String): ModelTodoConnection
+  getCostOfLivingRanking(city: String!): CostOfLivingRanking
+  listCostOfLivingRankings(city: String, filter: ModelCostOfLivingRankingFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelCostOfLivingRankingConnection
+  getCityPrice(cityCountry: String!): CityPrice
+  listCityPrices(cityCountry: String, filter: ModelCityPriceFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelCityPriceConnection
+}
+
 input ModelTodoConditionInput {
   name: ModelStringInput
   description: ModelStringInput
@@ -304,6 +307,18 @@ input DeleteTodoInput {
   id: ID!
 }
 
+type Mutation {
+  createTodo(input: CreateTodoInput!, condition: ModelTodoConditionInput): Todo
+  updateTodo(input: UpdateTodoInput!, condition: ModelTodoConditionInput): Todo
+  deleteTodo(input: DeleteTodoInput!, condition: ModelTodoConditionInput): Todo
+  createCostOfLivingRanking(input: CreateCostOfLivingRankingInput!, condition: ModelCostOfLivingRankingConditionInput): CostOfLivingRanking
+  updateCostOfLivingRanking(input: UpdateCostOfLivingRankingInput!, condition: ModelCostOfLivingRankingConditionInput): CostOfLivingRanking
+  deleteCostOfLivingRanking(input: DeleteCostOfLivingRankingInput!, condition: ModelCostOfLivingRankingConditionInput): CostOfLivingRanking
+  createCityPrice(input: CreateCityPriceInput!, condition: ModelCityPriceConditionInput): CityPrice
+  updateCityPrice(input: UpdateCityPriceInput!, condition: ModelCityPriceConditionInput): CityPrice
+  deleteCityPrice(input: DeleteCityPriceInput!, condition: ModelCityPriceConditionInput): CityPrice
+}
+
 input ModelSubscriptionTodoFilterInput {
   id: ModelSubscriptionIDInput
   name: ModelSubscriptionStringInput
@@ -316,5 +331,182 @@ type Subscription {
   onCreateTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["createTodo"])
   onUpdateTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["updateTodo"])
   onDeleteTodo(filter: ModelSubscriptionTodoFilterInput): Todo @aws_subscribe(mutations: ["deleteTodo"])
+  onCreateCostOfLivingRanking(filter: ModelSubscriptionCostOfLivingRankingFilterInput): CostOfLivingRanking @aws_subscribe(mutations: ["createCostOfLivingRanking"])
+  onUpdateCostOfLivingRanking(filter: ModelSubscriptionCostOfLivingRankingFilterInput): CostOfLivingRanking @aws_subscribe(mutations: ["updateCostOfLivingRanking"])
+  onDeleteCostOfLivingRanking(filter: ModelSubscriptionCostOfLivingRankingFilterInput): CostOfLivingRanking @aws_subscribe(mutations: ["deleteCostOfLivingRanking"])
+  onCreateCityPrice(filter: ModelSubscriptionCityPriceFilterInput): CityPrice @aws_subscribe(mutations: ["createCityPrice"])
+  onUpdateCityPrice(filter: ModelSubscriptionCityPriceFilterInput): CityPrice @aws_subscribe(mutations: ["updateCityPrice"])
+  onDeleteCityPrice(filter: ModelSubscriptionCityPriceFilterInput): CityPrice @aws_subscribe(mutations: ["deleteCityPrice"])
+}
+
+type ModelCostOfLivingRankingConnection {
+  items: [CostOfLivingRanking]!
+  nextToken: String
+}
+
+input ModelCostOfLivingRankingFilterInput {
+  city: ModelStringInput
+  city_name: ModelStringInput
+  cityCountry: ModelStringInput
+  country: ModelStringInput
+  gross_rental_yield_outside_of_centre: ModelFloatInput
+  price_to_rent_ratio_outside_of_centre: ModelFloatInput
+  house_price_to_income_ratio: ModelFloatInput
+  affordability_index: ModelFloatInput
+  mortgage_as_percentage_of_income: ModelFloatInput
+  price_to_rent_ratio_city_centre: ModelFloatInput
+  gross_rental_yield_city_centre: ModelFloatInput
+  city_id: ModelIntInput
+  and: [ModelCostOfLivingRankingFilterInput]
+  or: [ModelCostOfLivingRankingFilterInput]
+  not: ModelCostOfLivingRankingFilterInput
+}
+
+input ModelCostOfLivingRankingConditionInput {
+  city_name: ModelStringInput
+  cityCountry: ModelStringInput
+  country: ModelStringInput
+  gross_rental_yield_outside_of_centre: ModelFloatInput
+  price_to_rent_ratio_outside_of_centre: ModelFloatInput
+  house_price_to_income_ratio: ModelFloatInput
+  affordability_index: ModelFloatInput
+  mortgage_as_percentage_of_income: ModelFloatInput
+  price_to_rent_ratio_city_centre: ModelFloatInput
+  gross_rental_yield_city_centre: ModelFloatInput
+  city_id: ModelIntInput
+  and: [ModelCostOfLivingRankingConditionInput]
+  or: [ModelCostOfLivingRankingConditionInput]
+  not: ModelCostOfLivingRankingConditionInput
+}
+
+input CreateCostOfLivingRankingInput {
+  city: String!
+  city_name: String!
+  cityCountry: String!
+  country: String!
+  gross_rental_yield_outside_of_centre: Float!
+  price_to_rent_ratio_outside_of_centre: Float!
+  house_price_to_income_ratio: Float!
+  affordability_index: Float!
+  mortgage_as_percentage_of_income: Float!
+  price_to_rent_ratio_city_centre: Float!
+  gross_rental_yield_city_centre: Float!
+  city_id: Int!
+}
+
+input UpdateCostOfLivingRankingInput {
+  city: String!
+  city_name: String
+  cityCountry: String
+  country: String
+  gross_rental_yield_outside_of_centre: Float
+  price_to_rent_ratio_outside_of_centre: Float
+  house_price_to_income_ratio: Float
+  affordability_index: Float
+  mortgage_as_percentage_of_income: Float
+  price_to_rent_ratio_city_centre: Float
+  gross_rental_yield_city_centre: Float
+  city_id: Int
+}
+
+input DeleteCostOfLivingRankingInput {
+  city: String!
+}
+
+input ModelSubscriptionCostOfLivingRankingFilterInput {
+  city: ModelSubscriptionStringInput
+  city_name: ModelSubscriptionStringInput
+  cityCountry: ModelSubscriptionStringInput
+  country: ModelSubscriptionStringInput
+  gross_rental_yield_outside_of_centre: ModelSubscriptionFloatInput
+  price_to_rent_ratio_outside_of_centre: ModelSubscriptionFloatInput
+  house_price_to_income_ratio: ModelSubscriptionFloatInput
+  affordability_index: ModelSubscriptionFloatInput
+  mortgage_as_percentage_of_income: ModelSubscriptionFloatInput
+  price_to_rent_ratio_city_centre: ModelSubscriptionFloatInput
+  gross_rental_yield_city_centre: ModelSubscriptionFloatInput
+  city_id: ModelSubscriptionIntInput
+  and: [ModelSubscriptionCostOfLivingRankingFilterInput]
+  or: [ModelSubscriptionCostOfLivingRankingFilterInput]
+}
+
+type ModelCityPriceConnection {
+  items: [CityPrice]!
+  nextToken: String
+}
+
+input ModelCityPriceFilterInput {
+  country: ModelStringInput
+  numbeoCityId: ModelIntInput
+  city: ModelStringInput
+  currency: ModelStringInput
+  contributors12months: ModelIntInput
+  monthLastUpdate: ModelIntInput
+  cityCountry: ModelStringInput
+  contributors: ModelIntInput
+  yearLastUpdate: ModelIntInput
+  and: [ModelCityPriceFilterInput]
+  or: [ModelCityPriceFilterInput]
+  not: ModelCityPriceFilterInput
+}
+
+input ModelCityPriceConditionInput {
+  country: ModelStringInput
+  numbeoCityId: ModelIntInput
+  city: ModelStringInput
+  currency: ModelStringInput
+  contributors12months: ModelIntInput
+  monthLastUpdate: ModelIntInput
+  contributors: ModelIntInput
+  yearLastUpdate: ModelIntInput
+  and: [ModelCityPriceConditionInput]
+  or: [ModelCityPriceConditionInput]
+  not: ModelCityPriceConditionInput
+}
+
+input CreateCityPriceInput {
+  country: String
+  numbeoCityId: Int
+  city: String
+  usdPrices: [UsdPriceInput]
+  currency: String
+  contributors12months: Int
+  monthLastUpdate: Int
+  cityCountry: String!
+  contributors: Int
+  yearLastUpdate: Int
+  prices: [PriceInput]
+}
+
+input UpdateCityPriceInput {
+  country: String
+  numbeoCityId: Int
+  city: String
+  usdPrices: [UsdPriceInput]
+  currency: String
+  contributors12months: Int
+  monthLastUpdate: Int
+  cityCountry: String!
+  contributors: Int
+  yearLastUpdate: Int
+  prices: [PriceInput]
+}
+
+input DeleteCityPriceInput {
+  cityCountry: String!
+}
+
+input ModelSubscriptionCityPriceFilterInput {
+  country: ModelSubscriptionStringInput
+  numbeoCityId: ModelSubscriptionIntInput
+  city: ModelSubscriptionStringInput
+  currency: ModelSubscriptionStringInput
+  contributors12months: ModelSubscriptionIntInput
+  monthLastUpdate: ModelSubscriptionIntInput
+  cityCountry: ModelSubscriptionStringInput
+  contributors: ModelSubscriptionIntInput
+  yearLastUpdate: ModelSubscriptionIntInput
+  and: [ModelSubscriptionCityPriceFilterInput]
+  or: [ModelSubscriptionCityPriceFilterInput]
 }
 

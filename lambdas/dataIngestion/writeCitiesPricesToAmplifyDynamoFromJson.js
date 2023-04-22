@@ -3,7 +3,7 @@ const AWS = require("aws-sdk");
 const { Amplify } = require("aws-amplify");
 const fs = require("fs");
 const path = require("path");
-const { createCitiesPrice } = require("../../src/graphql/mutations.ts");
+const { createCityPrice } = require("../../src/graphql/mutations.ts");
 
 const jsonFilePath = path.resolve(
   __dirname,
@@ -49,7 +49,7 @@ async function importData(items) {
 
     try {
       const result = await Amplify.API.graphql({
-        query: createCitiesPrice,
+        query: createCityPrice,
         variables: { input },
       });
       console.log("Item added:", JSON.stringify(result.data, null, 2));

@@ -9,10 +9,10 @@ type Todo @model {
   description: String
 }
 
-type CostOfLivingRanking {
-  city: String!
+type CostOfLivingRanking @model {
+  city: String! @primaryKey
   city_name: String!
-  cityCountry: String!
+  cityCountry: String! CityPrice @connection(fields: ["cityCountry"])
   country: String!
   gross_rental_yield_outside_of_centre: Float!
   price_to_rent_ratio_outside_of_centre: Float!
@@ -39,7 +39,7 @@ input CostOfLivingRankingInput {
   city_id: Int!
 }
 
-type CitiesPrice {
+type CityPrice @model {
   country: String
   numbeoCityId: Int
   city: String
@@ -47,13 +47,13 @@ type CitiesPrice {
   currency: String
   contributors12months: Int
   monthLastUpdate: Int
-  cityCountry: String!
+  cityCountry: String! @primaryKey
   contributors: Int
   yearLastUpdate: Int
   prices: [Price]
 }
 
-input CitiesPriceInput {
+input CityPriceInput {
   country: String
   numbeoCityId: Int
   city: String
@@ -103,16 +103,23 @@ input UsdPriceInput {
   item_id: Int
 }
 
+type CityPriceConnection {
+  Items: [CityPrice]
+  nextToken: String
+}
+
+# type Query {
+#   getCostOfLivingRanking(city: String!): CostOfLivingRanking
+#   listCostOfLivingRankings(limit: Int, nextToken: String): [CostOfLivingRanking]
+#   getCityPrice(cityCountry: String!): CityPrice
+#   listCityPrices(limit: Int, nextToken: String): [CityPriceConnection]
+# }
+
+# type Mutation {
+#   createCityPrice(input: CityPriceInput!): CityPrice
+# }
+
 schema {
   query: Query
-}
-
-type Query {
-  getCostOfLivingRanking(city: String!): CostOfLivingRanking
-  listCostOfLivingRankings(limit: Int, nextToken: String): [CostOfLivingRanking]
-  getCitiesPrice(cityCountry: String!): CitiesPrice
-}
-
-type Mutation {
-  createCitiesPrice(input: CitiesPriceInput!): CitiesPrice
+  # mutation: Mutation
 }

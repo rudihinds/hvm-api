@@ -1,0 +1,18 @@
+query ListCityPrices($limit: Int, $nextToken: String) {
+  listCityPrices(limit: $limit, nextToken: $nextToken) {
+    Items {
+      country
+      numbeoCityId
+      city
+      usdPrices
+      currency
+      contributors12months
+      monthLastUpdate
+      cityCountry
+      contributors
+      yearLastUpdate
+      prices
+    }
+    nextToken
+  }
+}
