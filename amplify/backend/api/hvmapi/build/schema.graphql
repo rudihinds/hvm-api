@@ -20,6 +20,7 @@ type CostOfLivingRanking {
   price_to_rent_ratio_city_centre: Float!
   gross_rental_yield_city_centre: Float!
   city_id: Int!
+  cityPrice: CityPrice
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
 }

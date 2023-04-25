@@ -12,7 +12,7 @@ type Todo @model {
 type CostOfLivingRanking @model {
   city: String! @primaryKey
   city_name: String!
-  cityCountry: String! CityPrice @connection(fields: ["cityCountry"])
+  cityCountry: String! 
   country: String!
   gross_rental_yield_outside_of_centre: Float!
   price_to_rent_ratio_outside_of_centre: Float!
@@ -22,6 +22,7 @@ type CostOfLivingRanking @model {
   price_to_rent_ratio_city_centre: Float!
   gross_rental_yield_city_centre: Float!
   city_id: Int!
+  cityPrice: CityPrice @hasOne(fields: ["cityCountry"])
 }
 
 input CostOfLivingRankingInput {
@@ -51,6 +52,7 @@ type CityPrice @model {
   contributors: Int
   yearLastUpdate: Int
   prices: [Price]
+  # costOfLivingRanking: CostOfLivingRanking @belongsTo(fields: ["cityCountry"])
 }
 
 input CityPriceInput {
@@ -119,7 +121,7 @@ type CityPriceConnection {
 #   createCityPrice(input: CityPriceInput!): CityPrice
 # }
 
-schema {
-  query: Query
+# schema {
+  # query: Query
   # mutation: Mutation
-}
+# }

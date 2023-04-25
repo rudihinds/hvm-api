@@ -46,6 +46,19 @@ export const getCostOfLivingRanking = /* GraphQL */ `
       price_to_rent_ratio_city_centre
       gross_rental_yield_city_centre
       city_id
+      cityPrice {
+        country
+        numbeoCityId
+        city
+        currency
+        contributors12months
+        monthLastUpdate
+        cityCountry
+        contributors
+        yearLastUpdate
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
