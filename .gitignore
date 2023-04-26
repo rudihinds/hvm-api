@@ -127,3 +127,5 @@ amplifytools.xcconfig
 data/
 data/numbeoCityPrices(deprecated).json
 data/numbeoCityPricesActual.json
+../../hvm-api/amplify/mock-data
+../../hvm-api/amplify/mock-api-resources
