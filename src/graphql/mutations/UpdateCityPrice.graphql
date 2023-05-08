@@ -1,0 +1,29 @@
+mutation UpdateCityPrice($input: CityPriceInput!) {
+  updateCityPrice(input: $input) {
+    numbeoCityId
+    city
+    country
+    currency
+    contributors12months
+    monthLastUpdate
+    cityCountry
+    contributors
+    yearLastUpdate
+    prices {
+      lowest_price
+      average_price
+      highest_price
+      data_points
+      item_name
+      item_id
+    }
+    usdPrices {
+      lowest_price
+      average_price
+      highest_price
+      data_points
+      item_name
+      item_id
+    }
+  }
+}

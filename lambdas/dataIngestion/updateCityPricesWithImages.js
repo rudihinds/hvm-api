@@ -20,6 +20,36 @@ const url = path.resolve(
   "sampleCityWithImages.json"
 );
 
+ const updateCityPrices = async (cityPrices) => {
+   let finalCityPrices = [];
+   let nextToken = null;
+   do {
+     try {
+       const result = await Amplify.API.graphql({
+         query: listCityPrices,
+         variables: { limit: 1000, nextToken },
+       });
+       console.log(
+         "nextToken from result",
+         result.data.listCityPrices.nextToken
+       );
+       nextToken = result.data.listCityPrices.nextToken;
+       finalCityPrices = [
+         ...finalCityPrices,
+         ...result.data.listCityPrices.items,
+       ];
+       console.log(finalCityPrices.length);
+     } catch (error) {
+       console.error(
+         "Error getting items list",
+         JSON.stringify(error, null, 2)
+       );
+     }
+   } while (nextToken);
+
+   console.log(finalCityPrices.length);
+ };
+
 fs.readFile(url, (err, data) => {
   if (err) throw err;
   const cities = JSON.parse(data);
@@ -51,19 +81,7 @@ fs.readFile(url, (err, data) => {
     aws_appsync_apiKey: "da2-fakeApiId123456",
   });
 
-  const updateCityPrices = async (cityPrices) => {
-    try {
-      const result = await Amplify.API.graphql({
-        query: listCityPrices,
-        variables: { input: {} },
-      });
-      console.log("length", result.data.listCityPrices.items.length);
-      throw Error("stop");
-      console.log("result.data", JSON.stringify(result.data, null, 2));
-    } catch (error) {
-      console.error("Error getting items list", JSON.stringify(error, null, 2));
-    }
-  };
 
-    updateCityPrices(cities);
+
+  updateCityPrices(cities);
 });

@@ -1,9 +1,13 @@
 require = require("esm")(module);
-const AWS = require("aws-sdk");
 const { Amplify } = require("aws-amplify");
 const fs = require("fs");
 const path = require("path");
-const { createCityPrice } = require("../../src/graphql/mutations.ts");
+const {
+  createCityPrice,
+  updateCityPrice,
+} = require("../../src/graphql/mutations.ts");
+
+const { getCityPrice } = require("../../src/graphql/queries.ts");
 
 const jsonFilePath = path.resolve(
   __dirname,
@@ -20,10 +24,20 @@ Amplify.configure({
   aws_appsync_apiKey: "da2-fakeApiId123456",
 });
 
-const docClient = new AWS.DynamoDB.DocumentClient({
-  region: "eu-west-1",
-  endpoint: "http://localhost:8000",
-});
+async function getCityFromDynamoDB(cityCountry) {
+  try {
+    const result = await Amplify.API.graphql({
+      query: getCityPrice,
+      variables: { cityCountry },
+    });
+    return result.data.getCityPrice;
+  } catch (error) {
+    console.error(
+      "error in getting json city from dynamodb when checking if it exists getcityfromdynamodb",
+      error
+    );
+  }
+}
 
 async function importData(cities) {
   for (const cityObj of cities) {
@@ -52,22 +66,22 @@ async function importData(cities) {
       numbeoCityId: city_id,
     };
 
-    const params = {
-      TableName: "CityPrice",
-      Item: input,
-    };
+    const city = await getCityFromDynamoDB(name);
+
+    let queryType;
 
     try {
-      console.log(input);
-      const result = await Amplify.API.graphql({
-        query: createCityPrice,
+      const params = {
+        query: city ? updateCityPrice : createCityPrice,
         variables: { input },
-      });
-      console.log(result);
-      throw Error("stop");
+      };
+      queryType = params.query;
+      const result = await Amplify.API.graphql(params);
+      console.log(name);
+      console.log(Object.entries(result.data)[0][0]);
     } catch (error) {
-      console.error(error);
-      break;
+      console.error("error updating or creating cityprice item", error);
+      console.error("querytype", queryType);
     }
   }
 }
