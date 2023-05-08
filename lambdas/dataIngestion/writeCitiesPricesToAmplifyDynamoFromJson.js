@@ -20,8 +20,13 @@ Amplify.configure({
   aws_appsync_apiKey: "da2-fakeApiId123456",
 });
 
-async function importData(items) {
-  for (const item of items) {
+const docClient = new AWS.DynamoDB.DocumentClient({
+  region: "eu-west-1",
+  endpoint: "http://localhost:8000",
+});
+
+async function importData(cities) {
+  for (const cityObj of cities) {
     const {
       name,
       city_id,
@@ -32,7 +37,7 @@ async function importData(items) {
       contributors,
       yearLastUpdate,
       prices,
-    } = item;
+    } = cityObj;
     const input = {
       cityCountry: name,
       city: name.split(", ")[0],
@@ -47,16 +52,22 @@ async function importData(items) {
       numbeoCityId: city_id,
     };
 
+    const params = {
+      TableName: "CityPrice",
+      Item: input,
+    };
+
     try {
+      console.log(input);
       const result = await Amplify.API.graphql({
         query: createCityPrice,
         variables: { input },
       });
-      console.log("Item added:", JSON.stringify(result.data, null, 2));
-      console.log("added item number", items.indexOf(item));
+      console.log(result);
       throw Error("stop");
     } catch (error) {
-      console.error("Error putting item:", JSON.stringify(error, null, 2));
+      console.error(error);
+      break;
     }
   }
 }
