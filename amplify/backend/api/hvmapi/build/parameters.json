@@ -1,7 +1,0 @@
-{
-    "AppSyncApiName": "hvmapi",
-    "DynamoDBBillingMode": "PAY_PER_REQUEST",
-    "DynamoDBEnableServerSideEncryption": false,
-    "S3DeploymentBucket": "amplify-hvmapi-dev-01301-deployment",
-    "S3DeploymentRootKey": "amplify-appsync-files/82b0ddc053feb9f097bdd8c5fd4088ccf85b09d1"
-}

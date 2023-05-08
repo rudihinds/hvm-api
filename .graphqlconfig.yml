@@ -1,18 +1,4 @@
-projects:
-  hvmapi:
-    schemaPath: amplify/backend/api/hvmapi/build/schema.graphql
-    includes:
-      - src/graphql/**/*.ts
-    excludes:
-      - ./amplify/**
-    extensions:
-      amplify:
-        codeGenTarget: typescript
-        generatedFileName: frontend/src/API.ts
-        docsFilePath: src/graphql
-        region: eu-west-1
-        apiId: null
-        maxDepth: 2
+projects: {}
 extensions:
   amplify:
     version: 3

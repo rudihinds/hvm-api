@@ -11,6 +11,7 @@ const { Amplify } = require("aws-amplify");
 const fs = require("fs");
 const path = require("path");
 const { listCityPrices } = require("../../src/graphql/queries.ts");
+const updateCityPrice = require("../../src/graphql/mutations.ts")
 
 const url = path.resolve(
   __dirname,
@@ -20,35 +21,71 @@ const url = path.resolve(
   "sampleCityWithImages.json"
 );
 
- const updateCityPrices = async (cityPrices) => {
-   let finalCityPrices = [];
-   let nextToken = null;
-   do {
-     try {
-       const result = await Amplify.API.graphql({
-         query: listCityPrices,
-         variables: { limit: 1000, nextToken },
-       });
-       console.log(
-         "nextToken from result",
-         result.data.listCityPrices.nextToken
-       );
-       nextToken = result.data.listCityPrices.nextToken;
-       finalCityPrices = [
-         ...finalCityPrices,
-         ...result.data.listCityPrices.items,
-       ];
-       console.log(finalCityPrices.length);
-     } catch (error) {
-       console.error(
-         "Error getting items list",
-         JSON.stringify(error, null, 2)
-       );
-     }
-   } while (nextToken);
+const updateCityPrices = async (cityImageObjsFromJson) => {
+  let cityPricesFromDb = [];
+  let nextToken = null;
+  let count = 0;
+  do {
+    try {
+      const result = await Amplify.API.graphql({
+        query: listCityPrices,
+        variables: { limit: 1000, nextToken },
+      });
+      console.log(
+        "nextToken from result",
+        result.data.listCityPrices.nextToken
+      );
+      nextToken = result.data.listCityPrices.nextToken;
+      cityPricesFromDb = [
+        ...cityPricesFromDb,
+        ...result.data.listCityPrices.items,
+      ];
+      count += 1;
+      console.log(cityPricesFromDb.length);
+      if (count === 3) {
+        nextToken = null;
+      }
+    } catch (error) {
+      console.error("Error getting items list", JSON.stringify(error, null, 2));
+    }
+  } while (nextToken);
 
-   console.log(finalCityPrices.length);
- };
+  let citiesFromDbWithNoImages = [];
+  for (const cityPrice of cityPricesFromDb) {
+    console.log('inside loop');
+    const cityImageObj = cityImageObjsFromJson.find(
+      (cityImageObj) => cityImageObj.city === cityPrice.city
+    );
+    if (cityImageObj) {
+      const input = {
+        ...cityPrice,
+        images: cityImageObj.images,
+      };
+      try {
+        const result = await Amplify.API.graphql({
+          query: updateCityPrice,
+          variables: { input },
+        });
+        console.log("result from updateCityPrice with images", result);
+      } catch (err) {
+        console.error("error updating cityPrice with images", err.message);
+      }
+    } else {
+        console.log('no image found for city', cityPrice.city);
+      citiesFromDbWithNoImages.push(cityPrice);
+    }
+  }
+
+  citiesFromDbWithNoImages.length &&
+    fs.writeFile(
+      "citiesFromDbWithNoImages.json",
+      JSON.stringify(citiesFromDbWithNoImages, null, 2),
+      (err) => {
+        if (err) throw err;
+        console.log("citiesFromDbWithNoImages.json written");
+      }
+    );
+};
 
 fs.readFile(url, (err, data) => {
   if (err) throw err;
@@ -80,8 +117,6 @@ fs.readFile(url, (err, data) => {
     aws_appsync_authenticationType: "API_KEY",
     aws_appsync_apiKey: "da2-fakeApiId123456",
   });
-
-
 
   updateCityPrices(cities);
 });

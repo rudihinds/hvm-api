@@ -25,5 +25,19 @@ mutation UpdateCityPrice($input: CityPriceInput!) {
       item_name
       item_id
     }
+    images {
+      unsplashId
+      name
+      city
+      description
+      alt_description
+      urls {
+        raw
+        full
+        regular
+        small
+        thumb
+      }
+    }
   }
 }

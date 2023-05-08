@@ -52,6 +52,7 @@ type CityPrice @model {
   contributors: Int
   yearLastUpdate: Int
   prices: [Price]
+  images: [ImageObject]
   # costOfLivingRanking: CostOfLivingRanking @belongsTo(fields: ["cityCountry"])
 }
 
@@ -67,6 +68,7 @@ input CityPriceInput {
   contributors: Int
   yearLastUpdate: Int
   prices: [PriceInput]
+  images: [ImageObjectInput]
 }
 
 type Price {
@@ -103,6 +105,40 @@ input UsdPriceInput {
   data_points: Int
   item_name: String
   item_id: Int
+}
+
+type ImageObject {
+  unsplashId: String
+  name: String
+  city: String
+  description: String
+  alt_description: String
+  urls: Urls
+}
+
+input ImageObjectInput {
+  unsplashId: String
+  name: String
+  city: String
+  description: String
+  alt_description: String
+  urls: UrlsInput
+}
+
+type Urls {
+  raw: String
+  full: String
+  regular: String
+  small: String
+  thumb: String
+}
+
+input UrlsInput {
+  raw: String
+  full: String
+  regular: String
+  small: String
+  thumb: String
 }
 
 type CityPriceConnection {
