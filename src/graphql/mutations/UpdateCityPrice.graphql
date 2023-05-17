@@ -37,7 +37,10 @@ mutation UpdateCityPrice($input: CityPriceInput!) {
         regular
         small
         thumb
+        small_s3
       }
     }
+    createdAt
+    updatedAt
   }
 }

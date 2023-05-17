@@ -11,7 +11,7 @@ const { Amplify } = require("aws-amplify");
 const fs = require("fs");
 const path = require("path");
 const { listCityPrices } = require("../../src/graphql/queries.ts");
-const updateCityPrice = require("../../src/graphql/mutations.ts")
+const { updateCityPrice } = require("../../src/graphql/mutations.ts");
 
 const url = path.resolve(
   __dirname,
@@ -31,32 +31,37 @@ const updateCityPrices = async (cityImageObjsFromJson) => {
         query: listCityPrices,
         variables: { limit: 1000, nextToken },
       });
-      console.log(
-        "nextToken from result",
-        result.data.listCityPrices.nextToken
-      );
       nextToken = result.data.listCityPrices.nextToken;
+      console.log("nextToken from result", nextToken);
       cityPricesFromDb = [
         ...cityPricesFromDb,
         ...result.data.listCityPrices.items,
       ];
+      console.log("len", cityPricesFromDb.length);
+
       count += 1;
-      console.log(cityPricesFromDb.length);
-      if (count === 3) {
-        nextToken = null;
-      }
+      // console.log(JSON.stringify(cityPricesFromDb));
+      // console.log(count);
+      // if (count === 10) {
+      //   nextToken = null;
+      // }
     } catch (error) {
       console.error("Error getting items list", JSON.stringify(error, null, 2));
     }
   } while (nextToken);
 
   let citiesFromDbWithNoImages = [];
+  let citiesFromDbWithImages = [];
   for (const cityPrice of cityPricesFromDb) {
-    console.log('inside loop');
+    console.log(cityPrice);
+    console.log(`inside loop for ${cityPrice.city}`);
     const cityImageObj = cityImageObjsFromJson.find(
-      (cityImageObj) => cityImageObj.city === cityPrice.city
+      (cityImageObj) =>
+        cityImageObj.city?.trim().toLowerCase() ===
+        cityPrice.city?.trim().toLowerCase()
     );
     if (cityImageObj) {
+      console.log("image found for ", cityPrice.city);
       const input = {
         ...cityPrice,
         images: cityImageObj.images,
@@ -66,23 +71,58 @@ const updateCityPrices = async (cityImageObjsFromJson) => {
           query: updateCityPrice,
           variables: { input },
         });
-        console.log("result from updateCityPrice with images", result);
+        citiesFromDbWithImages = [
+          ...citiesFromDbWithImages,
+          {
+            city: result.data.updateCityPrice.city,
+            country: result.data.updateCityPrice.country,
+          },
+        ];
+        console.log(
+          "result from updateCityPrice with images",
+          result.data.updateCityPrice
+        );
       } catch (err) {
-        console.error("error updating cityPrice with images", err.message);
+        console.error("error updating cityPrice with images", err);
       }
     } else {
-        console.log('no image found for city', cityPrice.city);
-      citiesFromDbWithNoImages.push(cityPrice);
+      console.log("no image found for city", cityPrice.city);
+      citiesFromDbWithNoImages = [
+        ...citiesFromDbWithNoImages,
+        {
+          city: cityPrice.city,
+          country: cityPrice.country,
+        },
+      ];
     }
   }
+  console.log("number cities with images now: ", citiesFromDbWithImages.length);
+  console.log(
+    "number cities with no images now: ",
+    citiesFromDbWithNoImages.length
+  );
 
   citiesFromDbWithNoImages.length &&
     fs.writeFile(
       "citiesFromDbWithNoImages.json",
       JSON.stringify(citiesFromDbWithNoImages, null, 2),
       (err) => {
-        if (err) throw err;
-        console.log("citiesFromDbWithNoImages.json written");
+        if (err) {
+          console.log("citiesFromDbWithNoImages.json couldnt be written");
+          console.log(err);
+        }
+      }
+    );
+
+  citiesFromDbWithImages.length &&
+    fs.writeFile(
+      "citiesFromDbWithImages.json",
+      JSON.stringify(citiesFromDbWithImages, null, 2),
+      (err) => {
+        if (err) {
+          console.log("citiesFromDbWithImages.json couldnt be written");
+          console.log(err);
+        }
       }
     );
 };

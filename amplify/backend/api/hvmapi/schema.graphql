@@ -12,7 +12,7 @@ input AMPLIFY {
 type CostOfLivingRanking @model {
   city: String! @primaryKey
   city_name: String!
-  cityCountry: String! 
+  cityCountry: String!
   country: String!
   gross_rental_yield_outside_of_centre: Float!
   price_to_rent_ratio_outside_of_centre: Float!
@@ -53,6 +53,8 @@ type CityPrice @model {
   yearLastUpdate: Int
   prices: [Price]
   images: [ImageObject]
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
   # costOfLivingRanking: CostOfLivingRanking @belongsTo(fields: ["cityCountry"])
 }
 
@@ -69,6 +71,8 @@ input CityPriceInput {
   yearLastUpdate: Int
   prices: [PriceInput]
   images: [ImageObjectInput]
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }
 
 type Price {
@@ -131,6 +135,7 @@ type Urls {
   regular: String
   small: String
   thumb: String
+  small_s3: String
 }
 
 input UrlsInput {
@@ -139,6 +144,7 @@ input UrlsInput {
   regular: String
   small: String
   thumb: String
+  small_s3: String
 }
 
 type CityPriceConnection {
@@ -158,6 +164,6 @@ type CityPriceConnection {
 # }
 
 # schema {
-  # query: Query
-  # mutation: Mutation
+# query: Query
+# mutation: Mutation
 # }

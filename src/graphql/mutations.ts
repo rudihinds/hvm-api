@@ -2,49 +2,7 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
-  ) {
-    createTodo(input: $input, condition: $condition) {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
-const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
-  ) {
-    updateTodo(input: $input, condition: $condition) {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
-const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
-  ) {
-    deleteTodo(input: $input, condition: $condition) {
-      id
-      name
-      description
-      createdAt
-      updatedAt
-    }
-  }
-`;
-const createCostOfLivingRanking = /* GraphQL */ `
+export const createCostOfLivingRanking = /* GraphQL */ `
   mutation CreateCostOfLivingRanking(
     $input: CreateCostOfLivingRankingInput!
     $condition: ModelCostOfLivingRankingConditionInput
@@ -80,7 +38,7 @@ const createCostOfLivingRanking = /* GraphQL */ `
     }
   }
 `;
-const updateCostOfLivingRanking = /* GraphQL */ `
+export const updateCostOfLivingRanking = /* GraphQL */ `
   mutation UpdateCostOfLivingRanking(
     $input: UpdateCostOfLivingRankingInput!
     $condition: ModelCostOfLivingRankingConditionInput
@@ -116,7 +74,7 @@ const updateCostOfLivingRanking = /* GraphQL */ `
     }
   }
 `;
-const deleteCostOfLivingRanking = /* GraphQL */ `
+export const deleteCostOfLivingRanking = /* GraphQL */ `
   mutation DeleteCostOfLivingRanking(
     $input: DeleteCostOfLivingRankingInput!
     $condition: ModelCostOfLivingRankingConditionInput
@@ -152,7 +110,7 @@ const deleteCostOfLivingRanking = /* GraphQL */ `
     }
   }
 `;
-const createCityPrice = /* GraphQL */ `
+export const createCityPrice = /* GraphQL */ `
   mutation CreateCityPrice(
     $input: CreateCityPriceInput!
     $condition: ModelCityPriceConditionInput
@@ -183,12 +141,19 @@ const createCityPrice = /* GraphQL */ `
         item_name
         item_id
       }
+      images {
+        unsplashId
+        name
+        city
+        description
+        alt_description
+      }
       createdAt
       updatedAt
     }
   }
 `;
-const updateCityPrice = /* GraphQL */ `
+export const updateCityPrice = /* GraphQL */ `
   mutation UpdateCityPrice(
     $input: UpdateCityPriceInput!
     $condition: ModelCityPriceConditionInput
@@ -219,12 +184,19 @@ const updateCityPrice = /* GraphQL */ `
         item_name
         item_id
       }
+      images {
+        unsplashId
+        name
+        city
+        description
+        alt_description
+      }
       createdAt
       updatedAt
     }
   }
 `;
-const deleteCityPrice = /* GraphQL */ `
+export const deleteCityPrice = /* GraphQL */ `
   mutation DeleteCityPrice(
     $input: DeleteCityPriceInput!
     $condition: ModelCityPriceConditionInput
@@ -255,20 +227,15 @@ const deleteCityPrice = /* GraphQL */ `
         item_name
         item_id
       }
+      images {
+        unsplashId
+        name
+        city
+        description
+        alt_description
+      }
       createdAt
       updatedAt
     }
   }
 `;
-
-module.exports = {
-  createTodo,
-  updateTodo,
-  deleteTodo,
-  createCostOfLivingRanking,
-  updateCostOfLivingRanking,
-  deleteCostOfLivingRanking,
-  createCityPrice,
-  updateCityPrice,
-  deleteCityPrice,
-};

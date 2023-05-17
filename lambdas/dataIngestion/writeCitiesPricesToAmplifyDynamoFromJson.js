@@ -39,6 +39,8 @@ async function getCityFromDynamoDB(cityCountry) {
   }
 }
 
+let count = 0;
+
 async function importData(cities) {
   for (const cityObj of cities) {
     const {
@@ -77,8 +79,10 @@ async function importData(cities) {
       };
       queryType = params.query;
       const result = await Amplify.API.graphql(params);
-      console.log(name);
+      console.log("succesfully added:", name);
       console.log(Object.entries(result.data)[0][0]);
+      count += 1;
+      console.log("count", count);
     } catch (error) {
       console.error("error updating or creating cityprice item", error);
       console.error("querytype", queryType);
@@ -93,5 +97,6 @@ fs.readFile(jsonFilePath, "utf-8", (err, data) => {
   }
 
   const items = JSON.parse(data);
+  console.log("items length", items.length);
   importData(items);
 });

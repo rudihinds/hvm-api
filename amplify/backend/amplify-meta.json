@@ -14,22 +14,22 @@
   },
   "api": {
     "hvmapi": {
-      "service": "AppSync",
-      "providerPlugin": "awscloudformation",
       "dependsOn": [],
       "output": {
         "authConfig": {
+          "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
             "apiKeyConfig": {
+              "apiKeyExpirationDate": "2023-05-15T20:01:05.691Z",
               "apiKeyExpirationDays": 7,
-              "apiKeyExpirationDate": "2023-04-24T23:44:45.267Z",
-              "description": "api key for dev"
-            }
-          },
-          "additionalAuthenticationProviders": []
+              "description": ""
+            },
+            "authenticationType": "API_KEY"
+          }
         }
-      }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
     }
   }
 }
