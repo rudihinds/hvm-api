@@ -31,14 +31,14 @@ const getCityImages = async (city) => {
     { headers: { "Content-Type": "application/json" } }
   );
 
-  const cityImages = res.data.results.slice(0, 10).map((image) => {
+  const cityImages = res.data?.results?.slice(0, 10).map((image) => {
     let cityImage = {
-      unsplashId: image.id,
-      description: image.description,
-      urls: image.urls,
-      height: image.height,
-      width: image.width,
-      unsplashLikes: image.likes,
+      unsplashId: image?.id,
+      description: image?.description,
+      urls: image?.urls,
+      height: image?.height,
+      width: image?.width,
+      unsplashLikes: image?.likes,
     };
     return cityImage;
   });
@@ -64,23 +64,40 @@ const getCityFromDynamoDB = async (cityCountry) => {
   }
 };
 
+const delay = (interval) =>
+  new Promise((resolve) => setTimeout(resolve, interval));
+
+const MAX_REQUESTS = 50; // maximum requests per interval
+const INTERVAL = 61 * 60 * 1000; // 61 minutes in milliseconds
+let requestCount = 0; // counter for the number of requests made
+
 const updateCityImages = async () => {
   for (const city of cities) {
-    // we need to update each city record in dynamodb with the image urls
-    // however we need to check if the city already has images
+    if (requestCount >= MAX_REQUESTS) {
+      console.log(
+        `Reached limit of ${MAX_REQUESTS} requests. Waiting for ${
+          INTERVAL / 60 / 1000
+        } minutes.`
+      );
+      await delay(INTERVAL);
+      requestCount = 0; // reset the request count
+    }
+    // update each city record in dynamodb with the image urls
     // we also need to preserve the rest of the city data in the cityprice table
-
-    //get record from dynamodb using citycountry (based on citiesfromdbwithoutimages.json)
+    // get record from dynamodb using citycountry (based on citiesfromdbwithoutimages.json)
     const cityCountry = city.city + ", " + city.country;
     const cityFromDynamoDB = await getCityFromDynamoDB(cityCountry);
 
     // get images for city from unsplash
     // update city record in dynamodb with image urls
     const cityImages = await getCityImages(city.city);
+    requestCount++; // increment the request count
+
     const input = {
       ...cityFromDynamoDB,
       images: cityImages,
     };
+
     try {
       const result = await Amplify.API.graphql({
         query: updateCityPrice,
@@ -96,53 +113,3 @@ const updateCityImages = async () => {
 };
 
 updateCityImages();
-
-// chatgpt code below for request limiting
-
-// const delay = (interval) =>
-//   new Promise((resolve) => setTimeout(resolve, interval));
-
-// const MAX_REQUESTS = 50; // maximum requests per interval
-// const INTERVAL = 61 * 60 * 1000; // 61 minutes in milliseconds
-
-// let requestCount = 0; // counter for the number of requests made
-
-// const updateCityImages = async () => {
-//   for (const [i, city] of cities.entries()) {
-//     if (requestCount >= MAX_REQUESTS) {
-//       console.log(
-//         `Reached limit of ${MAX_REQUESTS} requests. Waiting for ${
-//           INTERVAL / 60 / 1000
-//         } minutes.`
-//       );
-//       await delay(INTERVAL);
-//       requestCount = 0; // reset the request count
-//     }
-
-//     // Add your existing code here...
-
-//     // get images for city from unsplash
-//     // update city record in dynamodb with image urls
-//     const cityImages = await getCityImages(city.city);
-//     requestCount++; // increment the request count
-
-//     const input = {
-//       ...cityFromDynamoDB,
-//       images: cityImages,
-//     };
-//     try {
-//       const result = await Amplify.API.graphql({
-//         query: updateCityPrice,
-//         variables: {
-//           input,
-//         },
-//       });
-//       console.log(result.data.updateCityPrice);
-//     } catch (error) {
-//       console.error("error in updating city with images", error);
-//     }
-//   }
-// };
-
-// updateCityImages();
-

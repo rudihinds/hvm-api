@@ -1,18 +1,48 @@
 query ListCityPrices($limit: Int, $nextToken: String) {
   listCityPrices(limit: $limit, nextToken: $nextToken) {
     Items {
-      country
       numbeoCityId
       city
-      usdPrices
+      country
       currency
       contributors12months
       monthLastUpdate
       cityCountry
       contributors
       yearLastUpdate
-      prices
-      images
+      prices {
+        lowest_price
+        average_price
+        highest_price
+        data_points
+        item_name
+        item_id
+      }
+      usdPrices {
+        lowest_price
+        average_price
+        highest_price
+        data_points
+        item_name
+        item_id
+      }
+      images {
+        unsplashId
+        name
+        city
+        description
+        alt_description
+        urls {
+          raw
+          full
+          regular
+          small
+          thumb
+          small_s3
+        }
+      }
+      createdAt
+      updatedAt
     }
     nextToken
   }
