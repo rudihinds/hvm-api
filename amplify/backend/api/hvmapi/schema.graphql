@@ -113,20 +113,20 @@ input UsdPriceInput {
 
 type ImageObject {
   unsplashId: String
-  name: String
-  city: String
   description: String
-  alt_description: String
   urls: Urls
+  height: Int
+  width: Int
+  unsplashLikes: Int
 }
 
 input ImageObjectInput {
   unsplashId: String
-  name: String
-  city: String
   description: String
-  alt_description: String
   urls: UrlsInput
+  height: Int
+  width: Int
+  unsplashLikes: Int
 }
 
 type Urls {

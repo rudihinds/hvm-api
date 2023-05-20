@@ -143,10 +143,10 @@ export const createCityPrice = /* GraphQL */ `
       }
       images {
         unsplashId
-        name
-        city
         description
-        alt_description
+        height
+        width
+        unsplashLikes
       }
       createdAt
       updatedAt
@@ -186,10 +186,18 @@ export const updateCityPrice = /* GraphQL */ `
       }
       images {
         unsplashId
-        name
-        city
         description
-        alt_description
+        height
+        width
+        unsplashLikes
+        urls {
+          raw
+          full
+          regular
+          small
+          thumb
+          small_s3
+        }
       }
       createdAt
       updatedAt
@@ -229,10 +237,10 @@ export const deleteCityPrice = /* GraphQL */ `
       }
       images {
         unsplashId
-        name
-        city
         description
-        alt_description
+        height
+        width
+        unsplashLikes
       }
       createdAt
       updatedAt

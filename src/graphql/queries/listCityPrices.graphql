@@ -12,6 +12,7 @@ query ListCityPrices($limit: Int, $nextToken: String) {
       contributors
       yearLastUpdate
       prices
+      images
     }
     nextToken
   }

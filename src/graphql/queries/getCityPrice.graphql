@@ -1,16 +1,8 @@
 query GetCityPrice($cityCountry: String!) {
   getCityPrice(cityCountry: $cityCountry) {
-    country
     numbeoCityId
     city
-    usdPrices {
-      lowest_price
-      average_price
-      highest_price
-      data_points
-      item_name
-      item_id
-    }
+    country
     currency
     contributors12months
     monthLastUpdate
@@ -25,5 +17,30 @@ query GetCityPrice($cityCountry: String!) {
       item_name
       item_id
     }
+    usdPrices {
+      lowest_price
+      average_price
+      highest_price
+      data_points
+      item_name
+      item_id
+    }
+    images {
+      unsplashId
+      name
+      city
+      description
+      alt_description
+      urls {
+        raw
+        full
+        regular
+        small
+        thumb
+        small_s3
+      }
+    }
+    createdAt
+    updatedAt
   }
 }

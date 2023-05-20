@@ -100,10 +100,10 @@ export const getCityPrice = /* GraphQL */ `
       }
       images {
         unsplashId
-        name
-        city
         description
-        alt_description
+        height
+        width
+        unsplashLikes
       }
       createdAt
       updatedAt

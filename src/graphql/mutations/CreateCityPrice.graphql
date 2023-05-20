@@ -1,16 +1,8 @@
 mutation CreateCityPrice($input: CityPriceInput!) {
   createCityPrice(input: $input) {
-    country
     numbeoCityId
     city
-    usdPrices {
-      lowest_price
-      average_price
-      highest_price
-      data_points
-      item_name
-      item_id
-    }
+    country
     currency
     contributors12months
     monthLastUpdate
@@ -24,6 +16,29 @@ mutation CreateCityPrice($input: CityPriceInput!) {
       data_points
       item_name
       item_id
+    }
+    usdPrices {
+      lowest_price
+      average_price
+      highest_price
+      data_points
+      item_name
+      item_id
+    }
+    images {
+      unsplashId
+      name
+      city
+      description
+      alt_description
+      urls {
+        raw
+        full
+        regular
+        small
+        thumb
+        small_s3
+      }
     }
   }
 }

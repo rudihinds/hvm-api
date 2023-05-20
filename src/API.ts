@@ -158,11 +158,11 @@ export type Price = {
 export type ImageObject = {
   __typename: "ImageObject",
   unsplashId?: string | null,
-  name?: string | null,
-  city?: string | null,
   description?: string | null,
-  alt_description?: string | null,
   urls?: Urls | null,
+  height?: number | null,
+  width?: number | null,
+  unsplashLikes?: number | null,
 };
 
 export type Urls = {
@@ -231,11 +231,11 @@ export type PriceInput = {
 
 export type ImageObjectInput = {
   unsplashId?: string | null,
-  name?: string | null,
-  city?: string | null,
   description?: string | null,
-  alt_description?: string | null,
   urls?: UrlsInput | null,
+  height?: number | null,
+  width?: number | null,
+  unsplashLikes?: number | null,
 };
 
 export type UrlsInput = {
@@ -564,10 +564,10 @@ export type CreateCityPriceMutation = {
     images?:  Array< {
       __typename: "ImageObject",
       unsplashId?: string | null,
-      name?: string | null,
-      city?: string | null,
       description?: string | null,
-      alt_description?: string | null,
+      height?: number | null,
+      width?: number | null,
+      unsplashLikes?: number | null,
     } | null > | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -612,10 +612,10 @@ export type UpdateCityPriceMutation = {
     images?:  Array< {
       __typename: "ImageObject",
       unsplashId?: string | null,
-      name?: string | null,
-      city?: string | null,
       description?: string | null,
-      alt_description?: string | null,
+      height?: number | null,
+      width?: number | null,
+      unsplashLikes?: number | null,
     } | null > | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -660,10 +660,10 @@ export type DeleteCityPriceMutation = {
     images?:  Array< {
       __typename: "ImageObject",
       unsplashId?: string | null,
-      name?: string | null,
-      city?: string | null,
       description?: string | null,
-      alt_description?: string | null,
+      height?: number | null,
+      width?: number | null,
+      unsplashLikes?: number | null,
     } | null > | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -777,10 +777,10 @@ export type GetCityPriceQuery = {
     images?:  Array< {
       __typename: "ImageObject",
       unsplashId?: string | null,
-      name?: string | null,
-      city?: string | null,
       description?: string | null,
-      alt_description?: string | null,
+      height?: number | null,
+      width?: number | null,
+      unsplashLikes?: number | null,
     } | null > | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -967,10 +967,10 @@ export type OnCreateCityPriceSubscription = {
     images?:  Array< {
       __typename: "ImageObject",
       unsplashId?: string | null,
-      name?: string | null,
-      city?: string | null,
       description?: string | null,
-      alt_description?: string | null,
+      height?: number | null,
+      width?: number | null,
+      unsplashLikes?: number | null,
     } | null > | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -1014,10 +1014,10 @@ export type OnUpdateCityPriceSubscription = {
     images?:  Array< {
       __typename: "ImageObject",
       unsplashId?: string | null,
-      name?: string | null,
-      city?: string | null,
       description?: string | null,
-      alt_description?: string | null,
+      height?: number | null,
+      width?: number | null,
+      unsplashLikes?: number | null,
     } | null > | null,
     createdAt?: string | null,
     updatedAt?: string | null,
@@ -1061,10 +1061,10 @@ export type OnDeleteCityPriceSubscription = {
     images?:  Array< {
       __typename: "ImageObject",
       unsplashId?: string | null,
-      name?: string | null,
-      city?: string | null,
       description?: string | null,
-      alt_description?: string | null,
+      height?: number | null,
+      width?: number | null,
+      unsplashLikes?: number | null,
     } | null > | null,
     createdAt?: string | null,
     updatedAt?: string | null,
