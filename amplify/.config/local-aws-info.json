@@ -3,15 +3,5 @@
     "configLevel": "project",
     "useProfile": true,
     "profileName": "amplify-dev"
-  },
-  "devbackup": {
-    "configLevel": "project",
-    "useProfile": true,
-    "profileName": "amplify-dev"
-  },
-  "devtwo": {
-    "configLevel": "project",
-    "useProfile": true,
-    "profileName": "amplify-dev"
   }
 }

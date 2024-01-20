@@ -103,6 +103,10 @@ dist
 # TernJS port file
 .tern-port
 
+datamocks/numbeoCityPrices(deprecated).json
+data/mocks/numbeoCityPricesActual.json
+hvm-api/amplify/mock-data
+
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
@@ -124,6 +128,3 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
-datamocks/numbeoCityPrices(deprecated).json
-data/mocks/numbeoCityPricesActual.json
-hvm-api/amplify/mock-data

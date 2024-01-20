@@ -1,0 +1,169 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+# type Todo @model {
+#   id: ID!
+#   name: String!
+#   description: String
+# }
+
+type CostOfLivingRanking @model {
+  city: String! @primaryKey
+  city_name: String!
+  cityCountry: String!
+  country: String!
+  gross_rental_yield_outside_of_centre: Float!
+  price_to_rent_ratio_outside_of_centre: Float!
+  house_price_to_income_ratio: Float!
+  affordability_index: Float!
+  mortgage_as_percentage_of_income: Float!
+  price_to_rent_ratio_city_centre: Float!
+  gross_rental_yield_city_centre: Float!
+  city_id: Int!
+  cityPrice: CityPrice @hasOne(fields: ["cityCountry"])
+}
+
+input CostOfLivingRankingInput {
+  city: String!
+  city_name: String!
+  cityCountry: String!
+  country: String!
+  gross_rental_yield_outside_of_centre: Float!
+  price_to_rent_ratio_outside_of_centre: Float!
+  house_price_to_income_ratio: Float!
+  affordability_index: Float!
+  mortgage_as_percentage_of_income: Float!
+  price_to_rent_ratio_city_centre: Float!
+  gross_rental_yield_city_centre: Float!
+  city_id: Int!
+}
+
+type CityPrice @model {
+  country: String
+  numbeoCityId: Int
+  city: String
+  usdPrices: [UsdPrice]
+  currency: String
+  contributors12months: Int
+  monthLastUpdate: Int
+  cityCountry: String! @primaryKey
+  contributors: Int
+  yearLastUpdate: Int
+  prices: [Price]
+  images: [ImageObject]
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  # costOfLivingRanking: CostOfLivingRanking @belongsTo(fields: ["cityCountry"])
+}
+
+input CityPriceInput {
+  country: String
+  numbeoCityId: Int
+  city: String
+  usdPrices: [UsdPriceInput]
+  currency: String
+  contributors12months: Int
+  monthLastUpdate: Int
+  cityCountry: String!
+  contributors: Int
+  yearLastUpdate: Int
+  prices: [PriceInput]
+  images: [ImageObjectInput]
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+}
+
+type Price {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+input PriceInput {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+type UsdPrice {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+input UsdPriceInput {
+  lowest_price: Float
+  average_price: Float
+  highest_price: Float
+  data_points: Int
+  item_name: String
+  item_id: Int
+}
+
+type ImageObject {
+  unsplashId: String
+  description: String
+  urls: Urls
+  height: Int
+  width: Int
+  unsplashLikes: Int
+}
+
+input ImageObjectInput {
+  unsplashId: String
+  description: String
+  urls: UrlsInput
+  height: Int
+  width: Int
+  unsplashLikes: Int
+}
+
+type Urls {
+  raw: String
+  full: String
+  regular: String
+  small: String
+  thumb: String
+  small_s3: String
+}
+
+input UrlsInput {
+  raw: String
+  full: String
+  regular: String
+  small: String
+  thumb: String
+  small_s3: String
+}
+
+type CityPriceConnection {
+  Items: [CityPrice]
+  nextToken: String
+}
+
+# type Query {
+#   getCostOfLivingRanking(city: String!): CostOfLivingRanking
+#   listCostOfLivingRankings(limit: Int, nextToken: String): [CostOfLivingRanking]
+#   getCityPrice(cityCountry: String!): CityPrice
+#   listCityPrices(limit: Int, nextToken: String): [CityPriceConnection]
+# }
+
+# type Mutation {
+#   createCityPrice(input: CityPriceInput!): CityPrice
+# }
+
+# schema {
+# query: Query
+# mutation: Mutation
+# }
