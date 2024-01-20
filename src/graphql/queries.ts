@@ -137,28 +137,6 @@ export const listCityPrices = /* GraphQL */ `
         yearLastUpdate
         createdAt
         updatedAt
-        images {
-          unsplashId
-          description
-          height
-          width
-          unsplashLikes
-          urls {
-            raw
-            full
-            regular
-            small
-            thumb
-          }
-        }
-        prices {
-          lowest_price
-          average_price
-          highest_price
-          data_points
-          item_name
-          item_id
-        }
       }
       nextToken
     }

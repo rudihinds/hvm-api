@@ -124,8 +124,6 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
-data/
-data/numbeoCityPrices(deprecated).json
-data/numbeoCityPricesActual.json
-../../hvm-api/amplify/mock-data
-../../hvm-api/amplify/mock-api-resources
+datamocks/numbeoCityPrices(deprecated).json
+data/mocks/numbeoCityPricesActual.json
+hvm-api/amplify/mock-data

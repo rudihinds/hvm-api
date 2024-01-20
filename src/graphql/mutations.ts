@@ -190,14 +190,6 @@ export const updateCityPrice = /* GraphQL */ `
         height
         width
         unsplashLikes
-        urls {
-          raw
-          full
-          regular
-          small
-          thumb
-          small_s3
-        }
       }
       createdAt
       updatedAt
