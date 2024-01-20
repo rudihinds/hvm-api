@@ -1,35 +1,15 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-hvmapi-dev-01301-authRole",
-      "UnauthRoleArn": "arn:aws:iam::503313416126:role/amplify-hvmapi-dev-01301-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::503313416126:role/amplify-hvmapi-dev-01301-authRole",
-      "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-hvmapi-dev-01301-deployment",
-      "UnauthRoleName": "amplify-hvmapi-dev-01301-unauthRole",
-      "StackName": "amplify-hvmapi-dev-01301",
-      "StackId": "arn:aws:cloudformation:eu-west-1:503313416126:stack/amplify-hvmapi-dev-01301/672036f0-dd75-11ed-b5a3-06977adc6ef1",
-      "AmplifyAppId": "d1izmn44kfgokf"
-    }
-  },
-  "api": {
-    "hvmapi": {
-      "dependsOn": [],
-      "output": {
-        "authConfig": {
-          "additionalAuthenticationProviders": [],
-          "defaultAuthentication": {
-            "apiKeyConfig": {
-              "apiKeyExpirationDate": "2023-05-15T20:01:05.691Z",
-              "apiKeyExpirationDays": 7,
-              "description": ""
-            },
-            "authenticationType": "API_KEY"
-          }
-        }
-      },
-      "providerPlugin": "awscloudformation",
-      "service": "AppSync"
+      "AuthRoleName": "amplify-hvmapi-devtwo-164751-authRole",
+      "UnauthRoleArn": "arn:aws:iam::503313416126:role/amplify-hvmapi-devtwo-164751-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::503313416126:role/amplify-hvmapi-devtwo-164751-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-hvmapi-devtwo-164751-deployment",
+      "UnauthRoleName": "amplify-hvmapi-devtwo-164751-unauthRole",
+      "StackName": "amplify-hvmapi-devtwo-164751",
+      "StackId": "arn:aws:cloudformation:eu-west-2:503313416126:stack/amplify-hvmapi-devtwo-164751/a71b0960-b7b3-11ee-bf81-0ace47468ecf",
+      "AmplifyAppId": "d1iy8879ttnajt"
     }
   }
 }

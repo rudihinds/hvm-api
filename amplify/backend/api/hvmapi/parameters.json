@@ -1,6 +1,0 @@
-{
-  "AppSyncApiName": "hvmapi",
-  "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false,
-  "SkipClearData": "true"
-}
