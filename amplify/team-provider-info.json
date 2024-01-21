@@ -10,6 +10,11 @@
       "StackName": "amplify-hvmapi-dev-230701",
       "StackId": "arn:aws:cloudformation:eu-west-2:503313416126:stack/amplify-hvmapi-dev-230701/9ef7a6f0-b7e8-11ee-a0c0-06cbbf25eaf7",
       "AmplifyAppId": "d3rb2nw0x7e2n9"
+    },
+    "categories": {
+      "api": {
+        "hvmapi": {}
+      }
     }
   }
 }

@@ -1,13 +1,6 @@
 # This "input" configures a global authorization rule to enable public access to
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY {
-  globalAuthRule: AuthRule = { allow: public }
-} # FOR TESTING ONLY!
-# type Todo @model {
-#   id: ID!
-#   name: String!
-#   description: String
-# }
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
 type CostOfLivingRanking @model {
   city: String! @primaryKey
@@ -41,17 +34,17 @@ input CostOfLivingRankingInput {
 }
 
 type CityPrice @model {
+  cityCountry: String! @primaryKey
+  city: String
   country: String
   numbeoCityId: Int
-  city: String
   usdPrices: [UsdPrice]
   currency: String
+  prices: [Price]
   contributors12months: Int
   monthLastUpdate: Int
-  cityCountry: String! @primaryKey
   contributors: Int
   yearLastUpdate: Int
-  prices: [Price]
   images: [ImageObject]
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
@@ -76,12 +69,12 @@ input CityPriceInput {
 }
 
 type Price {
+  item_id: Int
+  item_name: String
   lowest_price: Float
   average_price: Float
   highest_price: Float
   data_points: Int
-  item_name: String
-  item_id: Int
 }
 
 input PriceInput {
@@ -150,6 +143,10 @@ input UrlsInput {
 type CityPriceConnection {
   Items: [CityPrice]
   nextToken: String
+}
+
+export default {
+    CityPrice
 }
 
 # type Query {
