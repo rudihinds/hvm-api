@@ -1,9 +1,11 @@
-require = require("esm")(module);
+// require = require("esm")(module);
 
-const { faker } = require("@faker-js/faker");
-import * as API from "../../src/API";
+// const { faker } = require("@faker-js/faker");
+// import * as API from "../../src/API";
 
-export function createRandomCityPrice(): API.CityPrice {
+import { faker } from "@faker-js/faker";
+
+export function createRandomCityPrice() {
   return {
     __typename: "CityPrice",
     cityCountry: faker.address.city(),
@@ -11,8 +13,8 @@ export function createRandomCityPrice(): API.CityPrice {
     country: faker.address.country(),
     numbeoCityId: faker.datatype.number(),
     currency: faker.finance.currencyCode(),
-    prices: faker.helpers.multiple(createRandomPrice, { count: 3 }),
-    usdPrices: faker.helpers.multiple(createRandomPrice("UsdPrice"), { count: 3 }),
+    prices: faker.helpers.multiple(() => createRandomPrice(), { count: 3 }),
+    usdPrices: faker.helpers.multiple(() => createRandomPrice("UsdPrice"), { count: 3 }),
     contributors12months: faker.datatype.number(),
     monthLastUpdate: faker.datatype.number({ min: 1, max: 12 }),
     contributors: faker.datatype.number(),
@@ -23,14 +25,14 @@ export function createRandomCityPrice(): API.CityPrice {
   };
 }
 
-const randomUrls: API.Urls = {
+const randomUrls = {
   __typename: "Urls",
-  raw: faker.image.imageUrl(),
-  full: faker.image.imageUrl(),
-  regular: faker.image.imageUrl(),
-  small: faker.image.imageUrl(),
-  thumb: faker.image.imageUrl(),
-  small_s3: faker.image.imageUrl(),
+  raw: faker.image.url(),
+  full: faker.image.url(),
+  regular: faker.image.url(),
+  small: faker.image.url(),
+  thumb: faker.image.url(),
+  small_s3: faker.image.url(),
 };
 
 let createRandomImageObject = () => {
@@ -45,21 +47,22 @@ let createRandomImageObject = () => {
   };
 };
 
-let createRandomPrice = (priceTypename = '') => {
+let createRandomPrice = (priceTypename = "") => {
   return {
     __typename: priceTypename || "Price",
-    lowest_price: faker.commerce.price(),
-    average_price: faker.commerce.price(),
-    highest_price: faker.commerce.price(),
-    data_points: faker.datatype.number(),
-    item_name: faker.commerce.productName(),
-    item_id: faker.datatype.number(),
+    lowest_price: 10,
+    average_price: 10,
+    highest_price: 10,
+    data_points: 10,
+    item_name: "sdw",
+    item_id: 10,
   };
-}
+};
 
-export const CITYPRICES: API.CityPrice[] = faker.helpers.multiple(
-  createRandomCityPrice,
-  {
-    count: 5,
-  },
-);
+export const cityPrices = (count) => {
+  return faker.helpers.multiple(createRandomCityPrice, {
+    count: count,
+  });
+};
+
+

@@ -2,7 +2,6 @@ require = require("esm")(module);
 
 const { faker } = require("@faker-js/faker");
 import * as API from "../../src/API";
-import { createRandomCityPrice } from "./cityPrices";
 
 export function createRandomCostOfLivingRanking(): API.CostOfLivingRanking {
   return {
@@ -19,13 +18,13 @@ export function createRandomCostOfLivingRanking(): API.CostOfLivingRanking {
     price_to_rent_ratio_city_centre: faker.finance.amount(),
     gross_rental_yield_city_centre: faker.finance.amount(),
     city_id: faker.datatype.number(),
-    cityPrice: createRandomCityPrice, { count: 1 }[0],
     createdAt: faker.date.past().toISOString(),
     updatedAt: faker.date.recent().toISOString(),
   };
 }
 
-export const COSTOFLIVINGRANKINGS: API.CostOfLivingRanking[] =
-  faker.helpers.multiple(createRandomCostOfLivingRanking, {
-    count: 5,
+export const costOfLivingRankings = (count) => {
+  return faker.helpers.multiple(createRandomCostOfLivingRanking, {
+    count: count,
   });
+};
