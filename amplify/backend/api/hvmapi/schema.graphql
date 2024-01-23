@@ -3,9 +3,8 @@
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
 type CostOfLivingRanking @model {
-  city: String! @primaryKey
-  city_name: String!
-  cityCountry: String!
+  cityCountry: String! @primaryKey
+  city: String! 
   country: String!
   gross_rental_yield_outside_of_centre: Float!
   price_to_rent_ratio_outside_of_centre: Float!
@@ -19,9 +18,8 @@ type CostOfLivingRanking @model {
 }
 
 input CostOfLivingRankingInput {
+  cityCountry: String! @primaryKey
   city: String!
-  city_name: String!
-  cityCountry: String!
   country: String!
   gross_rental_yield_outside_of_centre: Float!
   price_to_rent_ratio_outside_of_centre: Float!
@@ -48,8 +46,10 @@ type CityPrice @model {
   images: [ImageObject]
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
-  # costOfLivingRanking: CostOfLivingRanking @belongsTo(fields: ["cityCountry"])
+  costoflivingranking: CostOfLivingRanking @hasOne(fields: ["cityCountry"]) # one to one with costoflivingranking
 }
+
+
 
 input CityPriceInput {
   country: String

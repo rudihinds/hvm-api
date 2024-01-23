@@ -1,15 +1,14 @@
 require = require("esm")(module);
 
 const { faker } = require("@faker-js/faker");
-import * as API from "../../src/API";
 
-export function createRandomCostOfLivingRanking(): API.CostOfLivingRanking {
+export function createRandomCostOfLivingRanking() {
   return {
     __typename: "CostOfLivingRanking",
-    city: faker.address.city(),
-    city_name: faker.address.cityName(),
-    cityCountry: faker.address.city() + ", " + faker.address.country(),
-    country: faker.address.country(),
+    city: faker.location.city(),
+    city_name: faker.location.city(),
+    cityCountry: faker.location.city() + ", " + faker.location.country(),
+    country: faker.location.country(),
     gross_rental_yield_outside_of_centre: faker.finance.amount(),
     price_to_rent_ratio_outside_of_centre: faker.finance.amount(),
     house_price_to_income_ratio: faker.finance.amount(),
@@ -17,7 +16,7 @@ export function createRandomCostOfLivingRanking(): API.CostOfLivingRanking {
     mortgage_as_percentage_of_income: faker.finance.amount(),
     price_to_rent_ratio_city_centre: faker.finance.amount(),
     gross_rental_yield_city_centre: faker.finance.amount(),
-    city_id: faker.datatype.number(),
+    city_id: faker.number.int(),
     createdAt: faker.date.past().toISOString(),
     updatedAt: faker.date.recent().toISOString(),
   };

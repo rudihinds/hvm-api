@@ -5,10 +5,11 @@
 require = require("esm")(module);
 const { DynamoDB } = require("aws-sdk");
 const { cityPrices } = require("../../../../../scripts/seed/cityPrices");
+const { costOfLivingRankings } = require("../../../../../scripts/seed/costOfLivingRankings");
 
 exports.handler = async (event) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
-  console.log(cityPrices(10));
+  console.log(costOfLivingRankings(10));
 
   return {
     statusCode: 200,

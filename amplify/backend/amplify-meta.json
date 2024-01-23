@@ -44,7 +44,7 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "lastDevBuildTimeStamp": "2024-01-22T22:22:39.419Z",
+      "lastDevBuildTimeStamp": "2024-01-23T19:34:14.818Z",
       "lastBuildType": "DEV"
     }
   }
