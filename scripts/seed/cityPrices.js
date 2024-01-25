@@ -3,14 +3,16 @@
 // const { faker } = require("@faker-js/faker");
 // import * as API from "../../src/API";
 
-import { faker } from "@faker-js/faker";
+const {faker} =  require("@faker-js/faker")
 
-export default function createRandomCityPrice() {
+module.exports = function createRandomCityPrice() {
+  let country = faker.location.country();
+  let city = faker.location.city();
   return {
     __typename: "CityPrice",
-    cityCountry: faker.location.city() + ", " + faker.location.country(),
-    city: faker.location.city(),
-    country: faker.location.country(),
+    cityCountry: city + ", " + country,
+    city: city,
+    country,
     numbeoCityId: faker.number.int(),
     currency: faker.finance.currencyCode(),
     prices: faker.helpers.multiple(() => createRandomPrice(), { count: 3 }),
@@ -22,8 +24,6 @@ export default function createRandomCityPrice() {
     contributors: faker.number.int(),
     yearLastUpdate: faker.number.int({ min: 2000, max: 2022 }),
     images: faker.helpers.multiple(createRandomImageObject, { count: 3 }),
-    createdAt: faker.date.past().toISOString(),
-    updatedAt: faker.date.recent().toISOString(),
   };
 }
 
@@ -34,10 +34,10 @@ const randomUrls = {
   regular: faker.image.url(),
   small: faker.image.url(),
   thumb: faker.image.url(),
-  small_s3: faker.image.url(),
+  smallS3: faker.image.url(),
 };
 
-let createRandomImageObject = () => {
+const createRandomImageObject = () => {
   return {
     __typename: "ImageObject",
     unsplashId: faker.string.uuid(),
@@ -49,14 +49,14 @@ let createRandomImageObject = () => {
   };
 };
 
-let createRandomPrice = (priceTypename = "") => {
+const createRandomPrice = (priceTypename = "") => {
   return {
     __typename: priceTypename || "Price",
-    lowest_price: 10,
-    average_price: 10,
-    highest_price: 10,
-    data_points: 10,
-    item_name: "sdw",
-    item_id: 10,
+    lowestPrice: 10,
+    averagePrice: 10,
+    highestPrice: 10,
+    dataPoints: 10,
+    itemName: "sdw",
+    itemId: 10,
   };
 };

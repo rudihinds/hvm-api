@@ -37,8 +37,6 @@ type CityPrice @model {
   contributors: Int
   yearLastUpdate: Int
   images: [ImageObject]
-  createdAt: AWSDateTime
-  updatedAt: AWSDateTime
   numbeoCityId: Int
   costOfLivingRanking: CostOfLivingRanking @hasOne(fields: ["cityCountry"]) # one to one with costOfLivingRanking
 }
@@ -55,8 +53,6 @@ input CityPriceInput {
   contributors: Int
   yearLastUpdate: Int
   images: [ImageObjectInput]
-  createdAt: AWSDateTime
-  updatedAt: AWSDateTime
   numbeoCityId: Int
 }
 
