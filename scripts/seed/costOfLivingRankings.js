@@ -1,14 +1,16 @@
 require = require("esm")(module);
-
 const { faker } = require("@faker-js/faker");
+import cityPrices from "./cityPrices";
+
+const { cityCountry, city, country } = cityPrices();
 
 export function createRandomCostOfLivingRanking() {
   return {
     __typename: "CostOfLivingRanking",
-    city: faker.location.city(),
-    city_name: faker.location.city(),
-    cityCountry: faker.location.city() + ", " + faker.location.country(),
-    country: faker.location.country(),
+    cityCountry,
+    city,
+    city_name: city,
+    country,
     gross_rental_yield_outside_of_centre: faker.finance.amount(),
     price_to_rent_ratio_outside_of_centre: faker.finance.amount(),
     house_price_to_income_ratio: faker.finance.amount(),

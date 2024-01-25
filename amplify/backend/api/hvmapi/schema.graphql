@@ -4,104 +4,96 @@ input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONL
 
 type CostOfLivingRanking @model {
   cityCountry: String! @primaryKey
-  city: String! 
-  country: String!
-  gross_rental_yield_outside_of_centre: Float!
-  price_to_rent_ratio_outside_of_centre: Float!
-  house_price_to_income_ratio: Float!
-  affordability_index: Float!
-  mortgage_as_percentage_of_income: Float!
-  price_to_rent_ratio_city_centre: Float!
-  gross_rental_yield_city_centre: Float!
-  city_id: Int!
+  grossRentalYieldOutsideOfCentre: Float!
+  priceToRentRatioOutsideOfCentre: Float!
+  housePriceToIncomeRatio: Float!
+  affordabilityIndex: Float!
+  mortgageAsPercentageOfIncome: Float!
+  priceToRentRatioCityCentre: Float!
+  grossRentalYieldCityCentre: Float!
   cityPrice: CityPrice @hasOne(fields: ["cityCountry"])
 }
 
 input CostOfLivingRankingInput {
-  cityCountry: String! @primaryKey
-  city: String!
-  country: String!
-  gross_rental_yield_outside_of_centre: Float!
-  price_to_rent_ratio_outside_of_centre: Float!
-  house_price_to_income_ratio: Float!
-  affordability_index: Float!
-  mortgage_as_percentage_of_income: Float!
-  price_to_rent_ratio_city_centre: Float!
-  gross_rental_yield_city_centre: Float!
-  city_id: Int!
+  cityCountry: String!
+  grossRentalYieldOutsideOfCentre: Float!
+  priceToRentRatioOutsideOfCentre: Float!
+  housePriceToIncomeRatio: Float!
+  affordabilityIndex: Float!
+  mortgageAsPercentageOfIncome: Float!
+  priceToRentRatioCityCentre: Float!
+  grossRentalYieldCityCentre: Float!
 }
 
 type CityPrice @model {
   cityCountry: String! @primaryKey
   city: String
   country: String
-  numbeoCityId: Int
+  prices: [Price]
   usdPrices: [UsdPrice]
   currency: String
-  prices: [Price]
-  contributors12months: Int
+  contributors12Months: Int
   monthLastUpdate: Int
   contributors: Int
   yearLastUpdate: Int
   images: [ImageObject]
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
-  costoflivingranking: CostOfLivingRanking @hasOne(fields: ["cityCountry"]) # one to one with costoflivingranking
+  numbeoCityId: Int
+  costOfLivingRanking: CostOfLivingRanking @hasOne(fields: ["cityCountry"]) # one to one with costOfLivingRanking
 }
 
-
-
 input CityPriceInput {
-  country: String
-  numbeoCityId: Int
+  cityCountry: String!
   city: String
+  country: String
+  prices: [PriceInput]
   usdPrices: [UsdPriceInput]
   currency: String
-  contributors12months: Int
+  contributors12Months: Int
   monthLastUpdate: Int
-  cityCountry: String!
   contributors: Int
   yearLastUpdate: Int
-  prices: [PriceInput]
   images: [ImageObjectInput]
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
+  numbeoCityId: Int
 }
 
 type Price {
-  item_id: Int
-  item_name: String
-  lowest_price: Float
-  average_price: Float
-  highest_price: Float
-  data_points: Int
+  itemId: Int
+  itemName: String
+  lowestPrice: Float
+  averagePrice: Float
+  highestPrice: Float
+  dataPoints: Int
 }
 
 input PriceInput {
-  lowest_price: Float
-  average_price: Float
-  highest_price: Float
-  data_points: Int
-  item_name: String
-  item_id: Int
+  itemId: Int
+  itemName: String
+  lowestPrice: Float
+  averagePrice: Float
+  highestPrice: Float
+  dataPoints: Int
 }
 
 type UsdPrice {
-  lowest_price: Float
-  average_price: Float
-  highest_price: Float
-  data_points: Int
-  item_name: String
-  item_id: Int
+  lowestPrice: Float
+  averagePrice: Float
+  highestPrice: Float
+  dataPoints: Int
+  itemName: String
+  itemId: Int
 }
 
 input UsdPriceInput {
-  lowest_price: Float
-  average_price: Float
-  highest_price: Float
-  data_points: Int
-  item_name: String
-  item_id: Int
+  lowestPrice: Float
+  averagePrice: Float
+  highestPrice: Float
+  dataPoints: Int
+  itemName: String
+  itemId: Int
 }
 
 type ImageObject {
@@ -128,7 +120,7 @@ type Urls {
   regular: String
   small: String
   thumb: String
-  small_s3: String
+  smallS3: String
 }
 
 input UrlsInput {
@@ -137,30 +129,10 @@ input UrlsInput {
   regular: String
   small: String
   thumb: String
-  small_s3: String
+  smallS3: String
 }
 
 type CityPriceConnection {
   Items: [CityPrice]
   nextToken: String
 }
-
-export default {
-    CityPrice
-}
-
-# type Query {
-#   getCostOfLivingRanking(city: String!): CostOfLivingRanking
-#   listCostOfLivingRankings(limit: Int, nextToken: String): [CostOfLivingRanking]
-#   getCityPrice(cityCountry: String!): CityPrice
-#   listCityPrices(limit: Int, nextToken: String): [CityPriceConnection]
-# }
-
-# type Mutation {
-#   createCityPrice(input: CityPriceInput!): CityPrice
-# }
-
-# schema {
-# query: Query
-# mutation: Mutation
-# }

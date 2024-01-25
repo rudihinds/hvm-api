@@ -5,10 +5,10 @@
 
 import { faker } from "@faker-js/faker";
 
-export function createRandomCityPrice() {
+export default function createRandomCityPrice() {
   return {
     __typename: "CityPrice",
-    cityCountry: faker.location.city(),
+    cityCountry: faker.location.city() + ", " + faker.location.country(),
     city: faker.location.city(),
     country: faker.location.country(),
     numbeoCityId: faker.number.int(),
@@ -59,10 +59,4 @@ let createRandomPrice = (priceTypename = "") => {
     item_name: "sdw",
     item_id: 10,
   };
-};
-
-export const cityPrices = (count) => {
-  return faker.helpers.multiple(createRandomCityPrice, {
-    count: count,
-  });
 };
