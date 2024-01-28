@@ -7,9 +7,6 @@
 // Import the faker library for generating fake data
 const { faker } = require("@faker-js/faker");
 
-// Import cityPrices, although it's not used in this file
-const cityPrices = require("./cityPrices");
-
 // Generate a random country, city, and cityCountry combination
 let country = faker.location.country();
 let city = faker.location.city();
@@ -20,14 +17,13 @@ function createRandomCostOfLivingRanking() {
   return {
     __typename: "CostOfLivingRanking", // GraphQL typename
     cityCountry, // The city and country combination
-    // Various financial metrics, generated randomly
-    grossRentalYieldOutsideOfCentre: faker.finance.amount(),
-    priceToRentRatioOutsideOfCentre: faker.finance.amount(),
-    housePriceToIncomeRatio: faker.finance.amount(),
-    affordabilityIndex: faker.finance.amount(),
-    mortgageAsPercentageOfIncome: faker.finance.amount(),
-    priceToRentRatioCityCentre: faker.finance.amount(),
-    grossRentalYieldCityCentre: faker.finance.amount(),
+    grossRentalYieldOutsideOfCentre: faker.number.float(),
+    priceToRentRatioOutsideOfCentre: faker.number.float(),
+    housePriceToIncomeRatio: faker.number.float(),
+    affordabilityIndex: faker.number.float(),
+    mortgageAsPercentageOfIncome: faker.number.float(),
+    priceToRentRatioCityCentre: faker.number.float(),
+    grossRentalYieldCityCentre: faker.number.float(),
   };
 }
 
@@ -40,9 +36,7 @@ function createRandomCityPrice() {
     country, // The country
     numbeoCityId: faker.number.int(), // A random integer for the city ID
     currency: faker.finance.currencyCode(), // A random currency code
-    // An array of 3 random prices
     prices: faker.helpers.multiple(() => createRandomPrice(), { count: 3 }),
-    // An array of 3 random USD prices
     usdPrices: faker.helpers.multiple(() => createRandomPrice("UsdPrice"), {
       count: 3,
     }),
@@ -85,12 +79,12 @@ const createRandomPrice = (priceTypename = "") => {
   return {
     __typename: priceTypename || "Price", // GraphQL typename, defaulting to "Price"
     // Various price metrics, all set to 10
-    lowestPrice: 10,
-    averagePrice: 10,
-    highestPrice: 10,
-    dataPoints: 10,
-    itemName: "sdw", // The item name, set to "sdw"
-    itemId: 10, // The item ID, set to 10
+    lowestPrice: faker.number.int(),
+    averagePrice: faker.number.int(),
+    highestPrice: faker.number.int(),
+    dataPoints: faker.number.int(), 
+    itemName: faker.string.itemName, // A random item name
+    itemId: faker.number.int(), // A random item ID
   };
 };
 
