@@ -1,7 +1,7 @@
 const axios = require("axios");
 const generateSeedData = require("./generateSeedData");
 
-const endpoint = "YOUR_GRAPHQL_ENDPOINT";
+const endpoint = "http://192.168.0.17:20002";
 
 async function sendToGraphQL(mutation, variables) {
   try {
