@@ -13,28 +13,24 @@ export const createCostOfLivingRanking = /* GraphQL */ `mutation CreateCostOfLiv
   $condition: ModelCostOfLivingRankingConditionInput
 ) {
   createCostOfLivingRanking(input: $input, condition: $condition) {
-    city
-    city_name
     cityCountry
-    country
-    gross_rental_yield_outside_of_centre
-    price_to_rent_ratio_outside_of_centre
-    house_price_to_income_ratio
-    affordability_index
-    mortgage_as_percentage_of_income
-    price_to_rent_ratio_city_centre
-    gross_rental_yield_city_centre
-    city_id
+    grossRentalYieldOutsideOfCentre
+    priceToRentRatioOutsideOfCentre
+    housePriceToIncomeRatio
+    affordabilityIndex
+    mortgageAsPercentageOfIncome
+    priceToRentRatioCityCentre
+    grossRentalYieldCityCentre
     cityPrice {
       cityCountry
       city
       country
-      numbeoCityId
       currency
-      contributors12months
+      contributors12Months
       monthLastUpdate
       contributors
       yearLastUpdate
+      numbeoCityId
       createdAt
       updatedAt
       __typename
@@ -53,28 +49,24 @@ export const updateCostOfLivingRanking = /* GraphQL */ `mutation UpdateCostOfLiv
   $condition: ModelCostOfLivingRankingConditionInput
 ) {
   updateCostOfLivingRanking(input: $input, condition: $condition) {
-    city
-    city_name
     cityCountry
-    country
-    gross_rental_yield_outside_of_centre
-    price_to_rent_ratio_outside_of_centre
-    house_price_to_income_ratio
-    affordability_index
-    mortgage_as_percentage_of_income
-    price_to_rent_ratio_city_centre
-    gross_rental_yield_city_centre
-    city_id
+    grossRentalYieldOutsideOfCentre
+    priceToRentRatioOutsideOfCentre
+    housePriceToIncomeRatio
+    affordabilityIndex
+    mortgageAsPercentageOfIncome
+    priceToRentRatioCityCentre
+    grossRentalYieldCityCentre
     cityPrice {
       cityCountry
       city
       country
-      numbeoCityId
       currency
-      contributors12months
+      contributors12Months
       monthLastUpdate
       contributors
       yearLastUpdate
+      numbeoCityId
       createdAt
       updatedAt
       __typename
@@ -93,28 +85,24 @@ export const deleteCostOfLivingRanking = /* GraphQL */ `mutation DeleteCostOfLiv
   $condition: ModelCostOfLivingRankingConditionInput
 ) {
   deleteCostOfLivingRanking(input: $input, condition: $condition) {
-    city
-    city_name
     cityCountry
-    country
-    gross_rental_yield_outside_of_centre
-    price_to_rent_ratio_outside_of_centre
-    house_price_to_income_ratio
-    affordability_index
-    mortgage_as_percentage_of_income
-    price_to_rent_ratio_city_centre
-    gross_rental_yield_city_centre
-    city_id
+    grossRentalYieldOutsideOfCentre
+    priceToRentRatioOutsideOfCentre
+    housePriceToIncomeRatio
+    affordabilityIndex
+    mortgageAsPercentageOfIncome
+    priceToRentRatioCityCentre
+    grossRentalYieldCityCentre
     cityPrice {
       cityCountry
       city
       country
-      numbeoCityId
       currency
-      contributors12months
+      contributors12Months
       monthLastUpdate
       contributors
       yearLastUpdate
+      numbeoCityId
       createdAt
       updatedAt
       __typename
@@ -136,27 +124,26 @@ export const createCityPrice = /* GraphQL */ `mutation CreateCityPrice(
     cityCountry
     city
     country
-    numbeoCityId
+    prices {
+      itemId
+      itemName
+      lowestPrice
+      averagePrice
+      highestPrice
+      dataPoints
+      __typename
+    }
     usdPrices {
-      lowest_price
-      average_price
-      highest_price
-      data_points
-      item_name
-      item_id
+      lowestPrice
+      averagePrice
+      highestPrice
+      dataPoints
+      itemName
+      itemId
       __typename
     }
     currency
-    prices {
-      item_id
-      item_name
-      lowest_price
-      average_price
-      highest_price
-      data_points
-      __typename
-    }
-    contributors12months
+    contributors12Months
     monthLastUpdate
     contributors
     yearLastUpdate
@@ -166,6 +153,20 @@ export const createCityPrice = /* GraphQL */ `mutation CreateCityPrice(
       height
       width
       unsplashLikes
+      __typename
+    }
+    numbeoCityId
+    costOfLivingRanking {
+      cityCountry
+      grossRentalYieldOutsideOfCentre
+      priceToRentRatioOutsideOfCentre
+      housePriceToIncomeRatio
+      affordabilityIndex
+      mortgageAsPercentageOfIncome
+      priceToRentRatioCityCentre
+      grossRentalYieldCityCentre
+      createdAt
+      updatedAt
       __typename
     }
     createdAt
@@ -185,27 +186,26 @@ export const updateCityPrice = /* GraphQL */ `mutation UpdateCityPrice(
     cityCountry
     city
     country
-    numbeoCityId
+    prices {
+      itemId
+      itemName
+      lowestPrice
+      averagePrice
+      highestPrice
+      dataPoints
+      __typename
+    }
     usdPrices {
-      lowest_price
-      average_price
-      highest_price
-      data_points
-      item_name
-      item_id
+      lowestPrice
+      averagePrice
+      highestPrice
+      dataPoints
+      itemName
+      itemId
       __typename
     }
     currency
-    prices {
-      item_id
-      item_name
-      lowest_price
-      average_price
-      highest_price
-      data_points
-      __typename
-    }
-    contributors12months
+    contributors12Months
     monthLastUpdate
     contributors
     yearLastUpdate
@@ -215,6 +215,20 @@ export const updateCityPrice = /* GraphQL */ `mutation UpdateCityPrice(
       height
       width
       unsplashLikes
+      __typename
+    }
+    numbeoCityId
+    costOfLivingRanking {
+      cityCountry
+      grossRentalYieldOutsideOfCentre
+      priceToRentRatioOutsideOfCentre
+      housePriceToIncomeRatio
+      affordabilityIndex
+      mortgageAsPercentageOfIncome
+      priceToRentRatioCityCentre
+      grossRentalYieldCityCentre
+      createdAt
+      updatedAt
       __typename
     }
     createdAt
@@ -234,27 +248,26 @@ export const deleteCityPrice = /* GraphQL */ `mutation DeleteCityPrice(
     cityCountry
     city
     country
-    numbeoCityId
+    prices {
+      itemId
+      itemName
+      lowestPrice
+      averagePrice
+      highestPrice
+      dataPoints
+      __typename
+    }
     usdPrices {
-      lowest_price
-      average_price
-      highest_price
-      data_points
-      item_name
-      item_id
+      lowestPrice
+      averagePrice
+      highestPrice
+      dataPoints
+      itemName
+      itemId
       __typename
     }
     currency
-    prices {
-      item_id
-      item_name
-      lowest_price
-      average_price
-      highest_price
-      data_points
-      __typename
-    }
-    contributors12months
+    contributors12Months
     monthLastUpdate
     contributors
     yearLastUpdate
@@ -264,6 +277,20 @@ export const deleteCityPrice = /* GraphQL */ `mutation DeleteCityPrice(
       height
       width
       unsplashLikes
+      __typename
+    }
+    numbeoCityId
+    costOfLivingRanking {
+      cityCountry
+      grossRentalYieldOutsideOfCentre
+      priceToRentRatioOutsideOfCentre
+      housePriceToIncomeRatio
+      affordabilityIndex
+      mortgageAsPercentageOfIncome
+      priceToRentRatioCityCentre
+      grossRentalYieldCityCentre
+      createdAt
+      updatedAt
       __typename
     }
     createdAt

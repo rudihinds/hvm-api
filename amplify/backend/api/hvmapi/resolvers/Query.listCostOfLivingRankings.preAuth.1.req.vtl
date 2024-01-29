@@ -3,14 +3,14 @@
   $util.error("sortDirection is not supported for List operations without a Sort key defined.", "InvalidArgumentsError")
 #end
 #set( $modelQueryExpression = {} )
-#if( !$util.isNull($ctx.args.city) )
-  #set( $modelQueryExpression.expression = "#city = :city" )
+#if( !$util.isNull($ctx.args.cityCountry) )
+  #set( $modelQueryExpression.expression = "#cityCountry = :cityCountry" )
   #set( $modelQueryExpression.expressionNames = {
-  "#city": "city"
+  "#cityCountry": "cityCountry"
 } )
   #set( $modelQueryExpression.expressionValues = {
-  ":city": {
-      "S": "$ctx.args.city"
+  ":cityCountry": {
+      "S": "$ctx.args.cityCountry"
   }
 } )
 #end

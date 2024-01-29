@@ -8,30 +8,26 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getCostOfLivingRanking = /* GraphQL */ `query GetCostOfLivingRanking($city: String!) {
-  getCostOfLivingRanking(city: $city) {
-    city
-    city_name
+export const getCostOfLivingRanking = /* GraphQL */ `query GetCostOfLivingRanking($cityCountry: String!) {
+  getCostOfLivingRanking(cityCountry: $cityCountry) {
     cityCountry
-    country
-    gross_rental_yield_outside_of_centre
-    price_to_rent_ratio_outside_of_centre
-    house_price_to_income_ratio
-    affordability_index
-    mortgage_as_percentage_of_income
-    price_to_rent_ratio_city_centre
-    gross_rental_yield_city_centre
-    city_id
+    grossRentalYieldOutsideOfCentre
+    priceToRentRatioOutsideOfCentre
+    housePriceToIncomeRatio
+    affordabilityIndex
+    mortgageAsPercentageOfIncome
+    priceToRentRatioCityCentre
+    grossRentalYieldCityCentre
     cityPrice {
       cityCountry
       city
       country
-      numbeoCityId
       currency
-      contributors12months
+      contributors12Months
       monthLastUpdate
       contributors
       yearLastUpdate
+      numbeoCityId
       createdAt
       updatedAt
       __typename
@@ -46,32 +42,28 @@ export const getCostOfLivingRanking = /* GraphQL */ `query GetCostOfLivingRankin
   APITypes.GetCostOfLivingRankingQuery
 >;
 export const listCostOfLivingRankings = /* GraphQL */ `query ListCostOfLivingRankings(
-  $city: String
+  $cityCountry: String
   $filter: ModelCostOfLivingRankingFilterInput
   $limit: Int
   $nextToken: String
   $sortDirection: ModelSortDirection
 ) {
   listCostOfLivingRankings(
-    city: $city
+    cityCountry: $cityCountry
     filter: $filter
     limit: $limit
     nextToken: $nextToken
     sortDirection: $sortDirection
   ) {
     items {
-      city
-      city_name
       cityCountry
-      country
-      gross_rental_yield_outside_of_centre
-      price_to_rent_ratio_outside_of_centre
-      house_price_to_income_ratio
-      affordability_index
-      mortgage_as_percentage_of_income
-      price_to_rent_ratio_city_centre
-      gross_rental_yield_city_centre
-      city_id
+      grossRentalYieldOutsideOfCentre
+      priceToRentRatioOutsideOfCentre
+      housePriceToIncomeRatio
+      affordabilityIndex
+      mortgageAsPercentageOfIncome
+      priceToRentRatioCityCentre
+      grossRentalYieldCityCentre
       createdAt
       updatedAt
       __typename
@@ -89,27 +81,26 @@ export const getCityPrice = /* GraphQL */ `query GetCityPrice($cityCountry: Stri
     cityCountry
     city
     country
-    numbeoCityId
+    prices {
+      itemId
+      itemName
+      lowestPrice
+      averagePrice
+      highestPrice
+      dataPoints
+      __typename
+    }
     usdPrices {
-      lowest_price
-      average_price
-      highest_price
-      data_points
-      item_name
-      item_id
+      lowestPrice
+      averagePrice
+      highestPrice
+      dataPoints
+      itemName
+      itemId
       __typename
     }
     currency
-    prices {
-      item_id
-      item_name
-      lowest_price
-      average_price
-      highest_price
-      data_points
-      __typename
-    }
-    contributors12months
+    contributors12Months
     monthLastUpdate
     contributors
     yearLastUpdate
@@ -119,6 +110,20 @@ export const getCityPrice = /* GraphQL */ `query GetCityPrice($cityCountry: Stri
       height
       width
       unsplashLikes
+      __typename
+    }
+    numbeoCityId
+    costOfLivingRanking {
+      cityCountry
+      grossRentalYieldOutsideOfCentre
+      priceToRentRatioOutsideOfCentre
+      housePriceToIncomeRatio
+      affordabilityIndex
+      mortgageAsPercentageOfIncome
+      priceToRentRatioCityCentre
+      grossRentalYieldCityCentre
+      createdAt
+      updatedAt
       __typename
     }
     createdAt
@@ -148,12 +153,12 @@ export const listCityPrices = /* GraphQL */ `query ListCityPrices(
       cityCountry
       city
       country
-      numbeoCityId
       currency
-      contributors12months
+      contributors12Months
       monthLastUpdate
       contributors
       yearLastUpdate
+      numbeoCityId
       createdAt
       updatedAt
       __typename

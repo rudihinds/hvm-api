@@ -1,9 +1,6 @@
 mutation CreateCostOfLivingRanking($input: CostOfLivingRankingInput!) {
   createCostOfLivingRanking(input: $input) {
-    city
-    city_name
     cityCountry
-    country
     gross_rental_yield_outside_of_centre
     price_to_rent_ratio_outside_of_centre
     house_price_to_income_ratio
@@ -11,6 +8,5 @@ mutation CreateCostOfLivingRanking($input: CostOfLivingRankingInput!) {
     mortgage_as_percentage_of_income
     price_to_rent_ratio_city_centre
     gross_rental_yield_city_centre
-    city_id
   }
 }

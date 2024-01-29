@@ -132,3 +132,4 @@ type CityPriceConnection {
   Items: [CityPrice]
   nextToken: String
 }
+

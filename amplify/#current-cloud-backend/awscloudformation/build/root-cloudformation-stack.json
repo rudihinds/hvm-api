@@ -155,13 +155,13 @@
     "apihvmapi": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-hvmapi-dev-230701-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-hvmapi-dev-214151-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "Parameters": {
           "AppSyncApiName": "hvmapi",
           "DynamoDBBillingMode": "PAY_PER_REQUEST",
           "DynamoDBEnableServerSideEncryption": false,
-          "S3DeploymentBucket": "amplify-hvmapi-dev-230701-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/3c70d38a3d7cadfb3be778552335a42152dfc905",
+          "S3DeploymentBucket": "amplify-hvmapi-dev-214151-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/ab84e8690e2e82c13440ac1fb853d956c141d208",
           "env": "dev"
         }
       }
