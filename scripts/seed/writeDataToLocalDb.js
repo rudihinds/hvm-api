@@ -1,14 +1,26 @@
+require("dotenv").config();
 const axios = require("axios");
 const generateSeedData = require("./generateSeedData");
+const endpoint = "http://192.168.0.17:20002/graphql";
+const API_KEY = process.env.APPSYNC_API_KEY;
 
-const endpoint = "http://192.168.0.17:20002";
+const headers = {
+  "Content-Type": "application/json",
+  "x-api-key": API_KEY,
+};
 
 async function sendToGraphQL(mutation, variables) {
   try {
-    const response = await axios.post(endpoint, {
-      query: mutation,
-      variables: variables,
-    });
+    const response = await axios.post(
+      endpoint,
+      {
+        query: mutation,
+        variables: variables,
+      },
+      {
+        headers: headers,
+      },
+    );
     console.log("Data sent:", response.data);
   } catch (error) {
     console.error("Error sending data:", error);
@@ -59,55 +71,53 @@ async function seedData(count) {
     );
 
     const createCityPriceMutation = `
-    mutation CreateCityPrice($input: CityPriceInput!) {
+    mutation CreateCityPrice($input: CreateCityPriceInput!) {
         createCityPrice(input: $input) {
             numbeoCityId
             city
             country
             currency
-            contributors12months
+            contributors12Months
             monthLastUpdate
             cityCountry
             contributors
             yearLastUpdate
             prices {
-                lowest_price
-                average_price
-                highest_price
-                data_points
-                item_name
-                item_id
-            }
-            usdPrices {
-                lowest_price
-                average_price
-                highest_price
-                data_points
-                item_name
-                item_id
-            }
-            images {
+                lowestPrice
+                averagePrice
+                highestPrice
+                dataPoints
+                itemName
+                itemId
+                }
+                usdPrices {
+                lowestPrice
+                averagePrice
+                highestPrice
+                dataPoints
+                itemName
+                itemId
+                }
+                images {
                 unsplashId
-                name
-                city
                 description
-                alt_description
                 urls {
                     raw
                     full
                     regular
                     small
                     thumb
-                    small_s3
+                    smallS3
                 }
             }
         }
     }
 
+
 `;
 
     const createCostOfLivingRankingMutation = `
-    mutation CreateCostOfLivingRanking($input: CostOfLivingRankingInput!) {
+    mutation CreateCostOfLivingRanking($input: CreateCostOfLivingRankingInput!) {
         createCostOfLivingRanking(input: $input) {
             cityCountry
             grossRentalYieldOutsideOfCentre

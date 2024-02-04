@@ -7,15 +7,9 @@
 // Import the faker library for generating fake data
 const { faker } = require("@faker-js/faker");
 
-// Generate a random country, city, and cityCountry combination
-let country = faker.location.country();
-let city = faker.location.city();
-let cityCountry = city + ", " + country;
-
 // Function to create a random cost of living ranking
-function createRandomCostOfLivingRanking() {
+function createRandomCostOfLivingRanking(cityCountry) {
   return {
-    __typename: "CostOfLivingRanking", // GraphQL typename
     cityCountry, // The city and country combination
     grossRentalYieldOutsideOfCentre: faker.number.float(),
     priceToRentRatioOutsideOfCentre: faker.number.float(),
@@ -28,21 +22,22 @@ function createRandomCostOfLivingRanking() {
 }
 
 // Function to create a random city price
-function createRandomCityPrice() {
+function createRandomCityPrice(cityCountry) {
+    const city = cityCountry.split(", ")[0];
+    const country = cityCountry.split(", ")[1];
   return {
-    __typename: "CityPrice", // GraphQL typename
     cityCountry, // The city and country combination
     city, // The city
     country, // The country
-    numbeoCityId: faker.number.int(), // A random integer for the city ID
+    numbeoCityId: faker.number.int(1000), // A random integer for the city ID
     currency: faker.finance.currencyCode(), // A random currency code
     prices: faker.helpers.multiple(() => createRandomPrice(), { count: 3 }),
-    usdPrices: faker.helpers.multiple(() => createRandomPrice("UsdPrice"), {
+    usdPrices: faker.helpers.multiple(() => createRandomPrice(), {
       count: 3,
     }),
-    contributors12months: faker.number.int(), // A random number of contributors in the last 12 months
+    contributors12Months: faker.number.int(1000), // A random number of contributors in the last 12 months
     monthLastUpdate: faker.number.int({ min: 1, max: 12 }), // A random month for the last update
-    contributors: faker.number.int(), // A random number of contributors
+    contributors: faker.number.int(1000), // A random number of contributors
     yearLastUpdate: faker.number.int({ min: 2000, max: 2022 }), // A random year for the last update
     // An array of 3 random image objects
     images: faker.helpers.multiple(createRandomImageObject, { count: 3 }),
@@ -51,7 +46,6 @@ function createRandomCityPrice() {
 
 // An object of random URLs
 const randomUrls = {
-  __typename: "Urls", // GraphQL typename
   // Various types of URLs, all generated randomly
   raw: faker.image.url(),
   full: faker.image.url(),
@@ -64,35 +58,38 @@ const randomUrls = {
 // Function to create a random image object
 const createRandomImageObject = () => {
   return {
-    __typename: "ImageObject", // GraphQL typename
     unsplashId: faker.string.uuid(), // A random UUID for the image ID
     description: faker.lorem.sentence(), // A random sentence for the description
     urls: randomUrls, // The random URLs object
-    height: faker.number.int(), // A random integer for the height
-    width: faker.number.int(), // A random integer for the width
-    unsplashLikes: faker.number.int(), // A random number of likes
+    height: faker.number.int(1000), // A random integer for the height
+    width: faker.number.int(1000), // A random integer for the width
+    unsplashLikes: faker.number.int(1000), // A random number of likes
   };
 };
 
 // Function to create a random price
-const createRandomPrice = (priceTypename = "") => {
+const createRandomPrice = () => {
   return {
-    __typename: priceTypename || "Price", // GraphQL typename, defaulting to "Price"
     // Various price metrics, all set to 10
-    lowestPrice: faker.number.int(),
-    averagePrice: faker.number.int(),
-    highestPrice: faker.number.int(),
-    dataPoints: faker.number.int(), 
-    itemName: faker.string.itemName, // A random item name
-    itemId: faker.number.int(), // A random item ID
+    lowestPrice: faker.number.int(1000),
+    averagePrice: faker.number.int(1000),
+    highestPrice: faker.number.int(1000),
+    dataPoints: faker.number.int(1000), 
+    itemName: faker.commerce.productName(), // A random item name
+    itemId: faker.number.int(1000), // A random item ID
   };
 };
 
 // Function to generate the seed data
 const generateSeedData = () => {
+  // Generate a random country, city, and cityCountry combination
+  let country = faker.location.country();
+  let city = faker.location.city();
+  let cityCountry = city + ", " + country;
   return {
-    createRandomCityPrice: createRandomCityPrice(), // A random city price
-    createRandomCostOfLivingRanking: createRandomCostOfLivingRanking(), // A random cost of living ranking
+    createRandomCityPrice: createRandomCityPrice(cityCountry), // A random city price
+    createRandomCostOfLivingRanking:
+      createRandomCostOfLivingRanking(cityCountry), // A random cost of living ranking
   };
 };
 
