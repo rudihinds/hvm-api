@@ -131,4 +131,4 @@ amplifytools.xcconfig
 #amplify-do-not-edit-end
 
 #large json data files
-data/
+data/mocks/

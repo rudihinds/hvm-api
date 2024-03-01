@@ -1,0 +1,602 @@
+{
+  "Meal, Inexpensive Restaurant, Restaurants": {
+    "adult": {
+      "workingClassFreq": 2.17,
+      "middleClassFreq": 6.944,
+      "highValueFreq": 10.416
+    },
+    "child": {
+      "workingClassFreq": 2.17,
+      "middleClassFreq": 6.944,
+      "highValueFreq": 10.416
+    }
+  },
+  "Meal for 2 People, Mid-range Restaurant, Three-course, Restaurants": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 1.24,
+      "highValueFreq": 17.36
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 1.24,
+      "highValueFreq": 0.25
+    }
+  },
+  "McMeal at McDonalds (or Equivalent Combo Meal), Restaurants": {
+    "adult": {
+      "workingClassFreq": 0.93,
+      "middleClassFreq": 2.976,
+      "highValueFreq": 4.464
+    },
+    "child": {
+      "workingClassFreq": 0.93,
+      "middleClassFreq": 2.976,
+      "highValueFreq": 4.464
+    }
+  },
+  "Domestic Beer (0.5 liter draught), Restaurants": {
+    "adult": {
+      "workingClassFreq": 0.0465,
+      "middleClassFreq": 2.356,
+      "highValueFreq": 14.384
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Imported Beer (0.33 liter bottle), Restaurants": {
+    "adult": {
+      "workingClassFreq": 0.0465,
+      "middleClassFreq": 2.356,
+      "highValueFreq": 14.384
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Coke/Pepsi (0.33 liter bottle), Restaurants": {
+    "adult": {
+      "workingClassFreq": 0.4185,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    },
+    "child": {
+      "workingClassFreq": 0.4185,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Water (0.33 liter bottle), Restaurants": {
+    "adult": {
+      "workingClassFreq": 0.4185,
+      "middleClassFreq": 1,
+      "highValueFreq": 4
+    },
+    "child": {
+      "workingClassFreq": 0.4185,
+      "middleClassFreq": 1,
+      "highValueFreq": 4
+    }
+  },
+  "Cinema, International Release, 1 Seat, Sports And Leisure": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 2.1,
+      "highValueFreq": 4.2
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 2.1,
+      "highValueFreq": 4.2
+    }
+  },
+  "Domestic Beer (0.5 liter bottle), Markets": {
+    "adult": {
+      "workingClassFreq": 1.1904762,
+      "middleClassFreq": 2.1,
+      "highValueFreq": 4.2
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Imported Beer (0.33 liter bottle), Markets": {
+    "adult": {
+      "workingClassFreq": 0.2380952,
+      "middleClassFreq": 2.1,
+      "highValueFreq": 4.2
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Milk (regular), (1 liter), Markets": {
+    "adult": {
+      "workingClassFreq": 7.4916667,
+      "middleClassFreq": 6.7166667,
+      "highValueFreq": 3.62
+    },
+    "child": {
+      "workingClassFreq": 7.4916667,
+      "middleClassFreq": 6.7166667,
+      "highValueFreq": 3.62
+    }
+  },
+  "Cigarettes 20 Pack (Marlboro), Markets": {
+    "adult": {
+      "workingClassFreq": 12.4,
+      "middleClassFreq": 3.1,
+      "highValueFreq": 3.1
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Chicken Fillets (1kg), Markets": {
+    "adult": {
+      "workingClassFreq": 4.495,
+      "middleClassFreq": 4.03,
+      "highValueFreq": 2.17
+    },
+    "child": {
+      "workingClassFreq": 4.495,
+      "middleClassFreq": 4.03,
+      "highValueFreq": 0
+    }
+  },
+  "Beef Round (1kg) (or Equivalent Back Leg Red Meat), Markets": {
+    "adult": {
+      "workingClassFreq": 4.495,
+      "middleClassFreq": 4.03,
+      "highValueFreq": 2.17
+    },
+    "child": {
+      "workingClassFreq": 4.495,
+      "middleClassFreq": 4.03,
+      "highValueFreq": 2.17
+    }
+  },
+  "Apples (1kg), Markets": {
+    "adult": {
+      "workingClassFreq": 8.99,
+      "middleClassFreq": 8.06,
+      "highValueFreq": 4.34
+    },
+    "child": {
+      "workingClassFreq": 8.99,
+      "middleClassFreq": 8.06,
+      "highValueFreq": 4.34
+    }
+  },
+  "Banana (1kg), Markets": {
+    "adult": {
+      "workingClassFreq": 7.4916667,
+      "middleClassFreq": 7.6166667,
+      "highValueFreq": 3.6166667
+    },
+    "child": {
+      "workingClassFreq": 7.4916667,
+      "middleClassFreq": 7.6166667,
+      "highValueFreq": 3.6166667
+    }
+  },
+  "Oranges (1kg), Markets": {
+    "adult": {
+      "workingClassFreq": 8.99,
+      "middleClassFreq": 8.06,
+      "highValueFreq": 4.34
+    },
+    "child": {
+      "workingClassFreq": 8.99,
+      "middleClassFreq": 8.06,
+      "highValueFreq": 4.34
+    }
+  },
+  "Potato (1kg), Markets": {
+    "adult": {
+      "workingClassFreq": 5.9333333,
+      "middleClassFreq": 5.3733333,
+      "highValueFreq": 2.8933333
+    },
+    "child": {
+      "workingClassFreq": 5.9333333,
+      "middleClassFreq": 5.3733333,
+      "highValueFreq": 2.8933333
+    }
+  },
+  "Tomato (1kg), Markets": {
+    "adult": {
+      "workingClassFreq": 5.9333333,
+      "middleClassFreq": 5.3733333,
+      "highValueFreq": 2.8933333
+    },
+    "child": {
+      "workingClassFreq": 5.9333333,
+      "middleClassFreq": 5.3733333,
+      "highValueFreq": 2.8933333
+    }
+  },
+  "Onion (1kg), Markets": {
+    "adult": {
+      "workingClassFreq": 2.9966667,
+      "middleClassFreq": 2.6866667,
+      "highValueFreq": 1.4466667
+    },
+    "child": {
+      "workingClassFreq": 2.9966667,
+      "middleClassFreq": 2.6866667,
+      "highValueFreq": 1.4466667
+    }
+  },
+  "Lettuce (1 head), Markets": {
+    "adult": {
+      "workingClassFreq": 5.9333333,
+      "middleClassFreq": 5.3733333,
+      "highValueFreq": 2.8933333
+    },
+    "child": {
+      "workingClassFreq": 5.9333333,
+      "middleClassFreq": 5.3733333,
+      "highValueFreq": 2.8933333
+    }
+  },
+  "Cappuccino (regular), Restaurants": {
+    "adult": {
+      "workingClassFreq": 0.93,
+      "middleClassFreq": 3.5,
+      "highValueFreq": 49.6
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Rice (white), (1kg), Markets": {
+    "adult": {
+      "workingClassFreq": 2.9966667,
+      "middleClassFreq": 2.6866667,
+      "highValueFreq": 1.4466667
+    },
+    "child": {
+      "workingClassFreq": 2.9966667,
+      "middleClassFreq": 2.6866667,
+      "highValueFreq": 1.4466667
+    }
+  },
+  "Water (1.5 liter bottle), Markets": {
+    "adult": {
+      "workingClassFreq": 7.5,
+      "middleClassFreq": 7.5,
+      "highValueFreq": 7.5
+    },
+    "child": {
+      "workingClassFreq": 7.5,
+      "middleClassFreq": 7.5,
+      "highValueFreq": 7.5
+    }
+  },
+  "Bottle of Wine (Mid-Range), Markets": {
+    "adult": {
+      "workingClassFreq": 0.1785714,
+      "middleClassFreq": 1.5357143,
+      "highValueFreq": 1.2857143
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Gasoline (1 liter), Transportation": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 120,
+      "highValueFreq": 240
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Volkswagen Golf 1.4 90 KW Trendline (Or Equivalent New Car), Transportation": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0.02283,
+      "highValueFreq": 0.045984
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Loaf of Fresh White Bread (500g), Markets": {
+    "adult": {
+      "workingClassFreq": 7.4916667,
+      "middleClassFreq": 6.716,
+      "highValueFreq": 3.6166667
+    },
+    "child": {
+      "workingClassFreq": 7.4916667,
+      "middleClassFreq": 6.716,
+      "highValueFreq": 3.6166667
+    }
+  },
+  "Eggs (regular) (12), Markets": {
+    "adult": {
+      "workingClassFreq": 5.9333333,
+      "middleClassFreq": 5.3733333,
+      "highValueFreq": 2.8933333
+    },
+    "child": {
+      "workingClassFreq": 5.9333333,
+      "middleClassFreq": 5.3733333,
+      "highValueFreq": 2.8933333
+    }
+  },
+  "Local Cheese (1kg), Markets": {
+    "adult": {
+      "workingClassFreq": 2.9966667,
+      "middleClassFreq": 2.6866667,
+      "highValueFreq": 1.4466667
+    },
+    "child": {
+      "workingClassFreq": 2.9966667,
+      "middleClassFreq": 2.6866667,
+      "highValueFreq": 1.4466667
+    }
+  },
+  "1 min. of Prepaid Mobile Tariff Local (No Discounts or Plans), Utilities (Monthly)": {
+    "adult": {
+      "workingClassFreq": 100,
+      "middleClassFreq": 300,
+      "highValueFreq": 600
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Internet (60 Mbps or More, Unlimited Data, Cable/ADSL), Utilities (Monthly)": {
+    "adult": {
+      "workingClassFreq": 1,
+      "middleClassFreq": 1.3,
+      "highValueFreq": 1.5
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Fitness Club, Monthly Fee for 1 Adult, Sports And Leisure": {
+    "adult": {
+      "workingClassFreq": 0.6,
+      "middleClassFreq": 1,
+      "highValueFreq": 3
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 2
+    }
+  },
+  "Tennis Court Rent (1 Hour on Weekend), Sports And Leisure": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 1,
+      "highValueFreq": 2
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 2
+    }
+  },
+  "Vacation and Travel (Monthly Approximate Amount)": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0.12,
+      "highValueFreq": 0.24
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0.12,
+      "highValueFreq": 0.24
+    }
+  },
+  "Preschool (or Kindergarten), Full Day, Private, Monthly for 1 Child, Childcare": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "International Primary School, Yearly for 1 Child, Childcare": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 1
+    }
+  },
+  "Apartment (1 bedroom) in City Centre, Rent Per Month": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 1
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Apartment (1 bedroom) Outside of Centre, Rent Per Month": {
+    "adult": {
+      "workingClassFreq": 1,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Apartment (3 bedrooms) in City Centre, Rent Per Month": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 1
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Apartment (3 bedrooms) Outside of Centre, Rent Per Month": {
+    "adult": {
+      "workingClassFreq": 0.334,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "1 Pair of Jeans (Levis 501 Or Similar), Clothing And Shoes": {
+    "adult": {
+      "workingClassFreq": 0.05,
+      "middleClassFreq": 0.3,
+      "highValueFreq": 4
+    },
+    "child": {
+      "workingClassFreq": 0.05,
+      "middleClassFreq": 0.3,
+      "highValueFreq": 4
+    }
+  },
+  "1 Summer Dress in a Chain Store (Zara, H&M, ...), Clothing And Shoes": {
+    "adult": {
+      "workingClassFreq": 0.05,
+      "middleClassFreq": 0.3,
+      "highValueFreq": 6
+    },
+    "child": {
+      "workingClassFreq": 0.05,
+      "middleClassFreq": 0.3,
+      "highValueFreq": 4
+    }
+  },
+  "1 Pair of Nike Running Shoes (Mid-Range), Clothing And Shoes": {
+    "adult": {
+      "workingClassFreq": 0.05,
+      "middleClassFreq": 0.3,
+      "highValueFreq": 3
+    },
+    "child": {
+      "workingClassFreq": 0.05,
+      "middleClassFreq": 0.3,
+      "highValueFreq": 2
+    }
+  },
+  "1 Pair of Men Leather Business Shoes, Clothing And Shoes": {
+    "adult": {
+      "workingClassFreq": 0.05,
+      "middleClassFreq": 0.1,
+      "highValueFreq": 2
+    },
+    "child": {
+      "workingClassFreq": 0.05,
+      "middleClassFreq": 0,
+      "highValueFreq": 1
+    }
+  },
+  "Basic (Electricity, Heating, Cooling, Water, Garbage) for 85m2 Apartment, Utilities (Monthly)": {
+    "adult": {
+      "workingClassFreq": 0.6547,
+      "middleClassFreq": 0.5,
+      "highValueFreq": 1
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0.5,
+      "highValueFreq": 0.25
+    }
+  },
+  "Taxi Start (Normal Tariff), Transportation": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 8.4,
+      "highValueFreq": 16.8
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Taxi 1km (Normal Tariff), Transportation": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 54.6,
+      "highValueFreq": 109.2
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Taxi 1hour Waiting (Normal Tariff), Transportation": {
+    "adult": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0.7,
+      "highValueFreq": 1
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  },
+  "Monthly Pass (Regular Price), Transportation": {
+    "adult": {
+      "workingClassFreq": 1,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    },
+    "child": {
+      "workingClassFreq": 0,
+      "middleClassFreq": 0,
+      "highValueFreq": 0
+    }
+  }
+}
