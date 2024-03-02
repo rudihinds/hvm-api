@@ -39,6 +39,7 @@ type CityPrice @model {
   images: [ImageObject]
   numbeoCityId: Int
   costOfLivingRanking: CostOfLivingRanking @hasOne(fields: ["cityCountry"]) # one to one with costOfLivingRanking
+  FilterCombination: FilterCombination @hasOne(fields: ["cityCountry"]) # one to one with FilterCombination
 }
 
 input CityPriceInput {
@@ -54,6 +55,40 @@ input CityPriceInput {
   yearLastUpdate: Int
   images: [ImageObjectInput]
   numbeoCityId: Int
+}
+
+type FilterCombination @model {
+  cityCountry: String! @primaryKey
+  country: String @index(name: "FilterCombinationCountryIndex")
+  singleWorkingMonthlyCost: Int
+  singleMiddleMonthlyCost: Int
+  singleHighValueMonthlyCost: Int
+  coupleWorkingMonthlyCost: Int
+  coupleMiddleMonthlyCost: Int
+  coupleHighValueMonthlyCost: Int
+  smallFamilyWorkingMonthlyCost: Int
+  smallFamilyMiddleMonthlyCost: Int
+  smallFamilyHighValueMonthlyCost: Int
+  largeFamilyWorkingMonthlyCost: Int
+  largeFamilyMiddleMonthlyCost: Int
+  largeFamilyHighValueMonthlyCost: Int
+  cityPrice: CityPrice @hasOne(fields: ["cityCountry"]) # one to one with cityPrice
+}
+
+input FilterCombinationInput {
+  cityCountry: String!
+  singleWorkingMonthlyCost: Int
+  singleMiddleMonthlyCost: Int
+  singleHighMonthlyCost: Int
+  coupleWorkingMonthlyCost: Int
+  coupleMiddleMonthlyCost: Int
+  coupleHighMonthlyCost: Int
+  smallFamilyWorkingMonthlyCost: Int
+  smallFamilyMiddleMonthlyCost: Int
+  smallFamilyHighMonthlyCost: Int
+  largeFamilyWorkingMonthlyCost: Int
+  largeFamilyMiddleMonthlyCost: Int
+  largeFamilyHighMonthlyCost: Int
 }
 
 type Price {

@@ -169,6 +169,25 @@ export const createCityPrice = /* GraphQL */ `mutation CreateCityPrice(
       updatedAt
       __typename
     }
+    FilterCombination {
+      cityCountry
+      country
+      singleWorkingMonthlyCost
+      singleMiddleMonthlyCost
+      singleHighValueMonthlyCost
+      coupleWorkingMonthlyCost
+      coupleMiddleMonthlyCost
+      coupleHighValueMonthlyCost
+      smallFamilyWorkingMonthlyCost
+      smallFamilyMiddleMonthlyCost
+      smallFamilyHighValueMonthlyCost
+      largeFamilyWorkingMonthlyCost
+      largeFamilyMiddleMonthlyCost
+      largeFamilyHighValueMonthlyCost
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -227,6 +246,25 @@ export const updateCityPrice = /* GraphQL */ `mutation UpdateCityPrice(
       mortgageAsPercentageOfIncome
       priceToRentRatioCityCentre
       grossRentalYieldCityCentre
+      createdAt
+      updatedAt
+      __typename
+    }
+    FilterCombination {
+      cityCountry
+      country
+      singleWorkingMonthlyCost
+      singleMiddleMonthlyCost
+      singleHighValueMonthlyCost
+      coupleWorkingMonthlyCost
+      coupleMiddleMonthlyCost
+      coupleHighValueMonthlyCost
+      smallFamilyWorkingMonthlyCost
+      smallFamilyMiddleMonthlyCost
+      smallFamilyHighValueMonthlyCost
+      largeFamilyWorkingMonthlyCost
+      largeFamilyMiddleMonthlyCost
+      largeFamilyHighValueMonthlyCost
       createdAt
       updatedAt
       __typename
@@ -293,6 +331,25 @@ export const deleteCityPrice = /* GraphQL */ `mutation DeleteCityPrice(
       updatedAt
       __typename
     }
+    FilterCombination {
+      cityCountry
+      country
+      singleWorkingMonthlyCost
+      singleMiddleMonthlyCost
+      singleHighValueMonthlyCost
+      coupleWorkingMonthlyCost
+      coupleMiddleMonthlyCost
+      coupleHighValueMonthlyCost
+      smallFamilyWorkingMonthlyCost
+      smallFamilyMiddleMonthlyCost
+      smallFamilyHighValueMonthlyCost
+      largeFamilyWorkingMonthlyCost
+      largeFamilyMiddleMonthlyCost
+      largeFamilyHighValueMonthlyCost
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -301,4 +358,130 @@ export const deleteCityPrice = /* GraphQL */ `mutation DeleteCityPrice(
 ` as GeneratedMutation<
   APITypes.DeleteCityPriceMutationVariables,
   APITypes.DeleteCityPriceMutation
+>;
+export const createFilterCombination = /* GraphQL */ `mutation CreateFilterCombination(
+  $input: CreateFilterCombinationInput!
+  $condition: ModelFilterCombinationConditionInput
+) {
+  createFilterCombination(input: $input, condition: $condition) {
+    cityCountry
+    country
+    singleWorkingMonthlyCost
+    singleMiddleMonthlyCost
+    singleHighValueMonthlyCost
+    coupleWorkingMonthlyCost
+    coupleMiddleMonthlyCost
+    coupleHighValueMonthlyCost
+    smallFamilyWorkingMonthlyCost
+    smallFamilyMiddleMonthlyCost
+    smallFamilyHighValueMonthlyCost
+    largeFamilyWorkingMonthlyCost
+    largeFamilyMiddleMonthlyCost
+    largeFamilyHighValueMonthlyCost
+    cityPrice {
+      cityCountry
+      city
+      country
+      currency
+      contributors12Months
+      monthLastUpdate
+      contributors
+      yearLastUpdate
+      numbeoCityId
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateFilterCombinationMutationVariables,
+  APITypes.CreateFilterCombinationMutation
+>;
+export const updateFilterCombination = /* GraphQL */ `mutation UpdateFilterCombination(
+  $input: UpdateFilterCombinationInput!
+  $condition: ModelFilterCombinationConditionInput
+) {
+  updateFilterCombination(input: $input, condition: $condition) {
+    cityCountry
+    country
+    singleWorkingMonthlyCost
+    singleMiddleMonthlyCost
+    singleHighValueMonthlyCost
+    coupleWorkingMonthlyCost
+    coupleMiddleMonthlyCost
+    coupleHighValueMonthlyCost
+    smallFamilyWorkingMonthlyCost
+    smallFamilyMiddleMonthlyCost
+    smallFamilyHighValueMonthlyCost
+    largeFamilyWorkingMonthlyCost
+    largeFamilyMiddleMonthlyCost
+    largeFamilyHighValueMonthlyCost
+    cityPrice {
+      cityCountry
+      city
+      country
+      currency
+      contributors12Months
+      monthLastUpdate
+      contributors
+      yearLastUpdate
+      numbeoCityId
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateFilterCombinationMutationVariables,
+  APITypes.UpdateFilterCombinationMutation
+>;
+export const deleteFilterCombination = /* GraphQL */ `mutation DeleteFilterCombination(
+  $input: DeleteFilterCombinationInput!
+  $condition: ModelFilterCombinationConditionInput
+) {
+  deleteFilterCombination(input: $input, condition: $condition) {
+    cityCountry
+    country
+    singleWorkingMonthlyCost
+    singleMiddleMonthlyCost
+    singleHighValueMonthlyCost
+    coupleWorkingMonthlyCost
+    coupleMiddleMonthlyCost
+    coupleHighValueMonthlyCost
+    smallFamilyWorkingMonthlyCost
+    smallFamilyMiddleMonthlyCost
+    smallFamilyHighValueMonthlyCost
+    largeFamilyWorkingMonthlyCost
+    largeFamilyMiddleMonthlyCost
+    largeFamilyHighValueMonthlyCost
+    cityPrice {
+      cityCountry
+      city
+      country
+      currency
+      contributors12Months
+      monthLastUpdate
+      contributors
+      yearLastUpdate
+      numbeoCityId
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteFilterCombinationMutationVariables,
+  APITypes.DeleteFilterCombinationMutation
 >;

@@ -163,6 +163,25 @@ export const onCreateCityPrice = /* GraphQL */ `subscription OnCreateCityPrice($
       updatedAt
       __typename
     }
+    FilterCombination {
+      cityCountry
+      country
+      singleWorkingMonthlyCost
+      singleMiddleMonthlyCost
+      singleHighValueMonthlyCost
+      coupleWorkingMonthlyCost
+      coupleMiddleMonthlyCost
+      coupleHighValueMonthlyCost
+      smallFamilyWorkingMonthlyCost
+      smallFamilyMiddleMonthlyCost
+      smallFamilyHighValueMonthlyCost
+      largeFamilyWorkingMonthlyCost
+      largeFamilyMiddleMonthlyCost
+      largeFamilyHighValueMonthlyCost
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -218,6 +237,25 @@ export const onUpdateCityPrice = /* GraphQL */ `subscription OnUpdateCityPrice($
       mortgageAsPercentageOfIncome
       priceToRentRatioCityCentre
       grossRentalYieldCityCentre
+      createdAt
+      updatedAt
+      __typename
+    }
+    FilterCombination {
+      cityCountry
+      country
+      singleWorkingMonthlyCost
+      singleMiddleMonthlyCost
+      singleHighValueMonthlyCost
+      coupleWorkingMonthlyCost
+      coupleMiddleMonthlyCost
+      coupleHighValueMonthlyCost
+      smallFamilyWorkingMonthlyCost
+      smallFamilyMiddleMonthlyCost
+      smallFamilyHighValueMonthlyCost
+      largeFamilyWorkingMonthlyCost
+      largeFamilyMiddleMonthlyCost
+      largeFamilyHighValueMonthlyCost
       createdAt
       updatedAt
       __typename
@@ -281,6 +319,25 @@ export const onDeleteCityPrice = /* GraphQL */ `subscription OnDeleteCityPrice($
       updatedAt
       __typename
     }
+    FilterCombination {
+      cityCountry
+      country
+      singleWorkingMonthlyCost
+      singleMiddleMonthlyCost
+      singleHighValueMonthlyCost
+      coupleWorkingMonthlyCost
+      coupleMiddleMonthlyCost
+      coupleHighValueMonthlyCost
+      smallFamilyWorkingMonthlyCost
+      smallFamilyMiddleMonthlyCost
+      smallFamilyHighValueMonthlyCost
+      largeFamilyWorkingMonthlyCost
+      largeFamilyMiddleMonthlyCost
+      largeFamilyHighValueMonthlyCost
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
@@ -289,4 +346,127 @@ export const onDeleteCityPrice = /* GraphQL */ `subscription OnDeleteCityPrice($
 ` as GeneratedSubscription<
   APITypes.OnDeleteCityPriceSubscriptionVariables,
   APITypes.OnDeleteCityPriceSubscription
+>;
+export const onCreateFilterCombination = /* GraphQL */ `subscription OnCreateFilterCombination(
+  $filter: ModelSubscriptionFilterCombinationFilterInput
+) {
+  onCreateFilterCombination(filter: $filter) {
+    cityCountry
+    country
+    singleWorkingMonthlyCost
+    singleMiddleMonthlyCost
+    singleHighValueMonthlyCost
+    coupleWorkingMonthlyCost
+    coupleMiddleMonthlyCost
+    coupleHighValueMonthlyCost
+    smallFamilyWorkingMonthlyCost
+    smallFamilyMiddleMonthlyCost
+    smallFamilyHighValueMonthlyCost
+    largeFamilyWorkingMonthlyCost
+    largeFamilyMiddleMonthlyCost
+    largeFamilyHighValueMonthlyCost
+    cityPrice {
+      cityCountry
+      city
+      country
+      currency
+      contributors12Months
+      monthLastUpdate
+      contributors
+      yearLastUpdate
+      numbeoCityId
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateFilterCombinationSubscriptionVariables,
+  APITypes.OnCreateFilterCombinationSubscription
+>;
+export const onUpdateFilterCombination = /* GraphQL */ `subscription OnUpdateFilterCombination(
+  $filter: ModelSubscriptionFilterCombinationFilterInput
+) {
+  onUpdateFilterCombination(filter: $filter) {
+    cityCountry
+    country
+    singleWorkingMonthlyCost
+    singleMiddleMonthlyCost
+    singleHighValueMonthlyCost
+    coupleWorkingMonthlyCost
+    coupleMiddleMonthlyCost
+    coupleHighValueMonthlyCost
+    smallFamilyWorkingMonthlyCost
+    smallFamilyMiddleMonthlyCost
+    smallFamilyHighValueMonthlyCost
+    largeFamilyWorkingMonthlyCost
+    largeFamilyMiddleMonthlyCost
+    largeFamilyHighValueMonthlyCost
+    cityPrice {
+      cityCountry
+      city
+      country
+      currency
+      contributors12Months
+      monthLastUpdate
+      contributors
+      yearLastUpdate
+      numbeoCityId
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateFilterCombinationSubscriptionVariables,
+  APITypes.OnUpdateFilterCombinationSubscription
+>;
+export const onDeleteFilterCombination = /* GraphQL */ `subscription OnDeleteFilterCombination(
+  $filter: ModelSubscriptionFilterCombinationFilterInput
+) {
+  onDeleteFilterCombination(filter: $filter) {
+    cityCountry
+    country
+    singleWorkingMonthlyCost
+    singleMiddleMonthlyCost
+    singleHighValueMonthlyCost
+    coupleWorkingMonthlyCost
+    coupleMiddleMonthlyCost
+    coupleHighValueMonthlyCost
+    smallFamilyWorkingMonthlyCost
+    smallFamilyMiddleMonthlyCost
+    smallFamilyHighValueMonthlyCost
+    largeFamilyWorkingMonthlyCost
+    largeFamilyMiddleMonthlyCost
+    largeFamilyHighValueMonthlyCost
+    cityPrice {
+      cityCountry
+      city
+      country
+      currency
+      contributors12Months
+      monthLastUpdate
+      contributors
+      yearLastUpdate
+      numbeoCityId
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteFilterCombinationSubscriptionVariables,
+  APITypes.OnDeleteFilterCombinationSubscription
 >;

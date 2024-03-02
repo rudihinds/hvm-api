@@ -8,7 +8,8 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getCostOfLivingRanking = /* GraphQL */ `query GetCostOfLivingRanking($cityCountry: String!) {
+export const getCostOfLivingRanking =
+  /* GraphQL */ `query GetCostOfLivingRanking($cityCountry: String!) {
   getCostOfLivingRanking(cityCountry: $cityCountry) {
     cityCountry
     grossRentalYieldOutsideOfCentre
@@ -38,10 +39,11 @@ export const getCostOfLivingRanking = /* GraphQL */ `query GetCostOfLivingRankin
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetCostOfLivingRankingQueryVariables,
-  APITypes.GetCostOfLivingRankingQuery
->;
-export const listCostOfLivingRankings = /* GraphQL */ `query ListCostOfLivingRankings(
+    APITypes.GetCostOfLivingRankingQueryVariables,
+    APITypes.GetCostOfLivingRankingQuery
+  >;
+export const listCostOfLivingRankings =
+  /* GraphQL */ `query ListCostOfLivingRankings(
   $cityCountry: String
   $filter: ModelCostOfLivingRankingFilterInput
   $limit: Int
@@ -73,10 +75,11 @@ export const listCostOfLivingRankings = /* GraphQL */ `query ListCostOfLivingRan
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListCostOfLivingRankingsQueryVariables,
-  APITypes.ListCostOfLivingRankingsQuery
->;
-export const getCityPrice = /* GraphQL */ `query GetCityPrice($cityCountry: String!) {
+    APITypes.ListCostOfLivingRankingsQueryVariables,
+    APITypes.ListCostOfLivingRankingsQuery
+  >;
+export const getCityPrice =
+  /* GraphQL */ `query GetCityPrice($cityCountry: String!) {
   getCityPrice(cityCountry: $cityCountry) {
     cityCountry
     city
@@ -126,15 +129,34 @@ export const getCityPrice = /* GraphQL */ `query GetCityPrice($cityCountry: Stri
       updatedAt
       __typename
     }
+    FilterCombination {
+      cityCountry
+      country
+      singleWorkingMonthlyCost
+      singleMiddleMonthlyCost
+      singleHighValueMonthlyCost
+      coupleWorkingMonthlyCost
+      coupleMiddleMonthlyCost
+      coupleHighValueMonthlyCost
+      smallFamilyWorkingMonthlyCost
+      smallFamilyMiddleMonthlyCost
+      smallFamilyHighValueMonthlyCost
+      largeFamilyWorkingMonthlyCost
+      largeFamilyMiddleMonthlyCost
+      largeFamilyHighValueMonthlyCost
+      createdAt
+      updatedAt
+      __typename
+    }
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetCityPriceQueryVariables,
-  APITypes.GetCityPriceQuery
->;
+    APITypes.GetCityPriceQueryVariables,
+    APITypes.GetCityPriceQuery
+  >;
 export const listCityPrices = /* GraphQL */ `query ListCityPrices(
   $cityCountry: String
   $filter: ModelCityPriceFilterInput
@@ -171,3 +193,127 @@ export const listCityPrices = /* GraphQL */ `query ListCityPrices(
   APITypes.ListCityPricesQueryVariables,
   APITypes.ListCityPricesQuery
 >;
+export const getFilterCombination =
+  /* GraphQL */ `query GetFilterCombination($cityCountry: String!) {
+  getFilterCombination(cityCountry: $cityCountry) {
+    cityCountry
+    country
+    singleWorkingMonthlyCost
+    singleMiddleMonthlyCost
+    singleHighValueMonthlyCost
+    coupleWorkingMonthlyCost
+    coupleMiddleMonthlyCost
+    coupleHighValueMonthlyCost
+    smallFamilyWorkingMonthlyCost
+    smallFamilyMiddleMonthlyCost
+    smallFamilyHighValueMonthlyCost
+    largeFamilyWorkingMonthlyCost
+    largeFamilyMiddleMonthlyCost
+    largeFamilyHighValueMonthlyCost
+    cityPrice {
+      cityCountry
+      city
+      country
+      currency
+      contributors12Months
+      monthLastUpdate
+      contributors
+      yearLastUpdate
+      numbeoCityId
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.GetFilterCombinationQueryVariables,
+    APITypes.GetFilterCombinationQuery
+  >;
+export const listFilterCombinations =
+  /* GraphQL */ `query ListFilterCombinations(
+  $cityCountry: String
+  $filter: ModelFilterCombinationFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listFilterCombinations(
+    cityCountry: $cityCountry
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      cityCountry
+      country
+      singleWorkingMonthlyCost
+      singleMiddleMonthlyCost
+      singleHighValueMonthlyCost
+      coupleWorkingMonthlyCost
+      coupleMiddleMonthlyCost
+      coupleHighValueMonthlyCost
+      smallFamilyWorkingMonthlyCost
+      smallFamilyMiddleMonthlyCost
+      smallFamilyHighValueMonthlyCost
+      largeFamilyWorkingMonthlyCost
+      largeFamilyMiddleMonthlyCost
+      largeFamilyHighValueMonthlyCost
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.ListFilterCombinationsQueryVariables,
+    APITypes.ListFilterCombinationsQuery
+  >;
+export const filterCombinationsByCountry =
+  /* GraphQL */ `query FilterCombinationsByCountry(
+  $country: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelFilterCombinationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  filterCombinationsByCountry(
+    country: $country
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      cityCountry
+      country
+      singleWorkingMonthlyCost
+      singleMiddleMonthlyCost
+      singleHighValueMonthlyCost
+      coupleWorkingMonthlyCost
+      coupleMiddleMonthlyCost
+      coupleHighValueMonthlyCost
+      smallFamilyWorkingMonthlyCost
+      smallFamilyMiddleMonthlyCost
+      smallFamilyHighValueMonthlyCost
+      largeFamilyWorkingMonthlyCost
+      largeFamilyMiddleMonthlyCost
+      largeFamilyHighValueMonthlyCost
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+    APITypes.FilterCombinationsByCountryQueryVariables,
+    APITypes.FilterCombinationsByCountryQuery
+  >;
