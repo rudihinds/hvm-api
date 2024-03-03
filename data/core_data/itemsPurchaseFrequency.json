@@ -19,8 +19,8 @@
     },
     "child": {
       "workingClassFreq": 0,
-      "middleClassFreq": 1.24,
-      "highValueFreq": 0.25
+      "middleClassFreq": 0.25,
+      "highValueFreq": 6
     }
   },
   "McMeal at McDonalds (or Equivalent Combo Meal), Restaurants": {
@@ -71,7 +71,7 @@
       "highValueFreq": 0
     }
   },
-  "Water (0.33 liter bottle), Restaurants": {
+  "Water (0.33 liter bottle) , Restaurants": {
     "adult": {
       "workingClassFreq": 0.4185,
       "middleClassFreq": 1,
