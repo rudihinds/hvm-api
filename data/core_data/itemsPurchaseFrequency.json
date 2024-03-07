@@ -162,8 +162,8 @@
       "highValueFreq": 2.17
     },
     "child": {
-      "workingClassFreq": 4.495,
-      "middleClassFreq": 4.03,
+      "workingClassFreq": 1.6,
+      "middleClassFreq": 2.03,
       "highValueFreq": 2.17
     }
   },
@@ -186,9 +186,9 @@
       "highValueFreq": 3.6166667
     },
     "child": {
-      "workingClassFreq": 7.4916667,
-      "middleClassFreq": 7.6166667,
-      "highValueFreq": 3.6166667
+      "workingClassFreq": 4.5,
+      "middleClassFreq": 4.5,
+      "highValueFreq": 3.61
     }
   },
   "Oranges (1kg), Markets": {
@@ -198,8 +198,8 @@
       "highValueFreq": 4.34
     },
     "child": {
-      "workingClassFreq": 8.99,
-      "middleClassFreq": 8.06,
+      "workingClassFreq": 5,
+      "middleClassFreq": 5,
       "highValueFreq": 4.34
     }
   },
@@ -210,8 +210,8 @@
       "highValueFreq": 2.8933333
     },
     "child": {
-      "workingClassFreq": 5.9333333,
-      "middleClassFreq": 5.3733333,
+      "workingClassFreq": 3,
+      "middleClassFreq": 3,
       "highValueFreq": 2.8933333
     }
   },
@@ -222,8 +222,8 @@
       "highValueFreq": 2.8933333
     },
     "child": {
-      "workingClassFreq": 5.9333333,
-      "middleClassFreq": 5.3733333,
+      "workingClassFreq": 2.9,
+      "middleClassFreq": 2.3,
       "highValueFreq": 2.8933333
     }
   },
@@ -246,8 +246,8 @@
       "highValueFreq": 2.8933333
     },
     "child": {
-      "workingClassFreq": 5.9333333,
-      "middleClassFreq": 5.3733333,
+      "workingClassFreq": 3.9333333,
+      "middleClassFreq": 3.3733333,
       "highValueFreq": 2.8933333
     }
   },
@@ -342,8 +342,8 @@
       "highValueFreq": 2.8933333
     },
     "child": {
-      "workingClassFreq": 5.9333333,
-      "middleClassFreq": 5.3733333,
+      "workingClassFreq": 2.2,
+      "middleClassFreq": 2.6,
       "highValueFreq": 2.8933333
     }
   },
@@ -361,8 +361,8 @@
   },
   "1 min. of Prepaid Mobile Tariff Local (No Discounts or Plans), Utilities (Monthly)": {
     "adult": {
-      "workingClassFreq": 100,
-      "middleClassFreq": 300,
+      "workingClassFreq": 300,
+      "middleClassFreq": 500,
       "highValueFreq": 600
     },
     "child": {

@@ -49,7 +49,7 @@ Amplify.configure({
 // };
 
 const newYork = numbeoCityPricesActual.find(
-  (item) => item.name === "New York, NY, United States",
+  (item) => item.name === "Cairo, Egypt",
 );
 
 getCityPricesFromNumbeoJson = async () => {
@@ -64,7 +64,7 @@ getCityPricesFromNumbeoJson = async () => {
 const getCitiesThatHaveAllPricingData = () => {
   const citiesWithPrices = [];
   for (const city of numbeoCityPricesActual) {
-    if (city.prices.length > 50) {
+    if (city.prices.length > 200) {
       citiesWithPrices.push(city);
     }
   }
@@ -78,23 +78,16 @@ const getCitiesThatHaveAllPricingData = () => {
 // lets create an object for each city that has cityCountry, totalMonthlyCosts for each social class, and the missing items if any
 // lets start with 10 and review
 
-const SINGLE_WORKING_CLASS = "singleWorkingClass";
-const SINGLE_MIDDLE_CLASS = "singleMiddleClass";
-const SINGLE_HIGH_VALUE = "singleHighValue";
-const COUPLE_WORKING_CLASS = "coupleWorkingClass";
-const COUPLE_MIDDLE_CLASS = "coupleMiddleClass";
-const COUPLE_HIGH_VALUE = "coupleHighValue";
-const SMALL_FAMILY_WORKING_CLASS = "smallFamilyWorkingClass";
-const SMALL_FAMILY_MIDDLE_CLASS = "smallFamilyMiddleClass";
-const SMALL_FAMILY_HIGH_VALUE = "smallFamilyHighValue";
-const LARGE_FAMILY_WORKING_CLASS = "largeFamilyWorkingClass";
-const LARGE_FAMILY_MIDDLE_CLASS = "largeFamilyMiddleClass";
-const LARGE_FAMILY_HIGH_VALUE = "largeFamilyHighValue";
+function createFamily(adults, children) {
+  return new Array(adults)
+    .fill("adult")
+    .concat(new Array(children).fill("child"));
+}
 
-const single = ["adult"];
-const couple = ["adult", "adult"];
-const smallFamily = ["adult", "adult", "child", "child"];
-const largeFamily = ["adult", "adult", "child", "child", "child", "child"];
+const single = createFamily(1, 0);
+const couple = createFamily(2, 0);
+const smallFamily = createFamily(2, 2);
+const largeFamily = createFamily(2, 4);
 
 // "Meal for 2 People, Mid-range Restaurant, Three-course, Restaurants", "Apartment (1 bedroom) in City Centre, Rent Per Month"
 // excluded items:
@@ -112,60 +105,188 @@ const excludedItems = [
 
 const socialClasses = ["workingClassFreq", "middleClassFreq", "highValueFreq"];
 
+// if (
+//   priceObj.average_price !== 0 &&
+//   itemsPurchaseFrequency[priceObj.item_name] &&
+//   itemsPurchaseFrequency[priceObj.item_name][currentFamilyMember] &&
+//   itemsPurchaseFrequency[priceObj.item_name][currentFamilyMember][
+//     socialClass
+//   ] !== 0 &&
+//   familyMemberIndex > 0 &&
+//   !excludedItems.includes(priceObj.item_name)
+// )
+const calculateFamilyMemberMonthlyCosts = (
+  city,
+  acc,
+  currentFamilyMember,
+  socialClass,
+  familyMemberIndex,
+) => {
+  let familyMemberDataUnaccountedFor = [];
+  city.prices.forEach((priceObj) => {
+    if (!priceObj.item_name) {
+      console.log(`No item name ${priceObj.item_name}`);
+    }
+    // console.log("item name: ", priceObj.item_name);
+    if (priceObj.average_price === 0) {
+      // console.log(`Average price for ${priceObj.item_name} is 0`);
+    }
+    // console.log("average price: ", priceObj.average_price);
+    if (!itemsPurchaseFrequency[priceObj.item_name]) {
+      console.log(`No purchase frequency data for ${priceObj.item_name}`);
+      familyMemberDataUnaccountedFor.push(priceObj.item_name);
+      return;
+    }
+    // console.log(
+    //   "purchase frequency" + ` for ${priceObj.item_name}`,
+    //   itemsPurchaseFrequency[priceObj.item_name],
+    // );
+    if (!itemsPurchaseFrequency[priceObj.item_name][currentFamilyMember]) {
+      console.log(
+        `No purchase frequency data for ${priceObj.item_name} for family member ${currentFamilyMember}`,
+      );
+    }
+    // console.log(
+    //   `Purchase frequency for ${priceObj.item_name} for family member ${currentFamilyMember}`,
+    //   itemsPurchaseFrequency[priceObj.item_name][currentFamilyMember],
+    // );
+    if (
+      itemsPurchaseFrequency[priceObj.item_name][currentFamilyMember][
+        socialClass
+      ] === 0
+    ) {
+      // console.log(
+      //   `Purchase frequency for ${priceObj.item_name} for family member ${currentFamilyMember} in social class ${socialClass} is 0`,
+      // );
+    }
+    if (excludedItems.includes(priceObj.item_name)) {
+      console.log(`${priceObj.item_name} is in the list of excluded items`);
+      return;
+    }
+
+    try {
+      let monthlyTotalForItem =
+        parseFloat(priceObj.average_price.toFixed(2)) *
+        parseFloat(
+          itemsPurchaseFrequency[priceObj.item_name][currentFamilyMember][
+            socialClass
+          ].toFixed(2),
+        );
+      if (currentFamilyMember === "adult") {
+        console.log(
+          "*************************** total start ***************************",
+        );
+        console.log("family member", currentFamilyMember);
+        console.log(
+          priceObj.item_name,
+          "item price: ",
+          priceObj.average_price.toFixed(2),
+        );
+        // console.log("item price", priceObj.average_price.toFixed(2));
+        console.log(
+          "frequency per month: ",
+          itemsPurchaseFrequency[priceObj.item_name][currentFamilyMember][
+            socialClass
+          ].toFixed(2),
+        );
+        console.log("monthly total for item: ", monthlyTotalForItem);
+      }
+      acc += monthlyTotalForItem;
+    } catch (error) {
+      console.error(`An error occurred: ${error.message}`);
+    }
+  });
+  return [acc, familyMemberDataUnaccountedFor];
+};
+
+const calculateRent = (familyMembers, city, socialClass) => {
+  let apartmentSize;
+  let location =
+    socialClass === "highValueFreq" ? "in City Centre" : "Outside of Centre";
+
+  switch (familyMembers.length) {
+    case 1:
+    case 2:
+      apartmentSize = "1 bedroom";
+      break;
+    case 3:
+    case 4:
+      apartmentSize = "3 bedrooms";
+      break;
+    case 5:
+    case 6:
+      apartmentSize = "4 bedrooms";
+      break;
+  }
+
+  let apartmentKey = `Apartment (${apartmentSize}) ${location}, Rent Per Month`;
+  let rentCost;
+  if (
+    city.prices.find((priceObj) => !priceObj.item_name.includes(apartmentSize))
+  ) {
+    // find the closest apartment size, then divide by bedrooms to get room cost to add to total
+    let bedSizeMinusOneRoom = apartmentSize.split(" ")[0] - 1 + " bedrooms";
+    let roomCost =
+      city.prices.find((priceObj) =>
+        priceObj.item_name.includes(bedSizeMinusOneRoom),
+      ).average_price /
+      (apartmentSize.split(" ")[0] - 1);
+    rentCost =
+      city.prices.find((priceObj) =>
+        priceObj.item_name.includes(bedSizeMinusOneRoom),
+      ).average_price + roomCost;
+  } else {
+    rentCost = city.prices.find(
+      (priceObj) => priceObj.item_name === apartmentKey,
+    ).average_price;
+  }
+  return rentCost;
+};
+
 const getCostsForSocialClass = (city, socialClass, familyMembers) => {
   // loop through family members, get sum of each price item for each family member by social class frequency
   // add together to get total monthly cost for that family
   // return total monthly cost
 
-return familyMembers.reduce((acc, currentFamilyMember, i) => {
-  if (i > 0) {
-    console.log("in this case dont add rent");
-  } else {
-    city.prices.forEach((priceObj) => {
-      if (
-        priceObj.average_price !== 0 &&
-        itemsPurchaseFrequency[priceObj.item_name] &&
-        itemsPurchaseFrequency[priceObj.item_name][currentFamilyMember] &&
-        itemsPurchaseFrequency[priceObj.item_name][currentFamilyMember][
-          socialClass
-        ] !== 0
-      ) {
-        let monthlyTotalForItem =
-          parseFloat(priceObj.average_price.toFixed(2)) *
-          parseFloat(
-            itemsPurchaseFrequency[priceObj.item_name][currentFamilyMember][
-              socialClass
-            ].toFixed(2),
-          );
-        acc += monthlyTotalForItem;
-      }
-    });
-  }
-  return acc;
-}, 0);
+  // add all family members living costs
+  let totalMonthlyCostsForFamilyExclRent = familyMembers.reduce(
+    (acc, currentFamilyMember, i) => {
+      let [total, familyMemberDataUnaccountedFor] =
+        calculateFamilyMemberMonthlyCosts(
+          city,
+          acc,
+          currentFamilyMember,
+          socialClass,
+          i,
+        );
+      console.log("total", total);
+      console.log("unaccounted", familyMemberDataUnaccountedFor);
+      return total;
+    },
+    0,
+  );
+  // add rent
+  let apartmentSize;
 };
 
-console.log(getCostsForSocialClass(newYork, "workingClassFreq", largeFamily));
+// console.log(
+//   "grand total",
+//   getCostsForSocialClass(newYork, "workingClassFreq", couple),
+// );
 
-const createMonthlyCosts = (city, familyMembers) => {
-  // loop through prices, use item_name against purchase frequency,
-  try {
-    familyMembers.reduce((acc, currentFamilyMember, i) => {
-      if (i > 0) {
-        console.log("in this case dont add rent");
-      } else {
-        return;
-      }
-    }, 0);
-  } catch (error) {
-    console.error("error: ", error);
-  }
-};
+// const checkFrequencyData = () => {
+//   for (itemKey in itemsPurchaseFrequency) {
+//     let item = itemsPurchaseFrequency[itemKey];
+//     console.log(item.child == undefined)
+//   }
+// };
+// checkFrequencyData()
 
-createMonthlyCosts("new york", largeFamily);
+// createMonthlyCosts("new york", largeFamily);
 
 // console.log('numbeo json length: ', numbeoCityPricesActual.length);
 // const fiftyCities = getCitiesThatHaveAllPricingData().slice(0, 500);
+
 // fiftyCities.forEach((city) => {
 //   let itemPricesForCity = city.prices.map((priceObj) => priceObj.item_name);
 //   let missingItems = Object.keys(itemsPurchaseFrequency).filter(
