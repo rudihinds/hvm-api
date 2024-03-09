@@ -154,8 +154,12 @@ const calculateRent = (familyMembers, city, socialClass) => {
   let apartmentKey = `Apartment (${apartmentSize}) ${location}, Rent Per Month`;
   let rentCost;
   if (
-    city.prices.find((priceObj) => !priceObj.item_name.includes(apartmentSize))
+    !!city.prices.find((priceObj) => priceObj.item_name.includes(apartmentSize))
   ) {
+    rentCost = city.prices.find(
+      (priceObj) => priceObj.item_name === apartmentKey,
+    ).average_price;
+  } else {
     // find the closest apartment size, then divide by bedrooms to get room cost to add to total
     let bedSizeMinusOneRoom = apartmentSize.split(" ")[0] - 1 + " bedrooms";
     let roomCost =
@@ -167,10 +171,6 @@ const calculateRent = (familyMembers, city, socialClass) => {
       city.prices.find((priceObj) =>
         priceObj.item_name.includes(bedSizeMinusOneRoom),
       ).average_price + roomCost;
-  } else {
-    rentCost = city.prices.find(
-      (priceObj) => priceObj.item_name === apartmentKey,
-    ).average_price;
   }
   return rentCost;
 };
@@ -194,13 +194,14 @@ const getCostsForSocialClass = (city, socialClass, familyMembers) => {
     0,
   );
   let rentCost = calculateRent(familyMembers, city, socialClass);
-  return totalMonthlyCostsForFamilyExclRent + rentCost;
+  return parseInt(totalMonthlyCostsForFamilyExclRent + rentCost);
 };
 
 const getCostsForCity = (city) => {
   let cityCosts = {};
   let cityCostsBySocialClass = socialClasses.reduce((acc, socialClass) => {
     for (const familyType in familyTypes) {
+      if (!acc[socialClass]) acc[socialClass] = {};
       acc[socialClass][familyType] = getCostsForSocialClass(
         city,
         socialClass,
@@ -213,4 +214,10 @@ const getCostsForCity = (city) => {
   return cityCosts;
 };
 
-const fiftyCities = getCitiesThatHaveAllPricingData().slice(0, 1`0);
+const fiftyCities = getCitiesThatHaveAllPricingData(
+  numbeoCityPricesActual,
+  50,
+).slice(0, 10);
+
+const monthlyCosts = fiftyCities.map((city) => getCostsForCity(city));
+console.log(JSON.stringify(monthlyCosts, null, 2));
