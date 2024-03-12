@@ -1,7 +1,16 @@
-// import puchase frequency by social class json
-// get all cities that have prices (test with a few cities first)
-// for each city, calculate the monthly cost of living for each social class by multiplying the relative purchase frequency by the price
-// build each family type total and insert into the FilterCombination table
+/**
+ * Calculates monthly cost of living in multiple cities for different family compositions and social classes.
+ *
+ * Gets list of cities that have sufficient pricing data.
+ * Defines family compositions.
+ * Loops through each city.
+ *   Calculates total monthly costs for each family member.
+ *   Sums family members totals to get family total.
+ *   Calculates rent based on family size and social class.
+ *   Adds rent to family total.
+ * Returns object containing monthly costs by city, social class and family type.
+ */
+
 require("ts-node/register");
 require("dotenv").config();
 require = require("esm")(module);
@@ -21,45 +30,9 @@ Amplify.configure({
   aws_appsync_apiKey: process.env.APPSYNC_API_KEY,
 });
 
-// const getCityPrices = async () => {
-//   const citiesWithPrices = [];
-//   try {
-//     const cities = await API.graphql(
-//       graphqlOperation(listCityPrices, { limit: 100 }),
-//     );
-//     for (const city of cities.data.listCityPrices.items) {
-//       try {
-//         const fullCityPrice = await API.graphql(
-//           graphqlOperation(getCityPrice, { cityCountry: city.cityCountry }),
-//         );
-//         citiesWithPrices.push({
-//           cityCountry: city.cityCountry,
-//           prices: fullCityPrice.data.getCityPrice.prices,
-//         });
-//       } catch (error) {
-//         console.error(
-//           `Failed to get prices for city ${city.cityCountry}: ${error}`,
-//         );
-//       }
-//     }
-//   } catch (error) {
-//     console.error(`Failed to list cities: ${error}`);
-//   }
-//   return citiesWithPrices;
-// };
-
 const newYork = numbeoCityPricesActual.find(
   (item) => item.name === "Cairo, Egypt",
 );
-
-const getCityMissingPricesFromNumbeoJson = async (city) => {
-  let missingItems = city.prices
-    .filter(
-      (priceObj) => !itemsPurchaseFrequency.hasOwnProperty(priceObj.item_name),
-    )
-    .map((priceObj) => priceObj.item_name);
-  return missingItems;
-};
 
 const getCitiesThatHaveAllPricingData = (cityData, length) => {
   const citiesWithPrices = [];
@@ -177,9 +150,10 @@ const calculateRent = (familyMembers, city, socialClass) => {
 
 const getCostsForSocialClass = (city, socialClass, familyMembers) => {
   // add all family members living costs at given social class
+  let unaccountedForPriceItems = [];
   let totalMonthlyCostsForFamilyExclRent = familyMembers.reduce(
     (acc, currentFamilyMember, i) => {
-      let [total, familyMemberDataUnaccountedFor] =
+      [total, familyMemberDataUnaccountedFor] =
         calculateFamilyMemberMonthlyCosts(
           city,
           acc,
@@ -187,14 +161,21 @@ const getCostsForSocialClass = (city, socialClass, familyMembers) => {
           socialClass,
           i,
         );
-      console.log("total", total);
-      console.log("unaccounted", familyMemberDataUnaccountedFor);
+      unaccountedForPriceItems = [
+        ...new Set([
+          ...unaccountedForPriceItems,
+          ...familyMemberDataUnaccountedFor,
+        ]),
+      ];
       return total;
     },
     0,
   );
-  let rentCost = calculateRent(familyMembers, city, socialClass);
-  return parseInt(totalMonthlyCostsForFamilyExclRent + rentCost);
+  let monthlyFamilyCostsIncludingRent = parseInt(
+    calculateRent(familyMembers, city, socialClass) +
+      totalMonthlyCostsForFamilyExclRent,
+  );
+  return [monthlyFamilyCostsIncludingRent, unaccountedForPriceItems];
 };
 
 const getCostsForCity = (city) => {
@@ -202,11 +183,13 @@ const getCostsForCity = (city) => {
   let cityCostsBySocialClass = socialClasses.reduce((acc, socialClass) => {
     for (const familyType in familyTypes) {
       if (!acc[socialClass]) acc[socialClass] = {};
-      acc[socialClass][familyType] = getCostsForSocialClass(
-        city,
-        socialClass,
-        familyTypes[familyType],
-      );
+      if (!acc["unaccountedForPriceItems"])
+        acc["unaccountedForPriceItems"] = [];
+      let [monthlyFamilyCostsIncludingRent, unaccountedForPriceItems] =
+        getCostsForSocialClass(city, socialClass, familyTypes[familyType]);
+      acc[socialClass][familyType]["monthlyCosts"] =
+        monthlyFamilyCostsIncludingRent;
+      acc["unaccountedForPriceItems"] = unaccountedForPriceItems;
     }
     return acc;
   }, {});

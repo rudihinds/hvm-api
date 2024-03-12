@@ -1,3 +1,8 @@
+/**
+ * Sends a test mutation to create a sample city price record.
+ * Uses axios to make a GraphQL mutation request to the API endpoint.
+ * Logs the response and any errors.
+ */
 const axios = require("axios");
 const endpoint = "http://192.168.0.17:20002/graphql";
 require("dotenv").config();
