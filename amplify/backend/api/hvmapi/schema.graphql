@@ -59,7 +59,6 @@ input CityPriceInput {
 
 type FilterCombination @model {
   cityCountry: String! @primaryKey
-  country: String @index(name: "FilterCombinationCountryIndex")
   singleWorkingMonthlyCost: Int
   singleMiddleMonthlyCost: Int
   singleHighValueMonthlyCost: Int

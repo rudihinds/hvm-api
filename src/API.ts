@@ -130,7 +130,6 @@ export type Urls = {
 export type FilterCombination = {
   __typename: "FilterCombination",
   cityCountry: string,
-  country?: string | null,
   singleWorkingMonthlyCost?: number | null,
   singleMiddleMonthlyCost?: number | null,
   singleHighValueMonthlyCost?: number | null,
@@ -287,7 +286,6 @@ export type DeleteCityPriceInput = {
 
 export type CreateFilterCombinationInput = {
   cityCountry: string,
-  country?: string | null,
   singleWorkingMonthlyCost?: number | null,
   singleMiddleMonthlyCost?: number | null,
   singleHighValueMonthlyCost?: number | null,
@@ -303,7 +301,6 @@ export type CreateFilterCombinationInput = {
 };
 
 export type ModelFilterCombinationConditionInput = {
-  country?: ModelStringInput | null,
   singleWorkingMonthlyCost?: ModelIntInput | null,
   singleMiddleMonthlyCost?: ModelIntInput | null,
   singleHighValueMonthlyCost?: ModelIntInput | null,
@@ -323,7 +320,6 @@ export type ModelFilterCombinationConditionInput = {
 
 export type UpdateFilterCombinationInput = {
   cityCountry: string,
-  country?: string | null,
   singleWorkingMonthlyCost?: number | null,
   singleMiddleMonthlyCost?: number | null,
   singleHighValueMonthlyCost?: number | null,
@@ -391,7 +387,6 @@ export type ModelCityPriceConnection = {
 
 export type ModelFilterCombinationFilterInput = {
   cityCountry?: ModelStringInput | null,
-  country?: ModelStringInput | null,
   singleWorkingMonthlyCost?: ModelIntInput | null,
   singleMiddleMonthlyCost?: ModelIntInput | null,
   singleHighValueMonthlyCost?: ModelIntInput | null,
@@ -483,7 +478,6 @@ export type ModelSubscriptionIntInput = {
 
 export type ModelSubscriptionFilterCombinationFilterInput = {
   cityCountry?: ModelSubscriptionStringInput | null,
-  country?: ModelSubscriptionStringInput | null,
   singleWorkingMonthlyCost?: ModelSubscriptionIntInput | null,
   singleMiddleMonthlyCost?: ModelSubscriptionIntInput | null,
   singleHighValueMonthlyCost?: ModelSubscriptionIntInput | null,
@@ -664,7 +658,6 @@ export type CreateCityPriceMutation = {
     FilterCombination?:  {
       __typename: "FilterCombination",
       cityCountry: string,
-      country?: string | null,
       singleWorkingMonthlyCost?: number | null,
       singleMiddleMonthlyCost?: number | null,
       singleHighValueMonthlyCost?: number | null,
@@ -744,7 +737,6 @@ export type UpdateCityPriceMutation = {
     FilterCombination?:  {
       __typename: "FilterCombination",
       cityCountry: string,
-      country?: string | null,
       singleWorkingMonthlyCost?: number | null,
       singleMiddleMonthlyCost?: number | null,
       singleHighValueMonthlyCost?: number | null,
@@ -824,7 +816,6 @@ export type DeleteCityPriceMutation = {
     FilterCombination?:  {
       __typename: "FilterCombination",
       cityCountry: string,
-      country?: string | null,
       singleWorkingMonthlyCost?: number | null,
       singleMiddleMonthlyCost?: number | null,
       singleHighValueMonthlyCost?: number | null,
@@ -854,7 +845,6 @@ export type CreateFilterCombinationMutation = {
   createFilterCombination?:  {
     __typename: "FilterCombination",
     cityCountry: string,
-    country?: string | null,
     singleWorkingMonthlyCost?: number | null,
     singleMiddleMonthlyCost?: number | null,
     singleHighValueMonthlyCost?: number | null,
@@ -895,7 +885,6 @@ export type UpdateFilterCombinationMutation = {
   updateFilterCombination?:  {
     __typename: "FilterCombination",
     cityCountry: string,
-    country?: string | null,
     singleWorkingMonthlyCost?: number | null,
     singleMiddleMonthlyCost?: number | null,
     singleHighValueMonthlyCost?: number | null,
@@ -936,7 +925,6 @@ export type DeleteFilterCombinationMutation = {
   deleteFilterCombination?:  {
     __typename: "FilterCombination",
     cityCountry: string,
-    country?: string | null,
     singleWorkingMonthlyCost?: number | null,
     singleMiddleMonthlyCost?: number | null,
     singleHighValueMonthlyCost?: number | null,
@@ -1088,7 +1076,6 @@ export type GetCityPriceQuery = {
     FilterCombination?:  {
       __typename: "FilterCombination",
       cityCountry: string,
-      country?: string | null,
       singleWorkingMonthlyCost?: number | null,
       singleMiddleMonthlyCost?: number | null,
       singleHighValueMonthlyCost?: number | null,
@@ -1146,7 +1133,6 @@ export type GetFilterCombinationQuery = {
   getFilterCombination?:  {
     __typename: "FilterCombination",
     cityCountry: string,
-    country?: string | null,
     singleWorkingMonthlyCost?: number | null,
     singleMiddleMonthlyCost?: number | null,
     singleHighValueMonthlyCost?: number | null,
@@ -1192,41 +1178,6 @@ export type ListFilterCombinationsQuery = {
     items:  Array< {
       __typename: "FilterCombination",
       cityCountry: string,
-      country?: string | null,
-      singleWorkingMonthlyCost?: number | null,
-      singleMiddleMonthlyCost?: number | null,
-      singleHighValueMonthlyCost?: number | null,
-      coupleWorkingMonthlyCost?: number | null,
-      coupleMiddleMonthlyCost?: number | null,
-      coupleHighValueMonthlyCost?: number | null,
-      smallFamilyWorkingMonthlyCost?: number | null,
-      smallFamilyMiddleMonthlyCost?: number | null,
-      smallFamilyHighValueMonthlyCost?: number | null,
-      largeFamilyWorkingMonthlyCost?: number | null,
-      largeFamilyMiddleMonthlyCost?: number | null,
-      largeFamilyHighValueMonthlyCost?: number | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type FilterCombinationsByCountryQueryVariables = {
-  country: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelFilterCombinationFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type FilterCombinationsByCountryQuery = {
-  filterCombinationsByCountry?:  {
-    __typename: "ModelFilterCombinationConnection",
-    items:  Array< {
-      __typename: "FilterCombination",
-      cityCountry: string,
-      country?: string | null,
       singleWorkingMonthlyCost?: number | null,
       singleMiddleMonthlyCost?: number | null,
       singleHighValueMonthlyCost?: number | null,
@@ -1406,7 +1357,6 @@ export type OnCreateCityPriceSubscription = {
     FilterCombination?:  {
       __typename: "FilterCombination",
       cityCountry: string,
-      country?: string | null,
       singleWorkingMonthlyCost?: number | null,
       singleMiddleMonthlyCost?: number | null,
       singleHighValueMonthlyCost?: number | null,
@@ -1485,7 +1435,6 @@ export type OnUpdateCityPriceSubscription = {
     FilterCombination?:  {
       __typename: "FilterCombination",
       cityCountry: string,
-      country?: string | null,
       singleWorkingMonthlyCost?: number | null,
       singleMiddleMonthlyCost?: number | null,
       singleHighValueMonthlyCost?: number | null,
@@ -1564,7 +1513,6 @@ export type OnDeleteCityPriceSubscription = {
     FilterCombination?:  {
       __typename: "FilterCombination",
       cityCountry: string,
-      country?: string | null,
       singleWorkingMonthlyCost?: number | null,
       singleMiddleMonthlyCost?: number | null,
       singleHighValueMonthlyCost?: number | null,
@@ -1593,7 +1541,6 @@ export type OnCreateFilterCombinationSubscription = {
   onCreateFilterCombination?:  {
     __typename: "FilterCombination",
     cityCountry: string,
-    country?: string | null,
     singleWorkingMonthlyCost?: number | null,
     singleMiddleMonthlyCost?: number | null,
     singleHighValueMonthlyCost?: number | null,
@@ -1633,7 +1580,6 @@ export type OnUpdateFilterCombinationSubscription = {
   onUpdateFilterCombination?:  {
     __typename: "FilterCombination",
     cityCountry: string,
-    country?: string | null,
     singleWorkingMonthlyCost?: number | null,
     singleMiddleMonthlyCost?: number | null,
     singleHighValueMonthlyCost?: number | null,
@@ -1673,7 +1619,6 @@ export type OnDeleteFilterCombinationSubscription = {
   onDeleteFilterCombination?:  {
     __typename: "FilterCombination",
     cityCountry: string,
-    country?: string | null,
     singleWorkingMonthlyCost?: number | null,
     singleMiddleMonthlyCost?: number | null,
     singleHighValueMonthlyCost?: number | null,

@@ -11,28 +11,10 @@
  * Returns object containing monthly costs by city, social class and family type.
  */
 
-require("ts-node/register");
 require("dotenv").config();
 require = require("esm")(module);
 const itemsPurchaseFrequency = require("../../data/core_data/itemsPurchaseFrequency.json");
 const numbeoCityPricesActual = require("../../data/mocks/dbjson/numbeoCityPricesActual.json");
-const cities500kPlus = require("../../data/mocks/dbjson/cities+5k.json");
-const { Amplify, API, graphqlOperation } = require("aws-amplify");
-const {
-  listCityPrices,
-  getCityPrice,
-} = require("../../src/graphql/queries.ts");
-
-Amplify.configure({
-  aws_appsync_graphqlEndpoint: process.env.APPSYNC_ENDPOINT,
-  aws_appsync_region: process.env.APPSYNC_REGION,
-  aws_appsync_authenticationType: process.env.APPSYNC_AUTH_TYPE,
-  aws_appsync_apiKey: process.env.APPSYNC_API_KEY,
-});
-
-const newYork = numbeoCityPricesActual.find(
-  (item) => item.name === "Cairo, Egypt",
-);
 
 const getCitiesThatHaveAllPricingData = (cityData, length) => {
   const citiesWithPrices = [];
@@ -75,14 +57,17 @@ const calculateFamilyMemberMonthlyCosts = (
   socialClass,
 ) => {
   let familyMemberDataUnaccountedFor = [];
+  let itemsWithNoAveragePriceData = [];
   city.prices.forEach((priceObj) => {
     if (!itemsPurchaseFrequency[priceObj.item_name]) {
-      console.log(`No purchase frequency data for ${priceObj.item_name}`);
       familyMemberDataUnaccountedFor.push(priceObj.item_name);
       return;
     }
+    if (!priceObj.average_price) {
+      itemsWithNoAveragePriceData.push(priceObj.item_name);
+      return;
+    }
     if (excludedItems.includes(priceObj.item_name)) {
-      console.log(`${priceObj.item_name} is in the list of excluded items`);
       return;
     }
 
@@ -101,7 +86,7 @@ const calculateFamilyMemberMonthlyCosts = (
       );
     }
   });
-  return [acc, familyMemberDataUnaccountedFor];
+  return [acc, familyMemberDataUnaccountedFor, itemsWithNoAveragePriceData];
 };
 
 const calculateRent = (familyMembers, city, socialClass) => {
@@ -126,24 +111,29 @@ const calculateRent = (familyMembers, city, socialClass) => {
 
   let apartmentKey = `Apartment (${apartmentSize}) ${location}, Rent Per Month`;
   let rentCost;
-  if (
-    !!city.prices.find((priceObj) => priceObj.item_name.includes(apartmentSize))
-  ) {
-    rentCost = city.prices.find(
-      (priceObj) => priceObj.item_name === apartmentKey,
-    ).average_price;
+  let priceObj = city.prices.find((priceObj) =>
+    priceObj.item_name.includes(apartmentSize),
+  );
+
+  if (priceObj) {
+    rentCost = priceObj.average_price;
   } else {
     // find the closest apartment size, then divide by bedrooms to get room cost to add to total
     let bedSizeMinusOneRoom = apartmentSize.split(" ")[0] - 1 + " bedrooms";
-    let roomCost =
-      city.prices.find((priceObj) =>
-        priceObj.item_name.includes(bedSizeMinusOneRoom),
-      ).average_price /
-      (apartmentSize.split(" ")[0] - 1);
-    rentCost =
-      city.prices.find((priceObj) =>
-        priceObj.item_name.includes(bedSizeMinusOneRoom),
-      ).average_price + roomCost;
+    let roomPriceObj = city.prices.find((priceObj) =>
+      priceObj.item_name.includes(bedSizeMinusOneRoom),
+    );
+    if (roomPriceObj) {
+      let roomCost =
+        roomPriceObj.average_price / (apartmentSize.split(" ")[0] - 1);
+      rentCost = roomPriceObj.average_price + roomCost;
+    } else {
+      // handle the case where roomPriceObj is undefined
+      console.error(
+        `No price data available for ${bedSizeMinusOneRoom} in ${city.name}`,
+      );
+      rentCost = 0; // or some other default value
+    }
   }
   return rentCost;
 };
@@ -151,9 +141,10 @@ const calculateRent = (familyMembers, city, socialClass) => {
 const getCostsForSocialClass = (city, socialClass, familyMembers) => {
   // add all family members living costs at given social class
   let unaccountedForPriceItems = [];
+  let itemsWithoutPriceData = [];
   let totalMonthlyCostsForFamilyExclRent = familyMembers.reduce(
     (acc, currentFamilyMember, i) => {
-      [total, familyMemberDataUnaccountedFor] =
+      [total, familyMemberDataUnaccountedFor, itemsWithNoAveragePriceData] =
         calculateFamilyMemberMonthlyCosts(
           city,
           acc,
@@ -167,6 +158,9 @@ const getCostsForSocialClass = (city, socialClass, familyMembers) => {
           ...familyMemberDataUnaccountedFor,
         ]),
       ];
+      itemsWithoutPriceData = [
+        ...new Set([...itemsWithoutPriceData, ...itemsWithNoAveragePriceData]),
+      ];
       return total;
     },
     0,
@@ -175,32 +169,45 @@ const getCostsForSocialClass = (city, socialClass, familyMembers) => {
     calculateRent(familyMembers, city, socialClass) +
       totalMonthlyCostsForFamilyExclRent,
   );
-  return [monthlyFamilyCostsIncludingRent, unaccountedForPriceItems];
+  return [
+    monthlyFamilyCostsIncludingRent,
+    unaccountedForPriceItems,
+    itemsWithoutPriceData,
+  ];
 };
 
 const getCostsForCity = (city) => {
   let cityCosts = {};
   let cityCostsBySocialClass = socialClasses.reduce((acc, socialClass) => {
     for (const familyType in familyTypes) {
-      if (!acc[socialClass]) acc[socialClass] = {};
-      if (!acc["unaccountedForPriceItems"])
-        acc["unaccountedForPriceItems"] = [];
-      let [monthlyFamilyCostsIncludingRent, unaccountedForPriceItems] =
-        getCostsForSocialClass(city, socialClass, familyTypes[familyType]);
+      acc[socialClass] = acc[socialClass] || {};
+      acc[socialClass][familyType] = acc[socialClass][familyType] || {};
+      acc["unaccountedForPriceItems"] = acc["unaccountedForPriceItems"] || [];
+      acc["itemsWithoutPriceData"] = acc["itemsWithoutPriceData"] || [];
+
+      let [
+        monthlyFamilyCostsIncludingRent,
+        unaccountedForPriceItems,
+        itemsWithoutPriceData,
+      ] = getCostsForSocialClass(city, socialClass, familyTypes[familyType]);
+
       acc[socialClass][familyType]["monthlyCosts"] =
         monthlyFamilyCostsIncludingRent;
       acc["unaccountedForPriceItems"] = unaccountedForPriceItems;
+      acc["itemsWithoutPriceData"] = itemsWithoutPriceData;
     }
     return acc;
   }, {});
-  cityCosts[city.name] = cityCostsBySocialClass;
+  cityCosts = {
+    cityCountry: city.name,
+    ...cityCostsBySocialClass,
+  };
   return cityCosts;
 };
 
-const fiftyCities = getCitiesThatHaveAllPricingData(
-  numbeoCityPricesActual,
-  50,
-).slice(0, 10);
+module.exports = {
+  getCostsForCity,
+};
 
-const monthlyCosts = fiftyCities.map((city) => getCostsForCity(city));
-console.log(JSON.stringify(monthlyCosts, null, 2));
+// const monthlyCosts = fiftyCities.map((city) => getCostsForCity(city));
+// console.log(JSON.stringify(monthlyCosts, null, 2));

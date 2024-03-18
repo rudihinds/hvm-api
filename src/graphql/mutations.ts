@@ -171,7 +171,6 @@ export const createCityPrice = /* GraphQL */ `mutation CreateCityPrice(
     }
     FilterCombination {
       cityCountry
-      country
       singleWorkingMonthlyCost
       singleMiddleMonthlyCost
       singleHighValueMonthlyCost
@@ -252,7 +251,6 @@ export const updateCityPrice = /* GraphQL */ `mutation UpdateCityPrice(
     }
     FilterCombination {
       cityCountry
-      country
       singleWorkingMonthlyCost
       singleMiddleMonthlyCost
       singleHighValueMonthlyCost
@@ -333,7 +331,6 @@ export const deleteCityPrice = /* GraphQL */ `mutation DeleteCityPrice(
     }
     FilterCombination {
       cityCountry
-      country
       singleWorkingMonthlyCost
       singleMiddleMonthlyCost
       singleHighValueMonthlyCost
@@ -365,7 +362,6 @@ export const createFilterCombination = /* GraphQL */ `mutation CreateFilterCombi
 ) {
   createFilterCombination(input: $input, condition: $condition) {
     cityCountry
-    country
     singleWorkingMonthlyCost
     singleMiddleMonthlyCost
     singleHighValueMonthlyCost
@@ -407,7 +403,6 @@ export const updateFilterCombination = /* GraphQL */ `mutation UpdateFilterCombi
 ) {
   updateFilterCombination(input: $input, condition: $condition) {
     cityCountry
-    country
     singleWorkingMonthlyCost
     singleMiddleMonthlyCost
     singleHighValueMonthlyCost
@@ -449,7 +444,6 @@ export const deleteFilterCombination = /* GraphQL */ `mutation DeleteFilterCombi
 ) {
   deleteFilterCombination(input: $input, condition: $condition) {
     cityCountry
-    country
     singleWorkingMonthlyCost
     singleMiddleMonthlyCost
     singleHighValueMonthlyCost

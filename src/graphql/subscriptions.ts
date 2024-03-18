@@ -165,7 +165,6 @@ export const onCreateCityPrice = /* GraphQL */ `subscription OnCreateCityPrice($
     }
     FilterCombination {
       cityCountry
-      country
       singleWorkingMonthlyCost
       singleMiddleMonthlyCost
       singleHighValueMonthlyCost
@@ -243,7 +242,6 @@ export const onUpdateCityPrice = /* GraphQL */ `subscription OnUpdateCityPrice($
     }
     FilterCombination {
       cityCountry
-      country
       singleWorkingMonthlyCost
       singleMiddleMonthlyCost
       singleHighValueMonthlyCost
@@ -321,7 +319,6 @@ export const onDeleteCityPrice = /* GraphQL */ `subscription OnDeleteCityPrice($
     }
     FilterCombination {
       cityCountry
-      country
       singleWorkingMonthlyCost
       singleMiddleMonthlyCost
       singleHighValueMonthlyCost
@@ -352,7 +349,6 @@ export const onCreateFilterCombination = /* GraphQL */ `subscription OnCreateFil
 ) {
   onCreateFilterCombination(filter: $filter) {
     cityCountry
-    country
     singleWorkingMonthlyCost
     singleMiddleMonthlyCost
     singleHighValueMonthlyCost
@@ -393,7 +389,6 @@ export const onUpdateFilterCombination = /* GraphQL */ `subscription OnUpdateFil
 ) {
   onUpdateFilterCombination(filter: $filter) {
     cityCountry
-    country
     singleWorkingMonthlyCost
     singleMiddleMonthlyCost
     singleHighValueMonthlyCost
@@ -434,7 +429,6 @@ export const onDeleteFilterCombination = /* GraphQL */ `subscription OnDeleteFil
 ) {
   onDeleteFilterCombination(filter: $filter) {
     cityCountry
-    country
     singleWorkingMonthlyCost
     singleMiddleMonthlyCost
     singleHighValueMonthlyCost
