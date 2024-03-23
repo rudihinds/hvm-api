@@ -16,6 +16,11 @@ Amplify.configure({
   aws_appsync_apiKey: process.env.APPSYNC_API_KEY,
 });
 
+console.log(process.env.APPSYNC_ENDPOINT);
+console.log(process.env.APPSYNC_REGION);
+console.log(process.env.APPSYNC_AUTH_TYPE);
+console.log(process.env.APPSYNC_API_KEY);
+
 async function countFilterCombinationListings() {
   let nextToken = null;
   let count = 0;

@@ -9,6 +9,7 @@ const numbeoCityPricesActual = require("../../data/mocks/dbjson/numbeoCityPrices
 const { Amplify } = require("aws-amplify");
 const { createFilterCombination } = require("../../src/graphql/mutations.ts");
 const { getFilterCombination } = require("../../src/graphql/queries.ts");
+const { getCitiesThatHaveAllPricingData } = require("../utils/utils");
 
 Amplify.configure({
   aws_appsync_graphqlEndpoint: process.env.APPSYNC_ENDPOINT,
@@ -17,12 +18,8 @@ Amplify.configure({
   aws_appsync_apiKey: process.env.APPSYNC_API_KEY,
 });
 
-const getCitiesThatHaveAllPricingData = (cityData, length) =>
-  cityData.filter((city) => city.prices.length > length);
-
 const citiesWithAllPricingData = getCitiesThatHaveAllPricingData(
   numbeoCityPricesActual,
-  52,
 );
 
 const cityPrices = citiesWithAllPricingData.map((city) => {
